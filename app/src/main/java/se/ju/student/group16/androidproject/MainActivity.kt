@@ -1,5 +1,6 @@
 package se.ju.student.group16.androidproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.database.DatabaseReference
@@ -18,5 +19,9 @@ class MainActivity : AppCompatActivity() {
         val myRef = database.child("Testing")
 
         myRef.setValue("Hello, World!")
+
+        startActivity(
+                Intent(this, LoginActivity::class.java)
+        )
     }
 }
