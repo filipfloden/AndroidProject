@@ -43,13 +43,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/loginBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login_button_text" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/loginGoogleBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/logingoogle_button_text" />
