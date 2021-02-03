@@ -6,4 +6,5 @@
     <string name="logingoogle_button_text">Logga in med Google</string>
     <string name="username_hint">Användarnamn</string>
     <string name="password_hint">Lösenord</string>
+    <string name="create_account_text">Skapa Konto</string>
 </resources>

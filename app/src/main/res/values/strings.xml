@@ -5,4 +5,5 @@
     <string name="logingoogle_button_text">Login with Google</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
+    <string name="create_account_text">Create Account</string>
 </resources>
