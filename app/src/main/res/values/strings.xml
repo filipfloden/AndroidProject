@@ -9,4 +9,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email_hint">Email</string>
+    <string name="settings_btn">Settings</string>
+    <string name="event_btn">Event</string>
+    <string name="friend_btn">Friend</string>
 </resources>
