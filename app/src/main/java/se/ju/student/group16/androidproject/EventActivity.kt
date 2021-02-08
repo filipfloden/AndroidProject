@@ -1,5 +1,6 @@
 package se.ju.student.group16.androidproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -11,11 +12,12 @@ import com.google.firebase.auth.FirebaseAuth
 class EventActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_event)
-
+        auth = FirebaseAuth.getInstance()
         val eventButton = findViewById<Button>(R.id.event_button)
         val friendsButton = findViewById<Button>(R.id.friend_button)
         val settingsButton = findViewById<Button>(R.id.settings_button)
@@ -46,13 +48,10 @@ class EventActivity : AppCompatActivity() {
             }
         }
 
-        val logoutButton = findViewById<Button>(R.id.logoutBtn)
-        logoutButton.setOnClickListener{
+        val logoutBtn = findViewById<Button>(R.id.logoutBtn)
+        logoutBtn.setOnClickListener {
             auth.signOut()
+            startActivity(Intent(this, LoginActivity::class.java))
         }
-
-
-
-
     }
 }

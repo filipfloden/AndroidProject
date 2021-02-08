@@ -31,11 +31,11 @@ class LoginActivity : AppCompatActivity() {
         val signupBtn = findViewById<Button>(R.id.signupBtn)
 
         loginBtn.setOnClickListener {
-            val usernameInput = findViewById<EditText>(R.id.usernameInput)
+            val emailInput = findViewById<EditText>(R.id.emailInput)
             val passwordInput = findViewById<EditText>(R.id.passwordInput)
 
-            if (usernameInput.text.toString().trim().isEmpty() || passwordInput.text.toString().trim().isEmpty())
-                auth.signInWithEmailAndPassword(usernameInput.text.toString(), passwordInput.text.toString())
+            if (emailInput.text.toString().trim().isNotEmpty() && passwordInput.text.toString().trim().isNotEmpty())
+                auth.signInWithEmailAndPassword(emailInput.text.toString(), passwordInput.text.toString())
                         .addOnCompleteListener(this) { task ->
                             if (task.isSuccessful) {
                                 // Sign in success, update UI with the signed-in user's information
