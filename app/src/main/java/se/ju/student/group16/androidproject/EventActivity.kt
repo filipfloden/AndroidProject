@@ -5,14 +5,15 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 
 class EventActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
 
-        val viewPager = findViewById<ViewPager>(R.id.viewPager)
-        viewPager.adapter = PageAdapter(supportFragmentManager)
+        supportFragmentManager.beginTransaction().add(R.id.frame_layout, EventFragment())
+
+
     }
 }
