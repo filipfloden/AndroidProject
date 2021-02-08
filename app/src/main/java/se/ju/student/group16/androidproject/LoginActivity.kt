@@ -19,37 +19,40 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        Log.d("currentUser", currentUser.toString())
+        if(currentUser != null){
+            startActivity(Intent(this, EventActivity::class.java))
+        }
+
         val loginBtn = findViewById<Button>(R.id.loginBtn)
         val signupBtn = findViewById<Button>(R.id.signupBtn)
 
         loginBtn.setOnClickListener {
-
-
             val usernameInput = findViewById<EditText>(R.id.usernameInput)
             val passwordInput = findViewById<EditText>(R.id.passwordInput)
-            auth = FirebaseAuth.getInstance()
-            auth.signInWithEmailAndPassword(usernameInput.text.toString(), passwordInput.text.toString())
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("login", "signInWithEmail:success")
-                            val user = auth.currentUser
-                            Log.d("user", user.toString())
-                            //updateUI(user)
-                            val intent = Intent(this, EventActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("login", "signInWithEmail:failure", task.exception)
-                            Toast.makeText(baseContext, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show()
-                            //updateUI(null)
-                            // ...
-                        }
 
-                        // ...
-                    }
+            if (usernameInput.text.toString().trim().isEmpty() || passwordInput.text.toString().trim().isEmpty())
+                auth.signInWithEmailAndPassword(usernameInput.text.toString(), passwordInput.text.toString())
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("login", "signInWithEmail:success")
+                                val user = auth.currentUser
+                                Log.d("user", user.toString())
+                                //updateUI(user)
+                                val intent = Intent(this, EventActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w("login", "signInWithEmail:failure", task.exception)
+                                Toast.makeText(baseContext, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show()
+                                //updateUI(null)
+                            }
+                        }
         }
 
         signupBtn.setOnClickListener {
