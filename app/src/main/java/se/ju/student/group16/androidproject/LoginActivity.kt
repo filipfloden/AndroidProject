@@ -1,15 +1,15 @@
 package se.ju.student.group16.androidproject
 
 import android.content.Intent
-import android.nfc.Tag
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -21,8 +21,9 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
-        Log.d("currentUser", currentUser.toString())
+
         if(currentUser != null){
+            Log.d("currentUser", currentUser.displayName.toString())
             startActivity(Intent(this, EventActivity::class.java))
         }
 
@@ -39,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
                             if (task.isSuccessful) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("login", "signInWithEmail:success")
-                                val user = auth.currentUser
+                                var user = auth.currentUser
                                 Log.d("user", user.toString())
                                 //updateUI(user)
                                 val intent = Intent(this, EventActivity::class.java)

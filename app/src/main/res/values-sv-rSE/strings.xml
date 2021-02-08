@@ -4,7 +4,8 @@
     <string name="login_button_text">Logga in</string>
     <string name="signup_button_text">Registrera</string>
     <string name="logingoogle_button_text">Logga in med Google</string>
-    <string name="username_hint">Användarnamn</string>
+    <string name="username_hint">Smeknamn</string>
     <string name="password_hint">Lösenord</string>
     <string name="create_account_text">Skapa Konto</string>
+    <string name="email_hint">Email</string>
 </resources>

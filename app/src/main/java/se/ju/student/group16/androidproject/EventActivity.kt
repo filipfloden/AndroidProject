@@ -6,8 +6,11 @@ import android.widget.Button
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.auth.FirebaseAuth
 
 class EventActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,9 +46,10 @@ class EventActivity : AppCompatActivity() {
             }
         }
 
-//        val logoutButton = findViewById<Button>(R.id.logoutBtn)
-//        logoutButton.setOnClickListener{
-//        }
+        val logoutButton = findViewById<Button>(R.id.logoutBtn)
+        logoutButton.setOnClickListener{
+            auth.signOut()
+        }
 
 
 
