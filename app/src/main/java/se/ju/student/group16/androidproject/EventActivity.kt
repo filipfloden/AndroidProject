@@ -40,6 +40,10 @@ class EventActivity : AppCompatActivity() {
             }
             true
         }
+
+
+
+
     }
     private fun makeCurrentFragment(fragment: Fragment) = supportFragmentManager.beginTransaction().apply{
         replace(R.id.frame_layout, fragment)
