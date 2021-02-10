@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Event"
+        android:icon="@drawable/ic_event"
+        android:id="@+id/event_item"/>
+
+    <item
+        android:title="Friends"
+        android:icon="@drawable/ic_person_"
+        android:id="@+id/friends_item"/>
+
+    <item
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"
+        android:id="@+id/settings_item"/>
+
+</menu>

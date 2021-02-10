@@ -11,4 +11,7 @@
     <string name="email_hint">Email</string>
     <string name="signup_empty_fields">Please fill out all fields</string>
     <string name="passwords_dont_match">Passwords dont match</string>
+    <string name="settings_btn">Settings</string>
+    <string name="event_btn">Event</string>
+    <string name="friend_btn">Friend</string>
 </resources>

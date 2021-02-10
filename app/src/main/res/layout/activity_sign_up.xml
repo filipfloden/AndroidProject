@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     tools:context=".SignUpActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="347dp"
+        android:layout_height="220dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,6 +21,8 @@
             android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@drawable/edittext_rounded_corners"
             android:ems="10"
             android:hint="@string/email_hint"
             android:inputType="textEmailAddress" />
@@ -28,6 +31,9 @@
             android:id="@+id/usernameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2"
+            android:background="@drawable/edittext_rounded_corners"
             android:ems="10"
             android:hint="@string/username_hint"
             android:inputType="textPersonName" />
@@ -36,6 +42,9 @@
             android:id="@+id/passwordInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2"
+            android:background="@drawable/edittext_rounded_corners"
             android:ems="10"
             android:hint="@string/password_hint"
             android:inputType="textPassword" />
@@ -44,6 +53,9 @@
             android:id="@+id/password2Input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2"
+            android:background="@drawable/edittext_rounded_corners"
             android:ems="10"
             android:hint="@string/password_hint"
             android:inputType="textPassword" />
@@ -57,8 +69,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="343dp"
+        android:layout_height="48dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,6 +81,7 @@
             android:id="@+id/createAccountBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners"
             android:text="@string/create_account_text" />
 
     </LinearLayout>
