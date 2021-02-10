@@ -45,11 +45,7 @@ class EventActivity : AppCompatActivity() {
 
 
 
-        val logoutBtn = findViewById<Button>(R.id.logoutBtn)
-        logoutBtn.setOnClickListener {
-            auth.signOut()
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
+
     }
     private fun makeCurrentFragment(fragment: Fragment) = supportFragmentManager.beginTransaction().apply{
         replace(R.id.frame_layout, fragment)
