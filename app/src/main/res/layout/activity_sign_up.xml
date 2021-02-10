@@ -47,6 +47,13 @@
             android:ems="10"
             android:hint="@string/password_hint"
             android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/signUpErrors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FF0000"
+            android:textColorHighlight="#313131" />
     </LinearLayout>
 
     <LinearLayout

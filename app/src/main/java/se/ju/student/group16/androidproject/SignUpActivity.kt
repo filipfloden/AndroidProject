@@ -1,15 +1,21 @@
 package se.ju.student.group16.androidproject
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.SignInMethodQueryResult
 import com.google.firebase.auth.UserProfileChangeRequest
+import kotlin.math.log
+
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -24,15 +30,17 @@ class SignUpActivity : AppCompatActivity() {
         val passwordInput = findViewById<EditText>(R.id.passwordInput)
         val password2Input = findViewById<EditText>(R.id.password2Input)
         val createAccountBtn = findViewById<Button>(R.id.createAccountBtn)
+        val signUpErrors = findViewById<TextView>(R.id.signUpErrors)
+        auth = FirebaseAuth.getInstance()
 
         createAccountBtn.setOnClickListener {
-            Log.d("test", "hmm")
-            if (passwordInput.text.toString() == password2Input.text.toString()){
-                auth = FirebaseAuth.getInstance()
-
-                auth.createUserWithEmailAndPassword(emailInput.text.toString(), passwordInput.text.toString()).addOnCompleteListener(this, OnCompleteListener{ task ->
-                    Log.d("task", task.toString())
-                    if(task.isSuccessful){
+            if (emailInput.text.toString().trim().isEmpty() || usernameInput.text.toString().trim().isEmpty() || passwordInput.text.toString().trim().isEmpty()){
+                signUpErrors.setText(R.string.signup_empty_fields)
+            }else if (passwordInput.text.toString().trim() != password2Input.text.toString().trim()){
+                signUpErrors.setText(R.string.passwords_dont_match)
+            }else {
+                auth.createUserWithEmailAndPassword(emailInput.text.toString(), passwordInput.text.toString()).addOnCompleteListener(this, OnCompleteListener { task ->
+                    if (task.isSuccessful) {
                         Log.d("test", "success")
                         Toast.makeText(this, "Successfully Registered", Toast.LENGTH_LONG).show()
 
@@ -43,8 +51,9 @@ class SignUpActivity : AppCompatActivity() {
                         val intent = Intent(this, EventActivity::class.java)
                         startActivity(intent)
                         finish()
-                    }else {
-                        Log.d("test", "failed")
+                    } else {
+                        signUpErrors.setText(task.exception!!.message)
+                        Log.d("test", "failed" + task.exception)
                         Toast.makeText(this, "Registration Failed", Toast.LENGTH_LONG).show()
                     }
                 })
