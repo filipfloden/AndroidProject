@@ -1,10 +1,13 @@
 package se.ju.student.group16.androidproject
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import se.ju.student.group16.androidproject.databinding.FragmentEventBinding
+import se.ju.student.group16.androidproject.databinding.FragmentSettingsBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +24,8 @@ class SettingsFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var binding: FragmentSettingsBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +37,22 @@ class SettingsFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+    ) = FragmentSettingsBinding.inflate(inflater, container, false).run {
+        binding = this
+        root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+
+        // TODO, listen for clicks on the Add button, add a number to the list and then
+        // tell the adapter that the list has changed (e.g. notifyDataSetChanged).
+
     }
 
     companion object {
