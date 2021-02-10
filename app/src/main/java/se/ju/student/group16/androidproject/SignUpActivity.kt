@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -18,6 +19,7 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
+        val emailInput = findViewById<EditText>(R.id.emailInput)
         val usernameInput = findViewById<EditText>(R.id.usernameInput)
         val passwordInput = findViewById<EditText>(R.id.passwordInput)
         val password2Input = findViewById<EditText>(R.id.password2Input)
@@ -28,11 +30,16 @@ class SignUpActivity : AppCompatActivity() {
             if (passwordInput.text.toString() == password2Input.text.toString()){
                 auth = FirebaseAuth.getInstance()
 
-                auth.createUserWithEmailAndPassword(usernameInput.text.toString(), passwordInput.text.toString()).addOnCompleteListener(this, OnCompleteListener{ task ->
+                auth.createUserWithEmailAndPassword(emailInput.text.toString(), passwordInput.text.toString()).addOnCompleteListener(this, OnCompleteListener{ task ->
                     Log.d("task", task.toString())
                     if(task.isSuccessful){
                         Log.d("test", "success")
                         Toast.makeText(this, "Successfully Registered", Toast.LENGTH_LONG).show()
+
+                        val profileUpdates = UserProfileChangeRequest.Builder()
+                                .setDisplayName(usernameInput.text.toString()).build()
+
+                        auth.currentUser!!.updateProfile(profileUpdates)
                         val intent = Intent(this, EventActivity::class.java)
                         startActivity(intent)
                         finish()
