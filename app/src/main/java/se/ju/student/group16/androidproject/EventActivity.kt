@@ -27,8 +27,6 @@ class EventActivity : AppCompatActivity() {
         val binding = ActivityEventBinding.inflate(layoutInflater)
 
         val bottom_nav = findViewById<BottomNavigationView>(R.id.bottom_nav)
-        val test = findViewById<Button>(R.id.testButton)
-
         val eventFragment = EventFragment()
         val friendsFragment = FriendsFragment()
         val settingsFragment = SettingsFragment()
@@ -41,14 +39,6 @@ class EventActivity : AppCompatActivity() {
                 R.id.settings_item -> makeCurrentFragment(settingsFragment)
             }
             true
-        }
-
-
-
-        val logoutBtn = findViewById<Button>(R.id.logoutBtn)
-        logoutBtn.setOnClickListener {
-            auth.signOut()
-            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
     private fun makeCurrentFragment(fragment: Fragment) = supportFragmentManager.beginTransaction().apply{
