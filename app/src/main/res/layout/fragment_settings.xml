@@ -9,12 +9,29 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="settings logga inte ut" />
+        android:text="Settings" />
 
-    <Button
-        android:id="@+id/logoutBtn"
+    <LinearLayout
+        android:id="@+id/settingsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="logout" />
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        tools:visibility="visible">
+
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="logout" />
+
+        <Button
+            android:id="@+id/changePasswordBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change Password" />
+    </LinearLayout>
 
 </FrameLayout>
