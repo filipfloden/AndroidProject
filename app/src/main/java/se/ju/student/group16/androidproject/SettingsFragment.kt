@@ -56,6 +56,11 @@ class SettingsFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.changePasswordBtn.setOnClickListener {
+            val intent = Intent(context, changePassword::class.java)
+            startActivity(intent)
+        }
+
         // TODO, listen for clicks on the Add button, add a number to the list and then
         // tell the adapter that the list has changed (e.g. notifyDataSetChanged).
 
