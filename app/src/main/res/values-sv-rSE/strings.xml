@@ -13,4 +13,5 @@
     <string name="settings_nav">Inställningar</string>
     <string name="friends_nav">Vänner</string>
     <string name="event_nav">Evenemang</string>
+    <string name="add_friend">Lägg till vän</string>
 </resources>
