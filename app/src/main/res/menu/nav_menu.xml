@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="Event"
+        android:title="@string/event_nav"
         android:icon="@drawable/ic_event"
         android:id="@+id/event_item"/>
 
     <item
-        android:title="Friends"
+        android:title="@string/friends_nav"
         android:icon="@drawable/ic_person_"
         android:id="@+id/friends_item"/>
 
     <item
-        android:title="Settings"
+        android:title="@string/settings_nav"
         android:icon="@drawable/ic_settings"
         android:id="@+id/settings_item"/>
 

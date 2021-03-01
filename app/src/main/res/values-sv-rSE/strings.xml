@@ -10,4 +10,7 @@
     <string name="email_hint">Email</string>
     <string name="signup_empty_fields">Fyll i alla fält</string>
     <string name="passwords_dont_match">Lösenorden matchar inte</string>
+    <string name="settings_nav">Inställningar</string>
+    <string name="friends_nav">Vänner</string>
+    <string name="event_nav">Evenemang</string>
 </resources>

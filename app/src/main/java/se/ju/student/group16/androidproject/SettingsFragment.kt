@@ -1,12 +1,12 @@
 package se.ju.student.group16.androidproject
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import se.ju.student.group16.androidproject.databinding.FragmentEventBinding
+import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import se.ju.student.group16.androidproject.databinding.FragmentSettingsBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,12 +23,14 @@ class SettingsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var auth: FirebaseAuth
 
     lateinit var binding: FragmentSettingsBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        auth = FirebaseAuth.getInstance()
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -37,9 +39,9 @@ class SettingsFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ) = FragmentSettingsBinding.inflate(inflater, container, false).run {
         binding = this
         root
@@ -48,7 +50,11 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        binding.logoutBtn.setOnClickListener {
+            auth.signOut()
+            val intent = Intent(context, LoginActivity::class.java)
+            startActivity(intent)
+        }
 
         // TODO, listen for clicks on the Add button, add a number to the list and then
         // tell the adapter that the list has changed (e.g. notifyDataSetChanged).
