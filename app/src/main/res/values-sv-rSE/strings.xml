@@ -13,6 +13,7 @@
     <string name="settings_nav">Inställningar</string>
     <string name="friends_nav">Vänner</string>
     <string name="event_nav">Evenemang</string>
+    <string name="create_event">Skapa event</string>
     <string name="add_friend">Lägg till vän</string>
     <string name="current_password">Nuvarande lösenord</string>
     <string name="new_password">Nytt lösenord</string>
