@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Create Event"
+        android:text="@string/create_event"
         android:id="@+id/text_view"/>
 
     <LinearLayout
@@ -21,7 +21,7 @@
             android:id="@+id/testButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create Event" />
+            android:text="@string/create_event" />
     </LinearLayout>
 
 </RelativeLayout>

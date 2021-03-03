@@ -13,4 +13,5 @@
     <string name="settings_nav">Settings</string>
     <string name="friends_nav">Friends</string>
     <string name="event_nav">Event</string>
+    <string name="create_event">Create event</string>
 </resources>
