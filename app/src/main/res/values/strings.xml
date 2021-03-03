@@ -18,4 +18,5 @@
     <string name="current_password">Current password</string>
     <string name="new_password">New password</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="enter_title">Enter Title</string>
 </resources>

@@ -51,7 +51,7 @@ class EventFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.testButton.setOnClickListener{
+        binding.createEventBtn.setOnClickListener{
             Log.d("test", auth.currentUser?.displayName.toString())
 
         }

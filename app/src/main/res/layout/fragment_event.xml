@@ -6,21 +6,40 @@
     tools:context=".EventFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/create_event"
-        android:id="@+id/text_view"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/testButton"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/text_view"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
+            android:textSize="26sp"
+            android:text="@string/create_event" />
+
+        <EditText
+            android:id="@+id/createEventTextField"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/rounded_corners"
+            android:gravity="center"
+            android:hint="@string/enter_title" />
+
+        <Button
+            android:id="@+id/createEventBtn"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/rounded_corners"
             android:text="@string/create_event" />
     </LinearLayout>
 
