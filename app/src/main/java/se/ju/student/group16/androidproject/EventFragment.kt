@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
 import se.ju.student.group16.androidproject.databinding.FragmentEventBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,6 +24,7 @@ class EventFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var auth: FirebaseAuth
 
     lateinit var binding: FragmentEventBinding
 
@@ -34,6 +36,7 @@ class EventFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        auth = FirebaseAuth.getInstance()
     }
 
     override fun onCreateView(
@@ -49,7 +52,8 @@ class EventFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.testButton.setOnClickListener{
-            Log.d("test", "knappen")
+            Log.d("test", auth.currentUser?.displayName.toString())
+
         }
 
         // TODO, listen for clicks on the Add button, add a number to the list and then

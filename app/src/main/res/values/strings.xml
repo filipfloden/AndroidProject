@@ -14,4 +14,8 @@
     <string name="friends_nav">Friends</string>
     <string name="event_nav">Event</string>
     <string name="create_event">Create event</string>
+    <string name="add_friend">Add friend</string>
+    <string name="current_password">Current password</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_password">Confirm password</string>
 </resources>

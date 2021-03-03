@@ -14,12 +14,15 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.SignInMethodQueryResult
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlin.math.log
 
 
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +35,7 @@ class SignUpActivity : AppCompatActivity() {
         val createAccountBtn = findViewById<Button>(R.id.createAccountBtn)
         val signUpErrors = findViewById<TextView>(R.id.signUpErrors)
         auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().reference
 
         createAccountBtn.setOnClickListener {
             if (emailInput.text.toString().trim().isEmpty() || usernameInput.text.toString().trim().isEmpty() || passwordInput.text.toString().trim().isEmpty()){
@@ -48,6 +52,11 @@ class SignUpActivity : AppCompatActivity() {
                                 .setDisplayName(usernameInput.text.toString()).build()
 
                         auth.currentUser!!.updateProfile(profileUpdates)
+                        val dbPath = database.child("users").child(auth.currentUser!!.uid)
+                        database.child("users").child(auth.currentUser!!.uid).child("displayname").setValue(auth.currentUser?.displayName)
+                        dbPath.child("displayname").setValue(auth.currentUser?.displayName)
+                        dbPath.child("email").setValue(auth.currentUser?.email)
+
                         val intent = Intent(this, EventActivity::class.java)
                         startActivity(intent)
                         finish()
