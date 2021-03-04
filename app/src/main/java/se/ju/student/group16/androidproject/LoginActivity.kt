@@ -24,12 +24,15 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().reference
+
         val currentUser = auth.currentUser
 
         if(currentUser != null){
@@ -114,7 +117,11 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success")
-                        val user = auth.currentUser
+                        val currentUser = auth.currentUser
+
+                        val dbPath = database.child("users").child(auth.currentUser!!.uid)
+                        dbPath.child("displayname").setValue(currentUser?.displayName)
+                        dbPath.child("email").setValue(currentUser?.email)
                         startActivity(Intent(this, EventActivity::class.java))
                     } else {
                         // If sign in fails, display a message to the user.

@@ -52,10 +52,12 @@ class SignUpActivity : AppCompatActivity() {
                                 .setDisplayName(usernameInput.text.toString()).build()
 
                         auth.currentUser!!.updateProfile(profileUpdates)
+
+                        val currentUser = auth.currentUser
                         val dbPath = database.child("users").child(auth.currentUser!!.uid)
-                        database.child("users").child(auth.currentUser!!.uid).child("displayname").setValue(auth.currentUser?.displayName)
-                        dbPath.child("displayname").setValue(auth.currentUser?.displayName)
-                        dbPath.child("email").setValue(auth.currentUser?.email)
+                        database.child("users").child(currentUser!!.uid).child("displayname").setValue(currentUser?.displayName)
+                        dbPath.child("displayname").setValue(usernameInput.text.toString())
+                        dbPath.child("email").setValue(currentUser?.email)
 
                         val intent = Intent(this, EventActivity::class.java)
                         startActivity(intent)
