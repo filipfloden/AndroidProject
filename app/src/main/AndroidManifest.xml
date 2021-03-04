@@ -13,13 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProject">
-        <activity android:name=".DatePopUpActivity"></activity>
-        <activity
-            android:name=".CreateEventActivity"
-            android:label="@string/title_activity_create_event"
-            android:theme="@style/Theme.AndroidProject.NoActionBar" />
-        <activity android:name=".AddFriendActivity" />
-        <activity android:name=".changePassword" />
+        <activity android:name=".AddFriendActivity"></activity>
+        <activity android:name=".changePassword"></activity>
         <activity android:name=".testActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />

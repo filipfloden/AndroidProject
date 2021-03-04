@@ -19,18 +19,4 @@
     <string name="new_password">New password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="enter_title">Enter Title</string>
-    <string name="title_activity_create_event">CreateEventActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="add_image">Add image</string>
-    <string name="invite_friends">Invite friends</string>
-    <string name="enter_event_theme">Enter event theme</string>
-    <string name="enter_event_description">Enter event description</string>
-    <string name="pick_a_date">Pick a date</string>
 </resources>
