@@ -19,4 +19,8 @@
     <string name="new_password">Nytt lösenord</string>
     <string name="confirm_password">Bekräfta lösenord</string>
     <string name="enter_title">Välj title</string>
+    <string name="add_image">Välj bild</string>
+    <string name="invite_friends">Bjud in vänner</string>
+    <string name="enter_event_theme">Ange event tema</string>
+    <string name="enter_event_description">Ange event beskrivning</string>
 </resources>

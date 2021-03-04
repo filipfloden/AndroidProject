@@ -1,5 +1,6 @@
 package se.ju.student.group16.androidproject
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -52,7 +53,8 @@ class EventFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.createEventBtn.setOnClickListener{
-            Log.d("test", auth.currentUser?.displayName.toString())
+            val intent = Intent(context, CreateEventActivity::class.java)
+            startActivity(intent)
 
         }
 
