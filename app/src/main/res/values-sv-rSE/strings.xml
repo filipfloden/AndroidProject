@@ -19,4 +19,5 @@
     <string name="new_password">Nytt lösenord</string>
     <string name="confirm_password">Bekräfta lösenord</string>
     <string name="enter_title">Välj title</string>
+    <string name="add_button">+ Lägg till</string>
 </resources>
