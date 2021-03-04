@@ -23,7 +23,21 @@ class CreateEventActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
 
-        
+        pickADateBtn.setOnClickListener {
+            val window = PopupWindow(this)
+            val view = layoutInflater.inflate(R.layout.activity_date_pop_up,null)
+            window.contentView = view
+            val calendarView = view.findViewById<CardView>(R.id.cardView)
+            calendarView.setOnClickListener{
+                window.dismiss()
+            }
+            window.showAsDropDown(pickADateBtn)
+
+
+
+
+
+
         }
 
 
