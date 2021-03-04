@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+
+    >
+
+    <TextView
+        android:id="@+id/fr_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:text="Test text"
+        android:textSize="18dp"
+        android:textColor="@android:color/tertiary_text_dark">
+    </TextView>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+    <Button
+        android:id="@+id/accept_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_button"
+        android:layout_alignParentRight="true">
+    </Button>
+
+    <Button
+        android:id="@+id/deny_friend"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="X"
+        android:textColor="@android:color/tertiary_text_dark"
+        android:textSize="20dp"
+        android:padding="0dp">
+    </Button>
+
+</LinearLayout>
