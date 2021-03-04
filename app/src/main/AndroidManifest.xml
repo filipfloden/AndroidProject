@@ -13,8 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProject">
-        <activity android:name=".AddFriendActivity"></activity>
-        <activity android:name=".changePassword"></activity>
+        <activity android:name=".CreateEventActivity"></activity>
+        <activity android:name=".AddFriendActivity" />
+        <activity android:name=".changePassword" />
         <activity android:name=".testActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />

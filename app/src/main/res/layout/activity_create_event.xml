@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateEventActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/event_title"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:textSize="26sp"
+            android:text="placeholder" />
+
+        <EditText
+            android:id="@+id/event_theme"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/edittext_rounded_corners"
+            android:gravity="center"
+            android:hint="enter_event_theme" />
+
+        <EditText
+            android:id="@+id/event_description"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/edittext_rounded_corners"
+            android:gravity="center"
+            android:hint="enter_event_description" />
+
+
+        <Button
+            android:id="@+id/pickDateBtn"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/rounded_corners"
+            android:gravity="center"
+            android:text="pick_a_date" />
+
+
+
+        <Button
+            android:id="@+id/invite_Friends_Btn"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/rounded_corners"
+            android:gravity="center"
+            android:text="invite_friends" />
+
+        <Button
+            android:id="@+id/add_Image_Btn"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/rounded_corners"
+            android:gravity="center"
+            android:text="add_image" />
+
+    </LinearLayout>
+
+</RelativeLayout>
