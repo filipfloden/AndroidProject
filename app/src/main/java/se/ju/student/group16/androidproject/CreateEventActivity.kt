@@ -4,9 +4,7 @@ import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
+import android.widget.*
 
 class CreateEventActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,31 +12,47 @@ class CreateEventActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create_event)
         val dateDialog = Dialog(this)
         dateDialog.setContentView(R.layout.datepopup)
-        val inviteFrinedsDialog = Dialog(this)
-        inviteFrinedsDialog.setContentView(R.layout.invite_friends_popup)
+        val inviteFriendsDialog = Dialog(this)
+        inviteFriendsDialog.setContentView(R.layout.invite_friends_popup)
         val createEventButton = findViewById<Button>(R.id.eventCreateBtn)
         val dateDoneButton = dateDialog.findViewById<Button>(R.id.date_done)
         val pickADateButton = findViewById<Button>(R.id.pickDateBtn)
-        val inviteFrinedsButton = findViewById<Button>(R.id.invite_Friends_Btn)
-        val inviteFriendsDoneButton = inviteFrinedsDialog.findViewById<Button>(R.id.invite_Friends_done)
-        var eventDate = null
+        val inviteFriendsButton = findViewById<Button>(R.id.invite_Friends_Btn)
+        val inviteFriendsDoneButton = inviteFriendsDialog.findViewById<Button>(R.id.invite_Friends_done)
+        val calendarView = dateDialog.findViewById<CalendarView>(R.id.calendarView)
+        var eventDate = ""
 
         pickADateButton.setOnClickListener{
             dateDialog.show()
         }
         dateDoneButton.setOnClickListener{
+            Log.d(eventDate,"vibe")
             dateDialog.dismiss()
         }
-        inviteFrinedsButton.setOnClickListener{
-            inviteFrinedsDialog.show()
+        inviteFriendsButton.setOnClickListener{
+            inviteFriendsDialog.show()
         }
         inviteFriendsDoneButton.setOnClickListener{
-            inviteFrinedsDialog.dismiss()
+            inviteFriendsDialog.dismiss()
         }
         createEventButton.setOnClickListener{
             createEvent()
         }
+        calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
+            val displayChosenDate = dateDialog.findViewById<TextView>(R.id.chosenDateTextView)
+            var thisMonth = ""
+            if(month<9){
+                thisMonth = (month+1).toString()
+                thisMonth = "0"+thisMonth
+            }else{
+                thisMonth = (month+1).toString()
+            }
+            displayChosenDate.text = "$year-$thisMonth-$dayOfMonth"
+            eventDate = "$year-$thisMonth-$dayOfMonth"
+        }
+
     }
+
 
     private fun createEvent(){
         val eventTitle = findViewById<EditText>(R.id.event_title)
@@ -49,7 +63,5 @@ class CreateEventActivity : AppCompatActivity() {
         }else{
             Log.d("funkar inte", "skicka error")
         }
-
-
     }
 }

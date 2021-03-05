@@ -24,9 +24,14 @@
             android:text="@string/invite_friends"
             android:textSize="20sp" />
 
+        <SearchView
+            android:id="@+id/seardh_friend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="375dp" />
+            android:layout_height="325dp" />
 
         <Button
             android:id="@+id/invite_Friends_done"
