@@ -20,4 +20,9 @@
     <string name="confirm_password">Bekräfta lösenord</string>
     <string name="enter_title">Välj title</string>
     <string name="add_button">+ Lägg till</string>
+    <string name="invite_friends">Bjud in vänner</string>
+    <string name="enter_event_description">Event beskrivning</string>
+    <string name="enter_event_theme">Event tema</string>
+    <string name="placeholder">placeholder</string>
+    <string name="pick_a_date">Välj ett datum</string>
 </resources>
