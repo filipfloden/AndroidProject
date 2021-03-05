@@ -19,7 +19,6 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
@@ -30,8 +29,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+
+
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
+        database.keepSynced(true)
+
 
         val currentUser = auth.currentUser
 
