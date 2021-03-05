@@ -19,7 +19,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             android:textSize="26sp"
-            android:text="placeholder" />
+            android:text="@string/placeholder" />
 
         <EditText
             android:id="@+id/event_theme"
@@ -30,7 +30,7 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/edittext_rounded_corners"
             android:gravity="center"
-            android:hint="enter_event_theme" />
+            android:hint="@string/enter_event_theme" />
 
         <EditText
             android:id="@+id/event_description"
@@ -41,7 +41,7 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/edittext_rounded_corners"
             android:gravity="center"
-            android:hint="enter_event_description" />
+            android:hint="@string/enter_event_description" />
 
 
         <Button
@@ -53,7 +53,7 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/rounded_corners"
             android:gravity="center"
-            android:text="pick_a_date" />
+            android:text="@string/pick_a_date" />
 
 
 
@@ -66,18 +66,9 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/rounded_corners"
             android:gravity="center"
-            android:text="invite_friends" />
+            android:text="@string/invite_friends" />
 
-        <Button
-            android:id="@+id/add_Image_Btn"
-            android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/rounded_corners"
-            android:gravity="center"
-            android:text="add_image" />
+
 
     </LinearLayout>
 

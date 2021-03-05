@@ -20,4 +20,9 @@
     <string name="confirm_password">Confirm password</string>
     <string name="enter_title">Enter Title</string>
     <string name="add_button">+ Add</string>
+    <string name="invite_friends">Invite friends</string>
+    <string name="pick_a_date">Pick a date</string>
+    <string name="enter_event_description">Enter event description</string>
+    <string name="enter_event_theme">Enter event theme</string>
+    <string name="placeholder">placeholder</string>
 </resources>
