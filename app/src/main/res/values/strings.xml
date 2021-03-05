@@ -25,4 +25,5 @@
     <string name="enter_event_description">Enter event description</string>
     <string name="enter_event_theme">Enter event theme</string>
     <string name="placeholder">placeholder</string>
+    <string name="done">Done</string>
 </resources>

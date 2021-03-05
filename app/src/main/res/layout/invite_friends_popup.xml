@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="475dp"
+    android:padding="5dp"
+    android:layout_gravity="center">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/Invite_friends_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:layout_gravity="center"
+            android:text="@string/invite_friends"
+            android:textSize="20sp" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="375dp" />
+
+        <Button
+            android:id="@+id/invite_Friends_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_corners"
+            android:text="@string/done" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
