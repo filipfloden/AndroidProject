@@ -29,4 +29,6 @@
     <string name="pick_a_location">Pick a location</string>
     <string name="title_activity_google_maps">Map</string>
     <string name="location_toast">Pick a location for the event</string>
+    <string name="accept_button">+ Accept</string>
+    <string name="chat_button">💬 Chat</string>
 </resources>

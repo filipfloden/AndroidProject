@@ -29,4 +29,6 @@
     <string name="title_activity_google_maps">Karta</string>
     <string name="pick_a_location">Välj en plats</string>
     <string name="done">Klar</string>
+    <string name="accept_button">+ Acceptera</string>
+    <string name="chat_button">💬 Chatt</string>
 </resources>

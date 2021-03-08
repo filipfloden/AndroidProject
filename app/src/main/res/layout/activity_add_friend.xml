@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddFriendActivity">
+    tools:context=".AddFriendActivity"
+    android:background="@color/backgroundColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,12 +31,11 @@
             android:layout_height="wrap_content" />
 
         <SearchView
-            style="@android:style/Widget.Material.SearchView"
             android:id="@+id/search_user"
+            style="@android:style/Widget.Material.SearchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:splitMotionEvents="false">
-
         </SearchView>
 
         <ListView

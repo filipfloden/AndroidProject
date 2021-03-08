@@ -1,6 +1,7 @@
 package se.ju.student.group16.androidproject
 
 import android.content.Intent
+import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextWatcher
@@ -10,8 +11,8 @@ import android.widget.Button
 import android.widget.ListView
 import android.widget.SearchView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
+import java.util.*
 
 class AddFriendActivity : AppCompatActivity() {
 
@@ -24,7 +25,6 @@ class AddFriendActivity : AppCompatActivity() {
     private val friendsPending = "friends-pending"
     private val displayname = "displayname"
     private val email = "email"
-    private val empty = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,27 +41,39 @@ class AddFriendActivity : AppCompatActivity() {
         val usersAdapter = UsersAdapter(this, allUsers)
         val currentUser = auth.currentUser
 
-        database.child(users).child(currentUser?.uid.toString()).child(friendsPending).get().addOnSuccessListener {
-            Log.i("firebase", "Got value ${it.value}")
-            for (fr in it.children){
-                if (fr.value.toString() == received){
-                    friendRequests.add(User(fr.key.toString(), empty, empty))
+        friendRequestListView.adapter = friendRequestAdapter
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.children
+                friendRequests.clear()
+                friendRequestAdapter.notifyDataSetChanged()
+                for (fr in post){
+                    if (fr.value.toString() == received){
+                        database.child(users).child(fr.key.toString()).get().addOnSuccessListener {
+                            friendRequests.add(User(it.key.toString(), it.child(displayname).value.toString(), it.child(email).value.toString()))
+                            friendRequestAdapter.notifyDataSetChanged()
+                        }
+                    }
                 }
             }
-        }.addOnFailureListener{
-            Log.e("firebase", "Error getting data", it)
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w("error", "loadPost:onCancelled", databaseError.toException())
+            }
         }
-        database.child("users").get().addOnSuccessListener {
-            Log.i("firebase", "Got value ${it.value}")
+        database.child(users).child(currentUser?.uid.toString()).child(friendsPending).addValueEventListener(postListener)
+        var currentUsersFriends = ""
+        database.child(users).child(currentUser?.uid.toString()).child("friends").get().addOnSuccessListener {
+            currentUsersFriends = it.value.toString()
+        }
+        database.child(users).get().addOnSuccessListener {
+
             for (user in it.children){
                 if (user.key.toString() != currentUser?.uid.toString())
-                    allUsers.add(User(user.key.toString(), user.child(displayname).value.toString(), user.child("email").value.toString()))
-                    if (friendRequests.contains(User(user.key.toString(), empty, empty))){
-                        friendRequests.remove(User(user.key.toString(), empty, empty))
-                        friendRequests.add(User(user.key.toString(), user.child(displayname).value.toString(), user.child(email).value.toString()))
-                    }
+                    if (!currentUsersFriends.contains(user.key.toString()))
+                        allUsers.add(User(user.key.toString(), user.child(displayname).value.toString(), user.child("email").value.toString()))
             }
-            friendRequestListView.adapter = friendRequestAdapter
             usersListView.adapter = usersAdapter
         }.addOnFailureListener{
             Log.e("firebase", "Error getting data", it)
@@ -69,8 +81,6 @@ class AddFriendActivity : AppCompatActivity() {
 
         usersListView.setOnItemClickListener { parent, view, position, id ->
             val userClicked = usersListView.getItemAtPosition(position) as User
-            Log.d("userclicked", userClicked.uid)
-
             database.child(users).child(currentUser?.uid.toString()).child(friendsPending).child(userClicked.uid).setValue("sent")
             database.child(users).child(userClicked.uid).child(friendsPending).child(currentUser?.uid.toString()).setValue("received")
         }

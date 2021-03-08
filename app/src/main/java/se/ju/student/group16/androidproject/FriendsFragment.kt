@@ -2,10 +2,15 @@ package se.ju.student.group16.androidproject
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import se.ju.student.group16.androidproject.databinding.FragmentEventBinding
 import se.ju.student.group16.androidproject.databinding.FragmentFriendsBinding
 
@@ -24,6 +29,13 @@ class FriendsFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     lateinit var binding: FragmentFriendsBinding
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
+    private val users = "users"
+    private val friends = "friends"
+    private val displayname = "displayname"
+    private val email = "email"
+    private val friendsList = mutableListOf<User>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +58,24 @@ class FriendsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().reference
+        val friendsListView = binding.friendsListView
+        val currentUser = auth.currentUser
+        val friendsAdapter = FriendAdapter(this.activity!!, friendsList)
+        friendsListView.adapter = friendsAdapter
 
-
+        database.child(users).child(currentUser?.uid.toString()).child(friends).get().addOnSuccessListener {
+            friendsList.clear()
+            for (friend in it.children){
+                database.child(users).child(friend.key.toString()).get().addOnSuccessListener { info ->
+                    val friendDisplayName = info.child(displayname).value
+                    val friendEmail = info.child(email).value
+                    friendsList.add(User(info.key.toString(), friendDisplayName.toString(), friendEmail.toString()))
+                    friendsAdapter.notifyDataSetChanged()
+                }
+            }
+        }
         binding.addFriendBtn.setOnClickListener {
             startActivity(
                 Intent(activity, AddFriendActivity::class.java)
