@@ -39,7 +39,9 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        var marker=""
+        var marker = emptyMap<String,Double>()
+        var lat:Double = 0.0
+        var lng:Double = 0.0
         val doneButton = findViewById<Button>(R.id.mapDone)
 
         doneButton.setOnClickListener {
@@ -47,19 +49,18 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 Toast.makeText(this,"@string/location_toast", Toast.LENGTH_LONG).show()
             }
             val data = Intent()
-            Log.d("koordinater", marker.toString())
-
-            data.putExtra("eventLocation", marker)
+            data.putExtra("longitude", lng)
+            data.putExtra("latitude", lat)
             setResult(Activity.RESULT_OK,data)
             finish()
         }
 
         mMap.setOnMapLongClickListener {    latlng->
             mMap.addMarker(MarkerOptions().position(latlng))
-            //val latitude = latlng.latitude
-            //val longitude =latlng.longitude
-            marker = latlng.toString()
-            Log.d("koordinater", marker)
+            lng  = latlng.longitude
+            lat = latlng.latitude
+            marker = mapOf("lat" to lat, "lng" to lng)
+            Log.d("koordinater", marker.toString())
 
         }
         val defaultMapLocation = LatLng(57.5, 14.0)

@@ -7,12 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
-import androidx.fragment.app.Fragment
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.SupportMapFragment
 
 private const val REQUEST_CODE = 1337
-private var eventLocation = ""
+private var eventLocation = emptyMap<String,Double?>()
 
 class CreateEventActivity : AppCompatActivity() {
 
@@ -49,7 +46,7 @@ class CreateEventActivity : AppCompatActivity() {
             inviteFriendsDialog.dismiss()
         }
         createEventButton.setOnClickListener{
-            createEvent()
+            createEvent(eventDate)
         }
         calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
             val displayChosenDate = dateDialog.findViewById<TextView>(R.id.chosenDateTextView)
@@ -83,20 +80,24 @@ class CreateEventActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
-            val location:String = data?.getStringExtra("eventLocation").toString()
-            eventLocation = location
-
-
+            val latitude = data?.getDoubleExtra("latitude",0.0)
+            val longitude = data?.getDoubleExtra("longitude",0.0)
+            Log.d("latitude", latitude.toString())
+            Log.d("longitude", longitude.toString())
+            eventLocation = mapOf("lat" to latitude, "lng" to longitude)
+            
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun createEvent(){
+    private fun createEvent(eventDate: String) {
         val eventTitle = findViewById<EditText>(R.id.event_title)
         val eventTheme = findViewById<EditText>(R.id.event_theme)
         val eventDescription = findViewById<EditText>(R.id.event_description)
-        Log.d("koordinat i create", eventLocation)
+        Log.d("koordinat i create", eventLocation.toString())
         if(eventTheme.text.isNotEmpty() && eventDescription.text.isNotEmpty() && eventTitle.text.isNotEmpty()){
+            val eventInfo = mapOf("title" to eventTitle, "theme" to eventTheme,
+                "Description" to eventDescription, "date" to eventDate, "location" to eventLocation)
             Log.d("funkar","skicka till firebase")
         }else{
             Log.d("funkar inte", "skicka error")
