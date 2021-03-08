@@ -132,8 +132,6 @@ class CreateEventActivity : AppCompatActivity() {
         val eventDescription = findViewById<EditText>(R.id.event_description)
         Log.d("koordinat i create", eventLocation.toString())
         if(eventTheme.text.isNotEmpty() && eventDescription.text.isNotEmpty() && eventTitle.text.isNotEmpty()){
-            val eventInfo = mapOf("title" to eventTitle, "theme" to eventTheme,
-                "Description" to eventDescription, "date" to eventDate, "location" to eventLocation)
             Log.d("funkar","skicka till firebase")
         }else{
             Log.d("funkar inte", "skicka error")
