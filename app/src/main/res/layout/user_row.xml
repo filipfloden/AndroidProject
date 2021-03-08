@@ -15,7 +15,7 @@
         android:padding="8dp"
         android:text="Test text"
         android:textSize="18dp"
-        android:textColor="@android:color/tertiary_text_dark">
+        android:textColor="@color/WhiteGrey">
     </TextView>
     <View
         android:layout_width="0dp"

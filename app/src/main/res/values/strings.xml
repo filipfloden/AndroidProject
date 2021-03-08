@@ -26,4 +26,6 @@
     <string name="enter_event_theme">Enter event theme</string>
     <string name="placeholder">placeholder</string>
     <string name="done">Done</string>
+    <string name="accept_button">+ Accept</string>
+    <string name="chat_button">💬 Chat</string>
 </resources>
