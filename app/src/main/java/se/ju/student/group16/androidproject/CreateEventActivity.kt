@@ -10,12 +10,21 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 private const val REQUEST_CODE = 1337
 private var eventLocation = ""
 
 class CreateEventActivity : AppCompatActivity() {
 
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
+    private val users = "users"
+    private val friends = "friends"
+    private val displayname = "displayname"
+    private val email = "email"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +43,14 @@ class CreateEventActivity : AppCompatActivity() {
         val calendarView = dateDialog.findViewById<CalendarView>(R.id.calendarView)
         val googleMapsButton = findViewById<Button>(R.id.googleMapsBtn)
         var eventDate = ""
+        val inviteFriendsListView = inviteFriendsDialog.findViewById<ListView>(R.id.inviteFriendsListView)
+        val inviteFriendsList = mutableListOf<User>()
+        val friendsList = mutableListOf<User>()
+        val inviteFriendsAdapter = ArrayAdapter<User>(this, android.R.layout.simple_list_item_1, android.R.id.text1, friendsList)
+        inviteFriendsListView.adapter = inviteFriendsAdapter
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().reference
+        val currentUser = auth.currentUser
 
         pickADateButton.setOnClickListener{
             dateDialog.show()
@@ -41,6 +58,22 @@ class CreateEventActivity : AppCompatActivity() {
         dateDoneButton.setOnClickListener{
             Log.d(eventDate,"vibe")
             dateDialog.dismiss()
+        }
+
+        database.child(users).child(currentUser?.uid.toString()).child(friends).get().addOnSuccessListener {
+            friendsList.clear()
+            for (friend in it.children){
+                database.child(users).child(friend.key.toString()).get().addOnSuccessListener { info ->
+                    val friendDisplayName = info.child(displayname).value
+                    val friendEmail = info.child(email).value
+                    friendsList.add(User(info.key.toString(), friendDisplayName.toString(), friendEmail.toString()))
+                    inviteFriendsAdapter.notifyDataSetChanged()
+                }
+            }
+        }
+        inviteFriendsListView.setOnItemClickListener { parent, view, position, id ->
+            inviteFriendsListView.setItemChecked(position, true)
+
         }
         inviteFriendsButton.setOnClickListener{
             inviteFriendsDialog.show()
