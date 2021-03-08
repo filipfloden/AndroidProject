@@ -25,4 +25,8 @@
     <string name="enter_event_theme">Event tema</string>
     <string name="placeholder">placeholder</string>
     <string name="pick_a_date">Välj ett datum</string>
+    <string name="location_toast">Välj en plats för eventet</string>
+    <string name="title_activity_google_maps">Karta</string>
+    <string name="pick_a_location">Välj en plats</string>
+    <string name="done">Klar</string>
 </resources>

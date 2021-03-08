@@ -26,4 +26,7 @@
     <string name="enter_event_theme">Enter event theme</string>
     <string name="placeholder">placeholder</string>
     <string name="done">Done</string>
+    <string name="pick_a_location">Pick a location</string>
+    <string name="title_activity_google_maps">Map</string>
+    <string name="location_toast">Pick a location for the event</string>
 </resources>
