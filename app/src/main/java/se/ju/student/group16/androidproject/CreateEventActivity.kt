@@ -46,7 +46,7 @@ class CreateEventActivity : AppCompatActivity() {
         val inviteFriendsListView = inviteFriendsDialog.findViewById<ListView>(R.id.inviteFriendsListView)
         val inviteFriendsList = mutableListOf<User>()
         val friendsList = mutableListOf<User>()
-        val inviteFriendsAdapter = ArrayAdapter<User>(this, android.R.layout.simple_list_item_1, android.R.id.text1, friendsList)
+        val inviteFriendsAdapter = InviteFriendsAdapter(this, friendsList)
         inviteFriendsListView.adapter = inviteFriendsAdapter
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
@@ -72,8 +72,7 @@ class CreateEventActivity : AppCompatActivity() {
             }
         }
         inviteFriendsListView.setOnItemClickListener { parent, view, position, id ->
-            inviteFriendsListView.setItemChecked(position, true)
-
+            inviteFriendsListView.getItemAtPosition(position)
         }
         inviteFriendsButton.setOnClickListener{
             inviteFriendsDialog.show()
