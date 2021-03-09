@@ -15,7 +15,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 private const val REQUEST_CODE = 1337
-private var eventLocation = ""
+private var latitude = 0.0
+private var longitude = 0.0
 
 class CreateEventActivity : AppCompatActivity() {
 
@@ -81,7 +82,7 @@ class CreateEventActivity : AppCompatActivity() {
             inviteFriendsDialog.dismiss()
         }
         createEventButton.setOnClickListener{
-            createEvent()
+            createEvent(eventDate)
         }
         calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
             val displayChosenDate = dateDialog.findViewById<TextView>(R.id.chosenDateTextView)
@@ -115,21 +116,25 @@ class CreateEventActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
-            val location:String = data?.getStringExtra("eventLocation").toString()
-            eventLocation = location
-
+            latitude = data!!.getDoubleExtra("latitude",0.0)
+            longitude = data!!.getDoubleExtra("longitude",0.0)
+            Log.d("latitude", latitude.toString())
+            Log.d("longitude", longitude.toString())
 
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun createEvent(){
-        val eventTitle = findViewById<EditText>(R.id.event_title)
-        val eventTheme = findViewById<EditText>(R.id.event_theme)
-        val eventDescription = findViewById<EditText>(R.id.event_description)
-        Log.d("koordinat i create", eventLocation)
-        if(eventTheme.text.isNotEmpty() && eventDescription.text.isNotEmpty() && eventTitle.text.isNotEmpty()){
+    private fun createEvent(eventDate: String) {
+        val currentUser = auth.currentUser!!.uid
+        val eventTitle = findViewById<EditText>(R.id.event_title).text.toString()
+        val eventTheme = findViewById<EditText>(R.id.event_theme).text.toString()
+        val eventDescription = findViewById<EditText>(R.id.event_description).text.toString()
+        if(eventTheme.isNotEmpty() && eventDescription.isNotEmpty() && eventTitle.isNotEmpty()){
+            val eventInfo = mapOf("host" to currentUser,"title" to eventTitle, "theme" to eventTheme,
+                    "description" to eventDescription, "date" to eventDate, "latitude" to latitude, "longitude" to longitude)
             Log.d("funkar","skicka till firebase")
+            database.child("event").push().setValue(eventInfo)
         }else{
             Log.d("funkar inte", "skicka error")
         }
