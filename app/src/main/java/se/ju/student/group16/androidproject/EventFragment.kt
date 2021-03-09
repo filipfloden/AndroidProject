@@ -29,8 +29,6 @@ class EventFragment : Fragment() {
 
     lateinit var binding: FragmentEventBinding
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {

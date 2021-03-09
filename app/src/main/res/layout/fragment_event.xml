@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,38 +11,72 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="100dp"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="30dp"
-            android:textSize="26sp"
-            android:text="@string/create_event" />
-
-        <EditText
-            android:id="@+id/createEventTextField"
-            android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/rounded_corners"
-            android:gravity="center"
-            android:hint="@string/enter_title" />
 
         <Button
             android:id="@+id/createEventBtn"
             android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
+            android:layout_marginBottom="0dp"
             android:background="@drawable/rounded_corners"
             android:text="@string/create_event" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="#F44336"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/upcomingEventTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upcoming events"
+            android:textSize="40dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="#2196F3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/eventTitleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textSize="32dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/eventDescTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textSize="20dp"/>
+>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/eventInfoBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners"
+            android:text="Read more about the event"
+            android:textSize="20dp"
+            android:layout_gravity="bottom"/>
+
     </LinearLayout>
 
 </RelativeLayout>
