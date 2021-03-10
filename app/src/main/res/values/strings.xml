@@ -33,4 +33,5 @@
     <string name="chat_button">💬 Chat</string>
     <string name="permission_granted">permission granted</string>
     <string name="event_was_created">Event was created!</string>
+    <string name="my_events">My events</string>
 </resources>
