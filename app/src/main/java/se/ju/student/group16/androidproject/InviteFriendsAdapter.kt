@@ -22,6 +22,7 @@ class InviteFriendsAdapter(private val context: Activity, private val friendsLis
     private val friendsPending = "friends-pending"
     private val displayname = "displayname"
     private val email = "email"
+    private var inviteFriendsList = mutableListOf<User>()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
@@ -39,11 +40,19 @@ class InviteFriendsAdapter(private val context: Activity, private val friendsLis
         val friendCheckBox = rowView.findViewById<CheckBox>(R.id.invite_friends_checkbox)
 
         friendCheckBox.setOnCheckedChangeListener { _, isChecked ->
-            friendsList[position]
-
+            if (isChecked){
+                inviteFriendsList.add(User(friendsList[position].uid, friendsList[position].displayname, friendsList[position].email))
+            }
+            else{
+                inviteFriendsList.remove(User(friendsList[position].uid, friendsList[position].displayname, friendsList[position].email))
+            }
         }
 
         return rowView
         //super.getView(position, convertView, parent)
+    }
+
+    fun getCheckedFriends(): MutableList<User>{
+        return inviteFriendsList
     }
 }

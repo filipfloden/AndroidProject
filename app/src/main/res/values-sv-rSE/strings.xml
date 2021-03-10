@@ -31,4 +31,5 @@
     <string name="done">Klar</string>
     <string name="accept_button">+ Acceptera</string>
     <string name="chat_button">💬 Chatt</string>
+    <string name="search_for_user">Sök efter användare</string>
 </resources>
