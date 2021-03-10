@@ -31,6 +31,7 @@
     <string name="done">Klar</string>
     <string name="accept_button">+ Acceptera</string>
     <string name="chat_button">💬 Chatt</string>
+    <string name="search_for_user">Sök efter användare</string>
     <string name="event_was_created">Event skapat</string>
     <string name="permission_granted">åtkomst beviljad</string>
     <string name="my_events">Mina event</string>

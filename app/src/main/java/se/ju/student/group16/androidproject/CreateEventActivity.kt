@@ -26,6 +26,7 @@ class CreateEventActivity : AppCompatActivity() {
     private val friends = "friends"
     private val displayname = "displayname"
     private val email = "email"
+    private var inviteFriendsList = mutableListOf<User>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +46,6 @@ class CreateEventActivity : AppCompatActivity() {
         val googleMapsButton = findViewById<Button>(R.id.googleMapsBtn)
         var eventDate = ""
         val inviteFriendsListView = inviteFriendsDialog.findViewById<ListView>(R.id.inviteFriendsListView)
-        val inviteFriendsList = mutableListOf<User>()
         val friendsList = mutableListOf<User>()
         val inviteFriendsAdapter = InviteFriendsAdapter(this, friendsList)
         inviteFriendsListView.adapter = inviteFriendsAdapter
@@ -72,13 +72,23 @@ class CreateEventActivity : AppCompatActivity() {
                 }
             }
         }
+        val inflater = this.layoutInflater
+        val rowView = inflater.inflate(R.layout.invite_friends_row, null, true)
+        val checkBox = rowView.findViewById<CheckBox>(R.id.invite_friends_checkbox)
+        val intentTest = Intent(this, InviteFriendsAdapter::class.java)
+
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            Log.d("Check", "checked")
+        }
         inviteFriendsListView.setOnItemClickListener { parent, view, position, id ->
-            inviteFriendsListView.getItemAtPosition(position)
+            inviteFriendsListView.setItemChecked(position, true)
+            Log.d("Testing tag", inviteFriendsListView.checkedItemCount.toString())
         }
         inviteFriendsButton.setOnClickListener{
             inviteFriendsDialog.show()
         }
         inviteFriendsDoneButton.setOnClickListener{
+            inviteFriendsList = inviteFriendsAdapter.getCheckedFriends()
             inviteFriendsDialog.dismiss()
         }
         createEventButton.setOnClickListener{
