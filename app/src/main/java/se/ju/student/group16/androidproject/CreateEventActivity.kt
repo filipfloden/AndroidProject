@@ -111,10 +111,10 @@ class CreateEventActivity : AppCompatActivity() {
             }
             displayChosenDate.text = "$year-$selectedMonth-$selectedDay"
             eventDate = "$year-$selectedMonth-$selectedDay"
+            pickADateButton.setText(eventDate)
         }
 
         googleMapsButton.setOnClickListener{
-            //googleMapDialog.show()
             val intent = Intent(this, GoogleMapsActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE)
 
@@ -141,7 +141,11 @@ class CreateEventActivity : AppCompatActivity() {
             val eventInfo = mapOf("host" to currentUser,"title" to eventTitle, "theme" to eventTheme,
                     "description" to eventDescription, "date" to eventDate, "latitude" to latitude, "longitude" to longitude)
             Log.d("funkar","skicka till firebase")
-            database.child("event").push().setValue(eventInfo)
+            val eventID = database.child("event").push().key
+            database.child("event").child(eventID.toString()).setValue(eventInfo)
+            Log.d("test", eventID.toString())
+            database.child(users).child(currentUser).child("my-events").child(eventID.toString()).setValue(true)
+            Toast.makeText(this,getString(R.string.event_was_created), Toast.LENGTH_LONG).show()
         }else{
             Log.d("funkar inte", "skicka error")
         }
