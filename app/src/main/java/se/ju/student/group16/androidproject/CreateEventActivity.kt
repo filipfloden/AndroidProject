@@ -101,6 +101,7 @@ class CreateEventActivity : AppCompatActivity() {
             }
             displayChosenDate.text = "$year-$selectedMonth-$selectedDay"
             eventDate = "$year-$selectedMonth-$selectedDay"
+            pickADateButton.setText(eventDate)
         }
 
         googleMapsButton.setOnClickListener{
@@ -135,6 +136,7 @@ class CreateEventActivity : AppCompatActivity() {
                     "description" to eventDescription, "date" to eventDate, "latitude" to latitude, "longitude" to longitude)
             Log.d("funkar","skicka till firebase")
             database.child("event").push().setValue(eventInfo)
+            Toast.makeText(this,getString(R.string.event_was_created), Toast.LENGTH_LONG).show()
         }else{
             Log.d("funkar inte", "skicka error")
         }
