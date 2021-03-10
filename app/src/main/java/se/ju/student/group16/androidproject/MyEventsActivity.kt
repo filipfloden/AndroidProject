@@ -14,9 +14,11 @@ class MyEventsActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private val event = "event"
+    private val users = "users"
+
     private val id = "id"
     private val host = "host"
-    private val email = "email"
+    private val myEvents = "my-events"
     private var myEventsList = mutableListOf<Events>()
 
 
@@ -27,7 +29,7 @@ class MyEventsActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance().reference
         val myEventsListView = findViewById<ListView>(R.id.myEventsListView)
         val currentUser = auth.currentUser
-        database.child(event).get().addOnSuccessListener {
+        database.child(users).child(currentUser?.uid.toString()).child(myEvents).get().addOnSuccessListener {
             Log.i("firebase", "Got value ${it.value}")
         }.addOnFailureListener{
             Log.e("firebase", "Error getting data", it)
