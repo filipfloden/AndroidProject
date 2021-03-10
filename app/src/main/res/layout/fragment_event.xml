@@ -34,7 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:background="#F44336"
+        android:background="@drawable/rounded_corners"
+        android:backgroundTint="@android:color/transparent"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -42,13 +43,17 @@
             android:id="@+id/upcomingEventTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/WhiteGrey"
+            android:padding="4sp"
             android:text="Upcoming events"
             android:textSize="40dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:background="#2196F3"
+            android:background="@drawable/rounded_corners"
+            android:backgroundTint="@color/WhiteGrey"
+            android:padding="12sp"
             android:orientation="vertical">
 
             <TextView
@@ -65,18 +70,22 @@
                 android:layout_height="wrap_content"
                 android:text="Description"
                 android:textSize="20dp"/>
->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+            <Button
+                android:id="@+id/eventInfoBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners"
+                android:text="Read more about the event"
+                android:textSize="14dp"
+                android:layout_gravity="bottom"
+                />
+
         </LinearLayout>
-
-        <Button
-            android:id="@+id/eventInfoBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_corners"
-            android:text="Read more about the event"
-            android:textSize="20dp"
-            android:layout_gravity="bottom"/>
-
     </LinearLayout>
 
 </RelativeLayout>
