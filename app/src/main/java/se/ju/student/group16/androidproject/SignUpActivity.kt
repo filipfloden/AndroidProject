@@ -45,7 +45,7 @@ class SignUpActivity : AppCompatActivity() {
             }else {
                 auth.createUserWithEmailAndPassword(emailInput.text.toString(), passwordInput.text.toString()).addOnCompleteListener(this, OnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Log.d("test", "success")
+                        Log.d("Signup", "success")
                         Toast.makeText(this, "Successfully Registered", Toast.LENGTH_LONG).show()
 
                         val profileUpdates = UserProfileChangeRequest.Builder()
@@ -64,7 +64,7 @@ class SignUpActivity : AppCompatActivity() {
                         finish()
                     } else {
                         signUpErrors.setText(task.exception!!.message)
-                        Log.d("test", "failed" + task.exception)
+                        Log.d("Signup", "failed" + task.exception)
                         Toast.makeText(this, "Registration Failed", Toast.LENGTH_LONG).show()
                     }
                 })

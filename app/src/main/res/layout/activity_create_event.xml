@@ -49,35 +49,39 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp">
 
             <Button
                 android:id="@+id/pickDateBtn"
-                android:layout_width="50dp"
-                android:layout_height="49dp"
-                android:layout_marginStart="120dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/rounded_corners"
+                android:text="Date"
                 android:drawableTop="@drawable/ic_event"
-                android:drawableTint="@color/AlmostBlack"/>
-
+                android:drawableTint="@color/AlmostBlack" />
             <Button
                 android:id="@+id/invite_Friends_Btn"
-                android:layout_width="50dp"
-                android:layout_height="49dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/rounded_corners"
+                android:text="Invite"
                 android:drawableTop="@drawable/ic_person_"
                 android:drawableTint="@color/AlmostBlack" />
             <Button
                 android:id="@+id/googleMapsBtn"
-                android:layout_width="50dp"
-                android:layout_height="49dp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/WhiteGrey"
-                android:background="@drawable/rounded_corners"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Location"
                 android:drawableTop="@android:drawable/ic_dialog_map"
                 android:drawableTint="@color/AlmostBlack"/>
+
 
         </LinearLayout>
         <View

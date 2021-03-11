@@ -39,7 +39,6 @@ class LoginActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
 
         if(currentUser != null){
-            Log.d("currentUser", currentUser.displayName.toString())
             startActivity(Intent(this, EventActivity::class.java))
         }
 
@@ -64,8 +63,6 @@ class LoginActivity : AppCompatActivity() {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("login", "signInWithEmail:success")
                                 var user = auth.currentUser
-                                Log.d("user", user.toString())
-                                //updateUI(user)
                                 val intent = Intent(this, EventActivity::class.java)
                                 startActivity(intent)
                                 finish()

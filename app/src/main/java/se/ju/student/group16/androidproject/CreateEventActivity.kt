@@ -57,7 +57,6 @@ class CreateEventActivity : AppCompatActivity() {
             dateDialog.show()
         }
         dateDoneButton.setOnClickListener{
-            Log.d(eventDate,"vibe")
             dateDialog.dismiss()
         }
 
@@ -71,18 +70,6 @@ class CreateEventActivity : AppCompatActivity() {
                     inviteFriendsAdapter.notifyDataSetChanged()
                 }
             }
-        }
-        val inflater = this.layoutInflater
-        val rowView = inflater.inflate(R.layout.invite_friends_row, null, true)
-        val checkBox = rowView.findViewById<CheckBox>(R.id.invite_friends_checkbox)
-        val intentTest = Intent(this, InviteFriendsAdapter::class.java)
-
-        checkBox.setOnCheckedChangeListener { _, isChecked ->
-            Log.d("Check", "checked")
-        }
-        inviteFriendsListView.setOnItemClickListener { parent, view, position, id ->
-            inviteFriendsListView.setItemChecked(position, true)
-            Log.d("Testing tag", inviteFriendsListView.checkedItemCount.toString())
         }
         inviteFriendsButton.setOnClickListener{
             inviteFriendsDialog.show()
@@ -125,8 +112,6 @@ class CreateEventActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
             latitude = data!!.getDoubleExtra("latitude",0.0)
             longitude = data!!.getDoubleExtra("longitude",0.0)
-            Log.d("latitude", latitude.toString())
-            Log.d("longitude", longitude.toString())
 
         }
         super.onActivityResult(requestCode, resultCode, data)
@@ -143,7 +128,6 @@ class CreateEventActivity : AppCompatActivity() {
             Log.d("funkar","skicka till firebase")
             val eventID = database.child("event").push().key
             database.child("event").child(eventID.toString()).setValue(eventInfo)
-            Log.d("test", eventID.toString())
             database.child(users).child(currentUser).child("my-events").child(eventID.toString()).setValue(true)
             Toast.makeText(this,getString(R.string.event_was_created), Toast.LENGTH_LONG).show()
         }else{
