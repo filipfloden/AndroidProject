@@ -37,7 +37,7 @@ class UsersAdapter(private val context: Activity, private val user: MutableList<
             database.child(users).child(currentUser?.uid.toString()).child(friendsPending).child(user[position].uid).setValue("sent")
             database.child(users).child(user[position].uid).child(friendsPending).child(currentUser?.uid.toString()).setValue("received")
 
-            addFriend.text = "Added"
+            addFriend.text = "✓ Added"
         }
         return rowView
         //super.getView(position, convertView, parent)

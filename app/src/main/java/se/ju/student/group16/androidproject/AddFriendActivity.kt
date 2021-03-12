@@ -76,11 +76,15 @@ class AddFriendActivity : AppCompatActivity() {
         database.child(users).child(currentUser?.uid.toString()).child("friends").get().addOnSuccessListener {
             currentUsersFriends = it.value.toString()
         }
+        var currentUsersPendingFriends = ""
+        database.child(users).child(currentUser?.uid.toString()).child(friendsPending).get().addOnSuccessListener {
+            currentUsersPendingFriends = it.value.toString()
+        }
         database.child(users).get().addOnSuccessListener {
 
             for (user in it.children){
                 if (user.key.toString() != currentUser?.uid.toString())
-                    if (!currentUsersFriends.contains(user.key.toString()))
+                    if (!currentUsersFriends.contains(user.key.toString()) && !currentUsersPendingFriends.contains(user.key.toString()))
                         allUsers.add(
                             User(
                                 user.key.toString(),

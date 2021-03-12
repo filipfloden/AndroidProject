@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/edittext_rounded_corners"
             android:padding="10dp"
@@ -54,7 +54,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp">
-
             <Button
                 android:id="@+id/pickDateBtn"
                 android:layout_width="0dp"
@@ -62,6 +61,7 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="10dp"
                 android:text="Date"
+                android:textSize="14sp"
                 android:drawableTop="@drawable/ic_event"
                 android:drawableTint="@color/AlmostBlack" />
             <Button
@@ -71,6 +71,7 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="10dp"
                 android:text="Invite"
+                android:textSize="14sp"
                 android:drawableTop="@drawable/ic_person_"
                 android:drawableTint="@color/AlmostBlack" />
             <Button
@@ -79,6 +80,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Location"
+                android:padding="0dp"
+                android:textSize="14sp"
                 android:drawableTop="@android:drawable/ic_dialog_map"
                 android:drawableTint="@color/AlmostBlack"/>
 
