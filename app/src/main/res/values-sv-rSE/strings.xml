@@ -19,7 +19,7 @@
     <string name="new_password">Nytt lösenord</string>
     <string name="confirm_password">Bekräfta lösenord</string>
     <string name="enter_title">Välj title</string>
-    <string name="add_button">+ Lägg till</string>
+    <string name="add_button_text">+ Lägg till</string>
     <string name="invite_friends">Bjud in vänner</string>
     <string name="enter_event_description">Event beskrivning</string>
     <string name="enter_event_theme">Event tema</string>
@@ -31,6 +31,9 @@
     <string name="done">Klar</string>
     <string name="accept_button">+ Acceptera</string>
     <string name="chat_button">💬 Chatt</string>
+    <string name="search_for_user">Sök efter användare</string>
     <string name="event_was_created">Event skapat</string>
     <string name="permission_granted">åtkomst beviljad</string>
+    <string name="my_events">Mina event</string>
+    <string name="added_button_text">✓ Tillagd</string>
 </resources>

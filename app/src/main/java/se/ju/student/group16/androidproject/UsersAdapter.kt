@@ -33,10 +33,11 @@ class UsersAdapter(private val context: Activity, private val user: MutableList<
             auth = FirebaseAuth.getInstance()
             database = FirebaseDatabase.getInstance().reference
             val currentUser = auth.currentUser
-            Log.d("Friend request", "Added " + user[position].uid)
 
             database.child(users).child(currentUser?.uid.toString()).child(friendsPending).child(user[position].uid).setValue("sent")
             database.child(users).child(user[position].uid).child(friendsPending).child(currentUser?.uid.toString()).setValue("received")
+
+            addFriend.text = "✓ Added"
         }
         return rowView
         //super.getView(position, convertView, parent)

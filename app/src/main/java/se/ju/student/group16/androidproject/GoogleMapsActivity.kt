@@ -65,8 +65,6 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             lng  = latlng.longitude
             lat = latlng.latitude
             marker = mapOf("lat" to lat, "lng" to lng)
-            Log.d("koordinater", marker.toString())
-
         }
         getLocationAccess()
         val defaultZoom = 5f

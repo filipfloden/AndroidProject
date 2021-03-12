@@ -55,6 +55,11 @@ class EventFragment : Fragment() {
             startActivity(intent)
 
         }
+
+        binding.myEventButton.setOnClickListener {
+            val intent = Intent(context, MyEventsActivity::class.java)
+            startActivity(intent)
+        }
         // TODO, listen for clicks on the Add button, add a number to the list and then
         // tell the adapter that the list has changed (e.g. notifyDataSetChanged).
 

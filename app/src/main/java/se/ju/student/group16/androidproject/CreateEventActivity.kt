@@ -26,6 +26,7 @@ class CreateEventActivity : AppCompatActivity() {
     private val friends = "friends"
     private val displayname = "displayname"
     private val email = "email"
+    private var inviteFriendsList = mutableListOf<User>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +46,6 @@ class CreateEventActivity : AppCompatActivity() {
         val googleMapsButton = findViewById<Button>(R.id.googleMapsBtn)
         var eventDate = ""
         val inviteFriendsListView = inviteFriendsDialog.findViewById<ListView>(R.id.inviteFriendsListView)
-        val inviteFriendsList = mutableListOf<User>()
         val friendsList = mutableListOf<User>()
         val inviteFriendsAdapter = InviteFriendsAdapter(this, friendsList)
         inviteFriendsListView.adapter = inviteFriendsAdapter
@@ -57,7 +57,6 @@ class CreateEventActivity : AppCompatActivity() {
             dateDialog.show()
         }
         dateDoneButton.setOnClickListener{
-            Log.d(eventDate,"vibe")
             dateDialog.dismiss()
         }
 
@@ -72,13 +71,11 @@ class CreateEventActivity : AppCompatActivity() {
                 }
             }
         }
-        inviteFriendsListView.setOnItemClickListener { parent, view, position, id ->
-            inviteFriendsListView.getItemAtPosition(position)
-        }
         inviteFriendsButton.setOnClickListener{
             inviteFriendsDialog.show()
         }
         inviteFriendsDoneButton.setOnClickListener{
+            inviteFriendsList = inviteFriendsAdapter.getCheckedFriends()
             inviteFriendsDialog.dismiss()
         }
         createEventButton.setOnClickListener{
@@ -105,22 +102,16 @@ class CreateEventActivity : AppCompatActivity() {
         }
 
         googleMapsButton.setOnClickListener{
-            //googleMapDialog.show()
             val intent = Intent(this, GoogleMapsActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE)
 
         }
-
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
             latitude = data!!.getDoubleExtra("latitude",0.0)
             longitude = data!!.getDoubleExtra("longitude",0.0)
-            Log.d("latitude", latitude.toString())
-            Log.d("longitude", longitude.toString())
 
         }
         super.onActivityResult(requestCode, resultCode, data)
@@ -135,7 +126,9 @@ class CreateEventActivity : AppCompatActivity() {
             val eventInfo = mapOf("host" to currentUser,"title" to eventTitle, "theme" to eventTheme,
                     "description" to eventDescription, "date" to eventDate, "latitude" to latitude, "longitude" to longitude)
             Log.d("funkar","skicka till firebase")
-            database.child("event").push().setValue(eventInfo)
+            val eventID = database.child("event").push().key
+            database.child("event").child(eventID.toString()).setValue(eventInfo)
+            database.child(users).child(currentUser).child("my-events").child(eventID.toString()).setValue(true)
             Toast.makeText(this,getString(R.string.event_was_created), Toast.LENGTH_LONG).show()
         }else{
             Log.d("funkar inte", "skicka error")
