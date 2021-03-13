@@ -112,7 +112,6 @@ class CreateEventActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
             latitude = data!!.getDoubleExtra("latitude",0.0)
             longitude = data!!.getDoubleExtra("longitude",0.0)
-
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
@@ -128,7 +127,10 @@ class CreateEventActivity : AppCompatActivity() {
             Log.d("funkar","skicka till firebase")
             val eventID = database.child("event").push().key
             database.child("event").child(eventID.toString()).setValue(eventInfo)
-            database.child(users).child(currentUser).child("my-events").child(eventID.toString()).setValue(true)
+            for (invitedFriend in inviteFriendsList) {
+                database.child("event").child(eventID.toString()).child("guest-list").child(invitedFriend.uid).setValue("pending")
+            }
+                database.child(users).child(currentUser).child("my-events").child(eventID.toString()).setValue(true)
             Toast.makeText(this,getString(R.string.event_was_created), Toast.LENGTH_LONG).show()
             finish()
         }else{
