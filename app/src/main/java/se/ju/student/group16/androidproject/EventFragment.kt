@@ -14,6 +14,8 @@ import se.ju.student.group16.androidproject.databinding.FragmentEventBinding
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private const val REQUEST_CODE = 14
+
 
 /**
  * A simple [Fragment] subclass.
@@ -52,7 +54,7 @@ class EventFragment : Fragment() {
 
         binding.createEventBtn.setOnClickListener{
             val intent = Intent(context, CreateEventActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, REQUEST_CODE)
 
         }
 
