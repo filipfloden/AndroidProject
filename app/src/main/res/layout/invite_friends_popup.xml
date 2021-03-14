@@ -5,7 +5,8 @@
     android:layout_height="475dp"
     android:padding="5dp"
     android:layout_gravity="center"
-    android:background="@color/backgroundColor">
+    android:background="@color/backgroundColor"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
 
     <LinearLayout
