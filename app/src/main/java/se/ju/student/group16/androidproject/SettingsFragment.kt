@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.firebase.auth.FirebaseAuth
 import se.ju.student.group16.androidproject.databinding.FragmentSettingsBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -50,9 +49,12 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.logoutBtn.setOnClickListener {
+            /*
             auth.signOut()
             val intent = Intent(context, LoginActivity::class.java)
             startActivity(intent)
+             */
+            signOut()
         }
 
         binding.changePasswordBtn.setOnClickListener {
@@ -62,7 +64,15 @@ class SettingsFragment : Fragment() {
 
         // TODO, listen for clicks on the Add button, add a number to the list and then
         // tell the adapter that the list has changed (e.g. notifyDataSetChanged).
-
+    }
+    fun signOut(){
+        auth.signOut()
+        friendsRepository.clearFriends()
+        val intent = Intent(context, LoginActivity::class.java)
+        intent.putExtra("finish", true)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP // To clean up all activities
+        this.activity?.finish()
+        startActivity(intent)
     }
 
     companion object {
