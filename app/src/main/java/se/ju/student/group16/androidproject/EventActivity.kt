@@ -49,6 +49,7 @@ class EventActivity : AppCompatActivity() {
             }
             true
         }
+        friendsRepository.clearFriends()
         database.child("users").child(currentUser?.uid.toString()).child("friends").get().addOnSuccessListener {
             for (friend in it.children){
                 database.child("users").child(friend.key.toString()).get().addOnSuccessListener { info ->

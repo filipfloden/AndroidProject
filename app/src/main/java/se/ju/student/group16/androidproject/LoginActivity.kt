@@ -21,22 +21,19 @@ import com.google.firebase.database.FirebaseDatabase
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
+    private val auth = firebaseRepository.getAuth()
     private lateinit var googleSignInClient: GoogleSignInClient
-    private lateinit var database: DatabaseReference
+    private var database = firebaseRepository.getDatabaseReference()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().reference
         database.keepSynced(true)
 
-        val currentUser = auth.currentUser
-
-        if(currentUser != null){
+        if(firebaseRepository.getCurrentUser() != null){
             startActivity(Intent(this, EventActivity::class.java))
+            finish()
         }
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

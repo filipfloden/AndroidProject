@@ -84,9 +84,10 @@ class CreateEventActivity : AppCompatActivity() {
             }else{
                 selectedMonth = (month+1).toString()
             }
+            val shortYear = year-2000
             displayChosenDate.text = "$year-$selectedMonth-$selectedDay"
             eventDate = "$year-$selectedMonth-$selectedDay"
-            pickADateButton.setText(eventDate)
+            pickADateButton.text = "$shortYear-$selectedMonth-$selectedDay"
         }
 
         googleMapsButton.setOnClickListener{
