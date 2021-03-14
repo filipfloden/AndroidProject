@@ -1,6 +1,7 @@
 package se.ju.student.group16.androidproject
 
 import android.app.Activity
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -23,8 +24,15 @@ class FriendAdapter(private val context: Activity, private val friends: MutableL
         val inflater = context.layoutInflater
         val rowView = inflater.inflate(R.layout.friend_row, null, true)
         val friendsName = rowView.findViewById<TextView>(R.id.friend_name)
+        val openChat = rowView.findViewById<Button>(R.id.open_chat)
         friends.sortBy { it.displayname }
         friendsName.text = friends[position].displayname
+
+        openChat.setOnClickListener {
+            context.startActivity(
+                    Intent(context, chatActivity::class.java).putExtra("chattingWith", friends[position].uid)
+            )
+        }
 
         return rowView
         //super.getView(position, convertView, parent)
