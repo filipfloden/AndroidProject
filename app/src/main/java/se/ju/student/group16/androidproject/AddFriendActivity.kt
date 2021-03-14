@@ -15,8 +15,8 @@ import java.util.*
 
 class AddFriendActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
-    private lateinit var database: DatabaseReference
+    private var database = firebaseRepository.getDatabaseReference()
+    private val currentUser = firebaseRepository.getCurrentUser()
     private val allUsers = mutableListOf<User>()
     private val friendRequests = mutableListOf<User>()
     private val users = "users"
@@ -30,15 +30,11 @@ class AddFriendActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_friend)
 
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().reference
-
         val usersListView = findViewById<ListView>(R.id.usersListView)
         val friendRequestListView = findViewById<ListView>(R.id.friendRequestListView)
         val searchBar = findViewById<SearchView>(R.id.search_user)
         val friendRequestAdapter = FriendRequestAdapter(this, friendRequests)
         val usersAdapter = UsersAdapter(this, allUsers)
-        val currentUser = auth.currentUser
 
         friendRequestListView.adapter = friendRequestAdapter
         val postListener = object : ValueEventListener {
@@ -102,12 +98,8 @@ class AddFriendActivity : AppCompatActivity() {
 
         usersListView.setOnItemClickListener { parent, view, position, id ->
             val userClicked = usersListView.getItemAtPosition(position) as User
-            database.child(users).child(currentUser?.uid.toString()).child(friendsPending).child(
-                userClicked.uid
-            ).setValue("sent")
-            database.child(users).child(userClicked.uid).child(friendsPending).child(currentUser?.uid.toString()).setValue(
-                "received"
-            )
+            database.child(users).child(currentUser?.uid.toString()).child(friendsPending).child(userClicked.uid).setValue("sent")
+            database.child(users).child(userClicked.uid).child(friendsPending).child(currentUser?.uid.toString()).setValue("received")
         }
 
         searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -122,5 +114,7 @@ class AddFriendActivity : AppCompatActivity() {
                 return false
             }
         })
+        val test = friendsRepository.getAllFriends()
+        Log.d("Friends List", test.toString())
     }
 }
