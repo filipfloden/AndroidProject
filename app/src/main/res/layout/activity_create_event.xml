@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".CreateEventActivity">
+    tools:context=".CreateEventActivity"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +22,9 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/edittext_rounded_corners"
             android:padding="10dp"
-            android:hint="@string/enter_title" />
+            android:hint="@string/enter_title"
+            android:textColorHint="@color/Grey"
+            android:textColor="@color/Grey"/>
 
         <EditText
             android:id="@+id/event_theme"
@@ -32,7 +35,9 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/edittext_rounded_corners"
             android:padding="10dp"
-            android:hint="@string/enter_event_theme" />
+            android:hint="@string/enter_event_theme"
+            android:textColorHint="@color/Grey"
+            android:textColor="@color/Grey"/>
 
         <EditText
             android:id="@+id/event_description"
@@ -44,7 +49,9 @@
             android:background="@drawable/edittext_rounded_corners"
             android:gravity="top"
             android:padding="10dp"
-            android:hint="@string/enter_event_description" />
+            android:hint="@string/enter_event_description"
+            android:textColorHint="@color/Grey"
+            android:textColor="@color/Grey"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,6 +69,7 @@
                 android:layout_marginEnd="10dp"
                 android:text="Date"
                 android:textSize="14sp"
+                android:textColor="@color/AlmostBlack"
                 android:drawableTop="@drawable/ic_event"
                 android:drawableTint="@color/AlmostBlack" />
             <Button
@@ -72,6 +80,7 @@
                 android:layout_marginEnd="10dp"
                 android:text="Invite"
                 android:textSize="14sp"
+                android:textColor="@color/AlmostBlack"
                 android:drawableTop="@drawable/ic_person_"
                 android:drawableTint="@color/AlmostBlack" />
             <Button
@@ -79,9 +88,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Location"
                 android:padding="0dp"
+                android:text="Location"
                 android:textSize="14sp"
+                android:textColor="@color/AlmostBlack"
                 android:drawableTop="@android:drawable/ic_dialog_map"
                 android:drawableTint="@color/AlmostBlack"/>
 
@@ -102,7 +112,8 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/rounded_corners"
             android:gravity="center"
-            android:text="@string/create_event" />
+            android:text="@string/create_event"
+            android:textColor="@color/AlmostBlack"/>
 
 
     </LinearLayout>

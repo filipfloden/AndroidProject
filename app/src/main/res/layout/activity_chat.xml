@@ -70,6 +70,8 @@
             android:layout_toStartOf="@+id/button_chat_send"
             android:background="@android:color/transparent"
             android:hint="Enter Message"
+            android:textColorHint="@color/Grey"
+            android:textColor="@color/Grey"
             android:inputType="text"
             android:maxLines="5"
             tools:ignore="Autofill" />
@@ -82,6 +84,6 @@
             android:background="@color/lightBlue"
             android:text="Send"
             android:textColor="@color/AlmostBlack"
-            android:textSize="10dp" />
+            android:textSize="10sp" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
