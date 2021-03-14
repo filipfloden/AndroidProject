@@ -29,12 +29,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-
-
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
         database.keepSynced(true)
-
 
         val currentUser = auth.currentUser
 
@@ -62,7 +59,6 @@ class LoginActivity : AppCompatActivity() {
                             if (task.isSuccessful) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("login", "signInWithEmail:success")
-                                var user = auth.currentUser
                                 val intent = Intent(this, EventActivity::class.java)
                                 startActivity(intent)
                                 finish()

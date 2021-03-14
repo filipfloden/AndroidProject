@@ -46,7 +46,7 @@ class CreateEventActivity : AppCompatActivity() {
         val googleMapsButton = findViewById<Button>(R.id.googleMapsBtn)
         var eventDate = ""
         val inviteFriendsListView = inviteFriendsDialog.findViewById<ListView>(R.id.inviteFriendsListView)
-        val friendsList = mutableListOf<User>()
+        val friendsList = friendsRepository.getAllFriends()
         val inviteFriendsAdapter = InviteFriendsAdapter(this, friendsList)
         inviteFriendsListView.adapter = inviteFriendsAdapter
         auth = FirebaseAuth.getInstance()
@@ -58,18 +58,6 @@ class CreateEventActivity : AppCompatActivity() {
         }
         dateDoneButton.setOnClickListener{
             dateDialog.dismiss()
-        }
-
-        database.child(users).child(currentUser?.uid.toString()).child(friends).get().addOnSuccessListener {
-            friendsList.clear()
-            for (friend in it.children){
-                database.child(users).child(friend.key.toString()).get().addOnSuccessListener { info ->
-                    val friendDisplayName = info.child(displayname).value
-                    val friendEmail = info.child(email).value
-                    friendsList.add(User(info.key.toString(), friendDisplayName.toString(), friendEmail.toString()))
-                    inviteFriendsAdapter.notifyDataSetChanged()
-                }
-            }
         }
         inviteFriendsButton.setOnClickListener{
             inviteFriendsDialog.show()

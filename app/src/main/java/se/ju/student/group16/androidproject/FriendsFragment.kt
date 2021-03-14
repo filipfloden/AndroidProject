@@ -29,13 +29,15 @@ class FriendsFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     lateinit var binding: FragmentFriendsBinding
-    private lateinit var auth: FirebaseAuth
-    private lateinit var database: DatabaseReference
+
+
+    private var database = firebaseRepository.getDatabaseReference()
+    private val currentUser = firebaseRepository.getCurrentUser()
     private val users = "users"
     private val friends = "friends"
     private val displayname = "displayname"
     private val email = "email"
-    private val friendsList = mutableListOf<User>()
+    private var friendsList = friendsRepository.getAllFriends()
     lateinit var friendsAdapter: FriendAdapter
 
 
@@ -45,10 +47,7 @@ class FriendsFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().reference
-        val currentUser = auth.currentUser
-
+        /*
         val friendsChangedListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
@@ -70,7 +69,8 @@ class FriendsFragment : Fragment() {
                 Log.w("error", "loadPost:onCancelled", databaseError.toException())
             }
         }
-        database.child(users).child(currentUser?.uid.toString()).child(friends).addValueEventListener(friendsChangedListener)
+         */
+        //database.child(users).child(currentUser?.uid.toString()).child(friends).addValueEventListener(friendsChangedListener)
     }
 
     override fun onCreateView(
@@ -84,10 +84,7 @@ class FriendsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().reference
         val friendsListView = binding.friendsListView
-        val currentUser = auth.currentUser
         friendsAdapter = FriendAdapter(this.activity!!, friendsList)
         friendsListView.adapter = friendsAdapter
         /*
