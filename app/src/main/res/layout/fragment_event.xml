@@ -22,7 +22,8 @@
             android:layout_marginTop="10dp"
             android:layout_gravity="end"
             android:layout_height="wrap_content"
-            android:text="@string/my_events" />
+            android:text="@string/my_events"
+            android:textColor="@color/AlmostBlack"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,14 +58,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:text="Title"
-                    android:textSize="32sp" />
+                    android:textSize="32sp"
+                    android:textColor="@color/Grey"/>
 
                 <TextView
                     android:id="@+id/eventDescTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Description"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/Grey"/>
 
                 <View
                     android:layout_width="0dp"
@@ -78,7 +81,8 @@
                     android:layout_gravity="bottom"
                     android:background="@drawable/rounded_corners"
                     android:text="Read more about the event"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textColor="@color/AlmostBlack"/>
 
             </LinearLayout>
         </LinearLayout>
@@ -92,7 +96,8 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/rounded_corners"
-            android:text="@string/create_event" />
+            android:text="@string/create_event"
+            android:textColor="@color/AlmostBlack"/>
 
     </LinearLayout>
 
