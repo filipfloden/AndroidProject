@@ -132,6 +132,7 @@ class CreateEventActivity : AppCompatActivity() {
             }
                 database.child(users).child(currentUser).child("my-events").child(eventID.toString()).setValue(true)
             Toast.makeText(this,getString(R.string.event_was_created), Toast.LENGTH_LONG).show()
+            finish()
         }else{
             Log.d("funkar inte", "skicka error")
         }

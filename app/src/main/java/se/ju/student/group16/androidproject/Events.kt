@@ -8,7 +8,8 @@ class Events(
     val eventDate: String,
     val eventLong: Double,
     val eventLat: Double,
-    val eventHost: String
+    val eventHost: String,
+    val guestList: String
 ) {
     override fun toString() = eventTitle
 
