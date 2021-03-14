@@ -13,22 +13,10 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class InviteFriendsAdapter(private val context: Activity, private val friendsList: MutableList<User>) : ArrayAdapter<User>(context, R.layout.invite_friends_row, friendsList) {
-
-    private lateinit var auth: FirebaseAuth
-    private lateinit var database: DatabaseReference
-    private val users = "users"
-    private val friends = "friends"
-    private val received = "received"
-    private val friendsPending = "friends-pending"
-    private val displayname = "displayname"
-    private val email = "email"
-    private var inviteFriendsList = mutableListOf<User>()
+    
+    private val inviteFriendsList = mutableListOf<User>()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().reference
-        val currentUser = auth.currentUser
 
         val inflater = context.layoutInflater
         val rowView = inflater.inflate(R.layout.invite_friends_row, null, true)
