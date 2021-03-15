@@ -36,4 +36,6 @@
     <string name="event_was_created">Event was created!</string>
     <string name="my_events">My events</string>
     <string name="added_button_text">✓ Added</string>
+    <string name="update_event">Update event</string>
+    <string name="delete_event">Delete event</string>
 </resources>
