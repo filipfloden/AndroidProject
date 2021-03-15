@@ -36,4 +36,6 @@
     <string name="permission_granted">åtkomst beviljad</string>
     <string name="my_events">Mina event</string>
     <string name="added_button_text">✓ Tillagd</string>
+    <string name="is_typing">◦ ◦ ◦</string>
+    <string name="message_too_long">Meddelande gränsen är 300 karaktärer</string>
 </resources>
