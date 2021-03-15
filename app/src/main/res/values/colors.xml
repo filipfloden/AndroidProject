@@ -13,4 +13,6 @@
     <color name="Grey">#707070</color>
     <color name="AlmostBlack">#31353d</color>
     <color name="ChatBlue">#3BB9FF</color>
+    <color name="Transparent">@android:color/transparent</color>
+    <color name="LightGrey">#C0C0C0</color>
 </resources>

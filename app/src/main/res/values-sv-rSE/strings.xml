@@ -38,4 +38,6 @@
     <string name="added_button_text">✓ Tillagd</string>
     <string name="update_event">Updatera event</string>
     <string name="delete_event">Tabort event</string>
+    <string name="is_typing">◦ ◦ ◦</string>
+    <string name="message_too_long">Meddelande gränsen är 300 karaktärer</string>
 </resources>

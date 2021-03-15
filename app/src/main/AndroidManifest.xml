@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProject">
         <activity android:name=".UpdateMyEventActivity"></activity>
+        <activity android:name=".LoadDataActivity"></activity>
         <activity android:name=".chatActivity" />
         <activity android:name=".MyEventsActivity" />
         <!--

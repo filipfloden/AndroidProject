@@ -38,4 +38,6 @@
     <string name="added_button_text">✓ Added</string>
     <string name="update_event">Update event</string>
     <string name="delete_event">Delete event</string>
+    <string name="is_typing">◦ ◦ ◦</string>
+    <string name="message_too_long">Message limit is 300 characters</string>
 </resources>

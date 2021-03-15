@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.widget.Button
 import androidx.core.app.NotificationCompat
@@ -14,6 +15,8 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.google.android.gms.common.api.Scope
+import com.google.android.gms.tasks.Tasks
 import com.google.android.material.bottomnavigation.BottomNavigationMenu
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabItem
@@ -29,6 +32,7 @@ class EventActivity : AppCompatActivity() {
     private val database = firebaseRepository.getDatabaseReference()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_event)
@@ -48,17 +52,6 @@ class EventActivity : AppCompatActivity() {
                 R.id.settings_item -> makeCurrentFragment(settingsFragment)
             }
             true
-        }
-        friendsRepository.clearFriends()
-        database.child("users").child(currentUser?.uid.toString()).child("friends").get().addOnSuccessListener {
-            for (friend in it.children){
-                database.child("users").child(friend.key.toString()).get().addOnSuccessListener { info ->
-                    val friendUID = info.key.toString()
-                    val friendDisplayName = info.child("displayname").value.toString()
-                    val friendEmail = info.child("email").value.toString()
-                    friendsRepository.addUser(friendUID, friendDisplayName, friendEmail)
-                }
-            }
         }
         createNotificationChannel()
     }

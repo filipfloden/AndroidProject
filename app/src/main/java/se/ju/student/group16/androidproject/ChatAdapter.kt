@@ -1,6 +1,7 @@
 package se.ju.student.group16.androidproject
 
 import android.app.Activity
+import android.content.Context
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -10,8 +11,10 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginRight
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import java.text.SimpleDateFormat
 
 
 class ChatAdapter(private val context: Activity, private val messages: MutableList<Message>) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
@@ -25,7 +28,9 @@ class ChatAdapter(private val context: Activity, private val messages: MutableLi
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.message_text)
+        val messageTime: TextView = view.findViewById(R.id.message_time)
         val frameLayout: FrameLayout = view.findViewById(R.id.message_layout)
+        val linearLayout: LinearLayout = view.findViewById(R.id.message_linear)
         init {
             // Define click listener for the ViewHolder's View.
         }
@@ -47,20 +52,24 @@ class ChatAdapter(private val context: Activity, private val messages: MutableLi
         // contents of the view with that element
         //Log.d("Compare", currentUser?.uid.toString() + " | " + messages[position].user)
         if (currentUser?.uid.toString() == messages[position].user){
-            Log.d("this user", messages[position].toString())
-            viewHolder.textView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.ChatBlue)
-            /*
-            val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(400, 10)
-            params.gravity = Gravity.RIGHT
-
+            viewHolder.linearLayout.backgroundTintList = ContextCompat.getColorStateList(context, R.color.ChatBlue)
+            val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT)
+            params.leftMargin = 350
+            params.rightMargin = 50
             viewHolder.frameLayout.layoutParams = params
-
-             */
         }
         else{
-            viewHolder.textView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.WhiteGrey)
-            viewHolder.textView.gravity = Gravity.LEFT
+            viewHolder.linearLayout.backgroundTintList = ContextCompat.getColorStateList(context, R.color.WhiteGrey)
+            val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
+            params.rightMargin = 350
+            params.leftMargin = 50
+            viewHolder.frameLayout.layoutParams = params
         }
+        if (messages[position].message == context.getString(R.string.is_typing)){
+            viewHolder.linearLayout.backgroundTintList = ContextCompat.getColorStateList(context, R.color.LightGrey)
+        }
+        val simpleDate = SimpleDateFormat("HH:mm")
+        viewHolder.messageTime.text = simpleDate.format(messages[position].timestamp)
         viewHolder.textView.text = messages[position].toString()
     }
 

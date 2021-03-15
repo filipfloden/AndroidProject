@@ -1,16 +1,20 @@
 package se.ju.student.group16.androidproject
 
+import android.app.PendingIntent
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import org.w3c.dom.Comment
+import java.text.SimpleDateFormat
 
 class chatActivity : AppCompatActivity() {
 
@@ -41,11 +45,16 @@ class chatActivity : AppCompatActivity() {
         val ref1 = database.child(messagesPath).child(currentUser?.uid.toString() + "_" + chattingWithUID)
         val ref2 = database.child(messagesPath).child(chattingWithUID + "_" + currentUser?.uid.toString())
 
+        /*
+        val intent = Intent(this, chatActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+         */
         database.child(usersPath).child(chattingWithUID.toString()).get().addOnSuccessListener {
             chattingWithUser = User(chattingWithUID.toString(), it.child("displayname").value.toString(), it.child("email").value.toString())
             chattingWithName.text = chattingWithUser.toString()
         }
-
         val childEventListener = object : ChildEventListener {
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
                 //Log.d("firebase", "onChildAdded:" + dataSnapshot.key!!)
@@ -53,7 +62,9 @@ class chatActivity : AppCompatActivity() {
                 // A new comment has been added, add it to the displayed list
                 val user = dataSnapshot.child("user").value
                 val message = dataSnapshot.child("message").value
-                listOfMessages.add(Message(user.toString(), message.toString()))
+                val timestamp = dataSnapshot.child("timestamp").value
+
+                listOfMessages.add(Message(user.toString(), message.toString(), timestamp as Long))
                 chatRecyclerView.scrollToPosition(chatAdapter.itemCount -1)
                 chatAdapter.notifyDataSetChanged()
 
@@ -63,14 +74,17 @@ class chatActivity : AppCompatActivity() {
                         .setSmallIcon(R.drawable.common_google_signin_btn_icon_light)
                         .setContentTitle("Message")
                         .setContentText(message.toString())
-                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .setContentIntent(pendingIntent)
+                        .setAutoCancel(true)
                 with(NotificationManagerCompat.from(baseContext)) {
                     // notificationId is a unique int for each notification that you must define
                     notify(2, builder.build())
                     Log.d("notfication sent", "true")
                 }
-
                  */
+
+
                 // ...
             }
 
@@ -90,8 +104,9 @@ class chatActivity : AppCompatActivity() {
 
                 // A comment has changed, use the key to determine if we are displaying this
                 // comment and if so remove it.
-                val commentKey = dataSnapshot.key
-
+                val commentKey = dataSnapshot.child("user").value
+                listOfMessages.remove(listOfMessages.find { it.message == getString(R.string.is_typing) })
+                chatAdapter.notifyDataSetChanged()
                 // ...
             }
 
@@ -113,14 +128,33 @@ class chatActivity : AppCompatActivity() {
             }
         }
         ref1.addChildEventListener(childEventListener)
-
+        val messageID = ref2.push().key
+        chatField.doOnTextChanged { text, start, before, count ->
+            chatRecyclerView.scrollToPosition(chatAdapter.itemCount -1)
+            val map = mapOf("user" to currentUser?.uid, "message" to getString(R.string.is_typing), "timestamp" to ServerValue.TIMESTAMP)
+            ref2.child(messageID!!).setValue(map)
+            if (chatField.text.toString() == ""){
+                ref2.child(messageID!!).removeValue()
+                chatAdapter.notifyDataSetChanged()
+            }
+        }
         sendMessage.setOnClickListener {
             val message = chatField.text.toString()
             if (message != "") {
-                val map = mapOf("user" to currentUser?.uid, "message" to message)
-                ref1.push().setValue(map)
-                ref2.push().setValue(map)
-                chatField.text = null
+                if (message.length < 300) {
+                    val map = mapOf(
+                        "user" to currentUser?.uid,
+                        "message" to message,
+                        "timestamp" to ServerValue.TIMESTAMP
+                    )
+                    ref1.push().setValue(map)
+                    ref2.push().setValue(map)
+                    chatField.text = null
+                    ref2.child(messageID!!).removeValue()
+                }else{
+                    Toast.makeText(this, getString(R.string.message_too_long),
+                        Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
