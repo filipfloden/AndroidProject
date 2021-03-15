@@ -1,6 +1,6 @@
 package se.ju.student.group16.androidproject
 
-class Events(
+data class Events(
     val eventID: String,
     val eventTitle: String,
     val eventDescription: String,
@@ -9,7 +9,7 @@ class Events(
     val eventLong: Double,
     val eventLat: Double,
     val eventHost: String,
-    val guestList: String
+    val guestList: Map<User, String>
 ) {
     override fun toString() = eventTitle
 
