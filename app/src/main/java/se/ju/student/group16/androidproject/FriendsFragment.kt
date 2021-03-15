@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import se.ju.student.group16.androidproject.databinding.FragmentEventBinding
@@ -33,11 +34,12 @@ class FriendsFragment : Fragment() {
 
     private var database = firebaseRepository.getDatabaseReference()
     private val currentUser = firebaseRepository.getCurrentUser()
-    private val users = "users"
+    private val usersPath = "users"
     private val friends = "friends"
-    private val displayname = "displayname"
-    private val email = "email"
-    private var friendsList = friendsRepository.getAllFriends()
+    private val displayNamePath = "displayname"
+    private val emailPath = "email"
+    private var displayName = ""
+    private var email = ""
     lateinit var friendsAdapter: FriendAdapter
 
 
@@ -47,30 +49,63 @@ class FriendsFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        /*
-        val friendsChangedListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-                val post = dataSnapshot.children
-                friendsList.clear()
-                friendsAdapter.notifyDataSetChanged()
-                for (friend in post){
-                    database.child(users).child(friend.key.toString()).get().addOnSuccessListener { info ->
-                        val friendDisplayName = info.child(displayname).value
-                        val friendEmail = info.child(email).value
-                        friendsList.add(User(info.key.toString(), friendDisplayName.toString(), friendEmail.toString()))
-                        friendsAdapter.notifyDataSetChanged()
-                    }
+        val childEventListener = object : ChildEventListener {
+            override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                //Log.d("firebase", "onChildAdded:" + dataSnapshot.key!!)
+
+                // A new comment has been added, add it to the displayed list
+
+                val uid = dataSnapshot.key.toString()
+
+                database.child(usersPath).child(uid).get().addOnSuccessListener {
+                    displayName = it.child(displayNamePath).value.toString()
+                    email = it.child(emailPath).value.toString()
                 }
+                if(friendsRepository.getFriendById(uid) == null)
+                    friendsRepository.addUser(uid, displayName, email)
                 friendsAdapter.notifyDataSetChanged()
             }
+
+            override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                Log.d("firebase", "onChildChanged: ${dataSnapshot.key}")
+
+                // A comment has changed, use the key to determine if we are displaying this
+                // comment and if so displayed the changed comment.
+                val newComment = dataSnapshot.value
+                val commentKey = dataSnapshot.key
+
+                // ...
+            }
+
+            override fun onChildRemoved(dataSnapshot: DataSnapshot) {
+                Log.d("firebase", "onChildRemoved:" + dataSnapshot.key!!)
+
+                // A comment has changed, use the key to determine if we are displaying this
+                // comment and if so remove it.
+                val commentKey = dataSnapshot.key
+                friendsRepository.deleteFriendById(commentKey.toString())
+                friendsAdapter.notifyDataSetChanged()
+                // ...
+            }
+
+            override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                Log.d("firebase", "onChildMoved:" + dataSnapshot.key!!)
+
+                // A comment has changed position, use the key to determine if we are
+                // displaying this comment and if so move it.
+                val movedComment = dataSnapshot.value
+                val commentKey = dataSnapshot.key
+
+                // ...
+            }
+
             override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w("error", "loadPost:onCancelled", databaseError.toException())
+                Log.w("firebase", "postComments:onCancelled", databaseError.toException())
+                Toast.makeText(context, "Failed to load comments.",
+                    Toast.LENGTH_SHORT).show()
             }
         }
-         */
-        //database.child(users).child(currentUser?.uid.toString()).child(friends).addValueEventListener(friendsChangedListener)
+        database.child(usersPath).child(currentUser?.uid.toString()).child(friends).addChildEventListener(childEventListener)
     }
 
     override fun onCreateView(
@@ -85,27 +120,15 @@ class FriendsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val friendsListView = binding.friendsListView
-        friendsAdapter = FriendAdapter(this.activity!!, friendsList)
+        friendsAdapter = FriendAdapter(this.activity!!, friendsRepository.getAllFriends())
         friendsListView.adapter = friendsAdapter
-        /*
-        database.child(users).child(currentUser?.uid.toString()).child(friends).get().addOnSuccessListener {
-            friendsList.clear()
-            for (friend in it.children){
-                database.child(users).child(friend.key.toString()).get().addOnSuccessListener { info ->
-                    val friendDisplayName = info.child(displayname).value
-                    val friendEmail = info.child(email).value
-                    friendsList.add(User(info.key.toString(), friendDisplayName.toString(), friendEmail.toString()))
-                    friendsAdapter.notifyDataSetChanged()
-                }
-            }
-        }
-        */
 
         binding.addFriendBtn.setOnClickListener {
             startActivity(
                 Intent(activity, AddFriendActivity::class.java)
             )
         }
+        Log.d("list", friendsRepository.getAllFriends().toString())
     }
 
     companion object {
