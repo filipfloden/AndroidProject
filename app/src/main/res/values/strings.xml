@@ -36,4 +36,6 @@
     <string name="event_was_created">Event was created!</string>
     <string name="my_events">My events</string>
     <string name="added_button_text">✓ Added</string>
+    <string name="is_typing">◦ ◦ ◦</string>
+    <string name="message_too_long">Message limit is 300 characters</string>
 </resources>
