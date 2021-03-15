@@ -1,5 +1,6 @@
 package se.ju.student.group16.androidproject
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -79,6 +80,8 @@ class UpdateMyEventActivity : AppCompatActivity() {
         }.addOnFailureListener{
             Log.e("firebase", "Error getting data", it)
         }
+
+
         pickADateButton.setOnClickListener{
             dateDialog.show()
         }
@@ -126,6 +129,14 @@ class UpdateMyEventActivity : AppCompatActivity() {
                 startActivityForResult(intent, REQUEST_CODE)
             }
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            latitude = data!!.getDoubleExtra("latitude",0.0)
+            longitude = data!!.getDoubleExtra("longitude",0.0)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
 
