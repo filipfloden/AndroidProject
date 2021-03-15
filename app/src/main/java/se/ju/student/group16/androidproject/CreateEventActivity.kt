@@ -100,7 +100,13 @@ class CreateEventActivity : AppCompatActivity() {
 
         googleMapsButton.setOnClickListener{
             val intent = Intent(this, GoogleMapsActivity::class.java)
-            startActivityForResult(intent, REQUEST_CODE)
+            if (longitude == 0.0 &&latitude == 0.0){
+                startActivityForResult(intent, REQUEST_CODE)
+            }else{
+                intent.putExtra("long", longitude)
+                intent.putExtra("lat", latitude)
+                startActivityForResult(intent, REQUEST_CODE)
+            }
 
         }
     }
