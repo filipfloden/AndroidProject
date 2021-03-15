@@ -3,20 +3,25 @@ package se.ju.student.group16.androidproject
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 
 private const val REQUEST_CODE = 1337
-private var latitude = 0.0
-private var longitude = 0.0
+
 
 class CreateEventActivity : AppCompatActivity() {
 
@@ -27,7 +32,10 @@ class CreateEventActivity : AppCompatActivity() {
     private val displayname = "displayname"
     private val email = "email"
     private var inviteFriendsList = mutableListOf<User>()
+    private var latitude = 0.0
+    private var longitude = 0.0
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
