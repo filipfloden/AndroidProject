@@ -4,14 +4,12 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -44,23 +42,30 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        var marker = emptyMap<String,Double>()
-        var lat:Double = 0.0
-        var lng:Double = 0.0
+        var marker = emptyMap<String, Double>()
+        var lat = intent.getDoubleExtra("lat", 0.0)
+        var lng = intent.getDoubleExtra("long", 0.0)
         val doneButton = findViewById<Button>(R.id.mapDone)
+
+        if (lat != 0.0 || lng != 0.0){
+            val eventLocation = LatLng(lat, lng)
+            googleMap.addMarker(MarkerOptions()
+                    .position(eventLocation))
+        }
 
         doneButton.setOnClickListener {
             if (marker.isEmpty()){
-                Toast.makeText(this,"@string/location_toast", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "@string/location_toast", Toast.LENGTH_LONG).show()
             }
             val data = Intent()
             data.putExtra("longitude", lng)
             data.putExtra("latitude", lat)
-            setResult(Activity.RESULT_OK,data)
+            setResult(Activity.RESULT_OK, data)
             finish()
         }
 
-        mMap.setOnMapLongClickListener {    latlng->
+        mMap.setOnMapLongClickListener { latlng->
+            mMap.clear()
             mMap.addMarker(MarkerOptions().position(latlng))
             lng  = latlng.longitude
             lat = latlng.latitude
@@ -75,7 +80,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun getLocationAccess(){
         if(ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                        Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
             mMap.isMyLocationEnabled = true
         } else {
             ActivityCompat.requestPermissions(this, arrayOf(
@@ -91,7 +96,10 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     mMap.isMyLocationEnabled = true
                 }
             } else{
-                finish()
+                if(ContextCompat.checkSelfPermission(this,
+                                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                    mMap.isMyLocationEnabled = false
+                }
             }
         }
     }
