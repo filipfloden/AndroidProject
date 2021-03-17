@@ -10,43 +10,55 @@ class EventRepository {
     fun getAllMyEvents() = myEvents
     fun getAllUpcomingEvents() = upcomingEvents
 
-    fun addMyEvent(eventID: String, eventTitle: String, eventDescription: String, eventTheme: String
-                   , eventDate: String, eventLong: Double, eventLat: Double, eventHost: String
-                   , guestList: Map<User, String>){
+    fun addMyEvent(eventID: String,
+                   eventHost: String,
+                   eventTitle: String,
+                   eventDescription: String,
+                   eventTheme: String,
+                   eventDate: String,
+                   eventLong: Double,
+                   eventLat: Double,
+                   guestList: Map<User, String>){
         myEvents.add(
                 Events(
                         eventID,
+                        eventHost,
                         eventTitle,
                         eventDescription,
                         eventTheme,
                         eventDate,
                         eventLong,
                         eventLat,
-                        eventHost,
                         guestList
                 )
         )
     }
-    fun addUpcomingEvents(eventID: String, eventTitle: String, eventDescription: String, eventTheme: String
-                   , eventDate: String, eventLong: Double, eventLat: Double, eventHost: String
-                   , guestList: Map<User, String>){
+    fun addUpcomingEvents(eventID: String,
+                          eventHost: String,
+                          eventTitle: String,
+                          eventDescription: String,
+                          eventTheme: String,
+                          eventDate: String,
+                          eventLong: Double,
+                          eventLat: Double,
+                          guestList: Map<User, String>){
         upcomingEvents.add(
                 Events(
                         eventID,
+                        eventHost,
                         eventTitle,
                         eventDescription,
                         eventTheme,
                         eventDate,
                         eventLong,
                         eventLat,
-                        eventHost,
                         guestList
                 )
         )
     }
 
-    fun getEventById(eventID: String) =
-        upcomingEvents.find {
+    fun getMyEventById(eventID: String) =
+        myEvents.find {
             it.eventID == eventID
         }
     fun deleteMyEventById(eventID: String) =
@@ -61,6 +73,24 @@ class EventRepository {
                         it.eventID == eventID
                     }
             )
+    fun updateMyEventById(eventID: String,
+                          newEventTitle: String,
+                          newEventDescription: String,
+                          newEventTheme: String,
+                          newEventDate: String,
+                          newEventLong: Double,
+                          newEventLat: Double,
+                          newGuestList: Map<User, String>){
+        getMyEventById(eventID)?.run {
+            eventTitle = newEventTitle
+            eventDescription = newEventDescription
+            eventTheme = newEventTheme
+            eventDate = newEventDate
+            eventLong = newEventLong
+            eventLat = newEventLat
+            guestList = newGuestList
+        }
+    }
     fun clearEvents(){
         myEvents.clear()
         upcomingEvents.clear()
