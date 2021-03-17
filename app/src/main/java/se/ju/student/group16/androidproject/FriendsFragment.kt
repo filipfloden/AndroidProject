@@ -128,7 +128,6 @@ class FriendsFragment : Fragment() {
                 Intent(activity, AddFriendActivity::class.java)
             )
         }
-        Log.d("list", friendsRepository.getAllFriends().toString())
     }
 
     companion object {
