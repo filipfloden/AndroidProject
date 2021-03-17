@@ -140,20 +140,26 @@ class UpdateMyEventActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun updateEvent(thisEvent: Events ,eventDate: String){
+    private fun updateEvent(thisEvent: Events ,eventDate: String) {
+
         val currentUser = firebaseRepository.getCurrentUser()
         val eventTitle = findViewById<EditText>(R.id.event_title).text.toString()
         val eventTheme = findViewById<EditText>(R.id.event_theme).text.toString()
         val eventDescription = findViewById<EditText>(R.id.event_description).text.toString()
-        val eventInfo = mapOf("host" to currentUser?.uid,"title" to eventTitle, "theme" to eventTheme,
-                "description" to eventDescription, "date" to eventDate, "latitude" to latitude,
-                "longitude" to longitude, "guest-list" to inviteFriendsList)
-        Log.d("en till", eventInfo.toString())
-        database.child(eventPath).child(thisEvent.eventID).setValue(eventInfo)
-        eventRepository.updateMyEventById(thisEvent.eventID, eventTitle, eventDescription, eventTheme,
-                eventDate, longitude, latitude, inviteFriendsList)
-        Toast.makeText(this,getString(R.string.event_was_updated), Toast.LENGTH_LONG).show()
-        finish()
+        if (eventTheme.isNotEmpty() && eventDescription.isNotEmpty() && eventTitle.isNotEmpty()
+                && eventDate.isNotEmpty() && !longitude.isNaN() && !latitude.isNaN() && inviteFriendsList.isNotEmpty()) {
+            val eventInfo = mapOf("host" to currentUser?.uid, "title" to eventTitle, "theme" to eventTheme,
+                    "description" to eventDescription, "date" to eventDate, "latitude" to latitude,
+                    "longitude" to longitude, "guest-list" to inviteFriendsList)
+            Log.d("en till", eventInfo.toString())
+            database.child(eventPath).child(thisEvent.eventID).setValue(eventInfo)
+            eventRepository.updateMyEventById(thisEvent.eventID, eventTitle, eventDescription, eventTheme,
+                    eventDate, longitude, latitude, inviteFriendsList)
+            Toast.makeText(this, getString(R.string.event_was_updated), Toast.LENGTH_LONG).show()
+            finish()
+        } else {
+            Toast.makeText(this,getString(R.string.fill_all_fields), Toast.LENGTH_LONG).show()
+        }
     }
 }
 

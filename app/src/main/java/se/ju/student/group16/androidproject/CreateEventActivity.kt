@@ -22,7 +22,6 @@ import java.time.format.DateTimeFormatter
 
 private const val REQUEST_CODE = 1337
 
-
 class CreateEventActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
@@ -125,7 +124,8 @@ class CreateEventActivity : AppCompatActivity() {
         val eventDescription = findViewById<EditText>(R.id.event_description).text.toString()
         val guestList = mutableMapOf<String, String>()
 
-        if(eventTheme.isNotEmpty() && eventDescription.isNotEmpty() && eventTitle.isNotEmpty()){
+        if(eventTheme.isNotEmpty() && eventDescription.isNotEmpty() && eventTitle.isNotEmpty() && guestList.isNotEmpty()
+                && eventDate.isNotEmpty() && !longitude.isNaN() && !latitude.isNaN() && inviteFriendsList.isNotEmpty()){
             val eventInfo = mapOf("host" to currentUser,"title" to eventTitle, "theme" to eventTheme,
                     "description" to eventDescription, "date" to eventDate, "latitude" to latitude, "longitude" to longitude)
             Log.d("funkar","skicka till firebase")
@@ -142,6 +142,7 @@ class CreateEventActivity : AppCompatActivity() {
             finish()
         }else{
             Log.d("funkar inte", "skicka error")
+            Toast.makeText(this,getString(R.string.fill_all_fields), Toast.LENGTH_LONG).show()
         }
     }
 }
