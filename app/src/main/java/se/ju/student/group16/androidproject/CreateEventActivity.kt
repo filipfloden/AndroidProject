@@ -113,7 +113,7 @@ class CreateEventActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
             latitude = data!!.getDoubleExtra("latitude",0.0)
-            longitude = data!!.getDoubleExtra("longitude",0.0)
+            longitude = data.getDoubleExtra("longitude",0.0)
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
