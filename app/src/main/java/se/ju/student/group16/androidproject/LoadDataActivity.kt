@@ -22,11 +22,12 @@ class LoadDataActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_load_data)
+        friendsRepository.clearFriends()
+        eventRepository.clearEvents()
         getFriends()
     }
     private fun getFriends(){
         Log.d("Started", "Getting friends")
-        friendsRepository.clearFriends()
         database.child(usersPath).child(currentUser?.uid.toString()).child(friendsPath).get().addOnSuccessListener {
             for (friend in it.children){
                 database.child(usersPath).child(friend.key.toString()).get().addOnSuccessListener { info ->
