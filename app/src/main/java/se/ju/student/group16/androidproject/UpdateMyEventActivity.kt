@@ -105,7 +105,7 @@ class UpdateMyEventActivity : AppCompatActivity() {
                     .setMessage(getString(R.string.delete_confirmation))
                     .setPositiveButton(getString(R.string.yes)){
                         dialog, whichButton ->
-                        deleteEvent()
+                        eventRepository.deleteMyEventById(myEvent[0].eventID)
                         Toast.makeText(this,getString(R.string.event_was_deleted), Toast.LENGTH_LONG).show()
                         finish()
                     }.setNegativeButton(getString(R.string.no)) { dialog, whichButtin ->
@@ -174,17 +174,13 @@ class UpdateMyEventActivity : AppCompatActivity() {
             for (invitedFriend in inviteFriendsList) {
                 Log.d("this friend",invitedFriend.toString())
 
-                database.child(eventPath).child(myEvent[0].eventID).child("guest-list").child(invitedFriend.toString()).setValue("pending")
+                database.child(eventPath).child(myEvent[0].eventID).child("guest-list").child(invitedFriend.uid).setValue("pending")
             }
             Toast.makeText(this,getString(R.string.event_was_updated), Toast.LENGTH_LONG).show()
             finish()
         }else {
             Log.d("funkar inte", "skicka error")
         }
-    }
-
-    private fun deleteEvent(){
-        database.child(eventPath).child(myEvent[0].eventID).removeValue()
     }
 }
 
