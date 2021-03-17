@@ -14,6 +14,7 @@ class LoadDataActivity : AppCompatActivity() {
     private val usersPath = "users"
     private val friendsPath = "friends"
     private val myEventsPath = "my-events"
+    private val upcomingEventsPath = "upcoming-events"
     private val eventPath = "event"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +35,10 @@ class LoadDataActivity : AppCompatActivity() {
                 }
             }
             Log.d("Finished", "Getting friends")
-            getEvents()
+            getMyEvents()
         }
     }
-    private fun getEvents(){
+    private fun getMyEvents(){
         Log.d("Started", "Getting events")
         eventRepository.clearEvents()
         database.child(usersPath).child(currentUser?.uid.toString()).child(myEventsPath).get().addOnSuccessListener {
@@ -58,9 +59,34 @@ class LoadDataActivity : AppCompatActivity() {
                     Log.e("firebase", "Error getting data", it)
                 }
             }
+            Log.d("Finished", "Getting my events")
+            getUpcomingEvents()
+        }
+    }
+    private fun getUpcomingEvents(){
+        Log.d("Started", "Getting upcoming events")
+        eventRepository.clearEvents()
+        database.child(usersPath).child(currentUser?.uid.toString()).child(upcomingEventsPath).get().addOnSuccessListener {
+            for (event in it.children){
+                database.child(eventPath).child(event.key.toString()).get().addOnSuccessListener { info ->
+                    eventRepository.addUpcomingEvents(
+                            event.key.toString(),
+                            info.child("host").value.toString(),
+                            info.child("title").value.toString(),
+                            info.child("description").value.toString(),
+                            info.child("theme").value.toString(),
+                            info.child("date").value.toString(),
+                            info.child("latitude").value as Double,
+                            info.child("longitude").value as Double,
+                            info.child("guest-list").value as Map<String, String>
+                    )
+                }.addOnFailureListener{
+                    Log.e("firebase", "Error getting data", it)
+                }
+            }
             startActivity(Intent(this, EventActivity::class.java))
             finish()
-            Log.d("Finished", "Getting events")
+            Log.d("Finished", "Getting upcoming events")
         }
     }
 }

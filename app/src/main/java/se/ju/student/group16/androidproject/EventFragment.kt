@@ -2,11 +2,14 @@ package se.ju.student.group16.androidproject
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
 import com.google.firebase.auth.FirebaseAuth
 import se.ju.student.group16.androidproject.databinding.FragmentEventBinding
 
@@ -28,6 +31,9 @@ class EventFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var auth: FirebaseAuth
+    private val upcomingEvents = eventRepository.getAllUpcomingEvents()
+    private lateinit var eventRecyclerView: RecyclerView
+    var position = 0
 
     lateinit var binding: FragmentEventBinding
 
@@ -51,11 +57,16 @@ class EventFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        eventRecyclerView = binding.recyclerEvents
+        val eventAdapter = EventAdapter(this.activity!!, eventRepository.getAllUpcomingEvents())
+        eventRecyclerView.adapter = eventAdapter
+        eventRecyclerView.layoutManager = LinearLayoutManager(this.activity!!, LinearLayoutManager.HORIZONTAL, false)
+        val snapHelper: SnapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(eventRecyclerView)
 
         binding.createEventBtn.setOnClickListener{
             val intent = Intent(context, CreateEventActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE)
-
         }
 
         binding.myEventButton.setOnClickListener {
