@@ -123,6 +123,8 @@ class CreateEventActivity : AppCompatActivity() {
         val eventTitle = findViewById<EditText>(R.id.event_title).text.toString()
         val eventTheme = findViewById<EditText>(R.id.event_theme).text.toString()
         val eventDescription = findViewById<EditText>(R.id.event_description).text.toString()
+        val guestList = mutableMapOf<String, String>()
+
         if(eventTheme.isNotEmpty() && eventDescription.isNotEmpty() && eventTitle.isNotEmpty()){
             val eventInfo = mapOf("host" to currentUser,"title" to eventTitle, "theme" to eventTheme,
                     "description" to eventDescription, "date" to eventDate, "latitude" to latitude, "longitude" to longitude)
@@ -131,9 +133,12 @@ class CreateEventActivity : AppCompatActivity() {
             database.child("event").child(eventID.toString()).setValue(eventInfo)
             for (invitedFriend in inviteFriendsList) {
                 database.child("event").child(eventID.toString()).child("guest-list").child(invitedFriend.uid).setValue("pending")
+                database.child(users).child(invitedFriend.uid).child("upcoming-events").child(eventID.toString()).setValue(true)
+                guestList[invitedFriend.uid] = "pending"
             }
-                database.child(users).child(currentUser).child("my-events").child(eventID.toString()).setValue(true)
+            database.child(users).child(currentUser).child("my-events").child(eventID.toString()).setValue(true)
             Toast.makeText(this,getString(R.string.event_was_created), Toast.LENGTH_LONG).show()
+            eventRepository.addMyEvent(eventID.toString(), currentUser, eventTitle, eventDescription, eventTheme, eventDate, longitude, latitude, guestList)
             finish()
         }else{
             Log.d("funkar inte", "skicka error")
