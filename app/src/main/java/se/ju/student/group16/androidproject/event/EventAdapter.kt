@@ -40,7 +40,7 @@ class EventAdapter(private val context: Activity, private val events: MutableLis
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        Log.d("test", events.toString())
+
         viewHolder.eventTitle.text = events[position].toString()
         viewHolder.eventTheme.text = events[position].eventTheme
         viewHolder.eventDescription.text = events[position].eventDescription
