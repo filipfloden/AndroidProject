@@ -96,7 +96,7 @@ class AddFriendActivity : AppCompatActivity() {
             Log.e("firebase", "Error getting data", it)
         }
 
-        usersListView.setOnItemClickListener { parent, view, position, id ->
+        usersListView.setOnItemClickListener { _, _, position, _ ->
             val userClicked = usersListView.getItemAtPosition(position) as User
             database.child(users).child(currentUser?.uid.toString()).child(friendsPending).child(userClicked.uid).setValue("sent")
             database.child(users).child(userClicked.uid).child(friendsPending).child(currentUser?.uid.toString()).setValue("received")
