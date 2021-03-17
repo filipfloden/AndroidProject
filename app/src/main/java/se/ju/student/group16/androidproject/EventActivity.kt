@@ -8,7 +8,9 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.util.AttributeSet
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -64,7 +66,7 @@ class EventActivity : AppCompatActivity() {
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = getString(R.string.app_name)
-            val descriptionText = getString(R.string.project_id)
+            val descriptionText = getString(R.string.app_name)
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel("MESSAGE_CHANNEL", name, importance).apply {
                 description = descriptionText
