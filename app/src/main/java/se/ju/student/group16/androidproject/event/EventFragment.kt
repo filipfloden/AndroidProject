@@ -19,6 +19,7 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import se.ju.student.group16.androidproject.databinding.FragmentEventBinding
+import se.ju.student.group16.androidproject.firebaseRepository
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -125,7 +126,6 @@ class EventFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("Test", "TESTOING")
         
         val eventRecyclerView = binding.recyclerEvents
         eventAdapter = EventAdapter(this.activity!!, eventRepository.getAllUpcomingEvents())
