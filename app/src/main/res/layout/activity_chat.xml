@@ -64,18 +64,19 @@
         <EditText
             android:id="@+id/chat_message_input"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
-            android:layout_toStartOf="@+id/button_chat_send"
+            android:layout_marginEnd="20dp"
             android:background="@android:color/transparent"
             android:hint="Enter Message"
             android:textColorHint="@color/Grey"
             android:textColor="@color/Grey"
             android:inputType="text"
             android:maxLines="5"
+            android:imeOptions="actionSend"
             tools:ignore="Autofill" />
-
+        <!--
         <Button
             android:id="@+id/button_chat_send"
             android:layout_width="64dp"
@@ -85,5 +86,6 @@
             android:text="Send"
             android:textColor="@color/AlmostBlack"
             android:textSize="10sp" />
+            -->
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

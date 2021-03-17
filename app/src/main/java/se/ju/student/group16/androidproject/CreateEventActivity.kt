@@ -59,7 +59,6 @@ class CreateEventActivity : AppCompatActivity() {
         inviteFriendsListView.adapter = inviteFriendsAdapter
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
-        val currentUser = auth.currentUser
 
         pickADateButton.setOnClickListener{
             dateDialog.show()

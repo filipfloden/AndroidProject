@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -36,7 +37,7 @@ class chatActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
         val chatRecyclerView = findViewById<RecyclerView>(R.id.recycler_chat)
         val chatField = findViewById<EditText>(R.id.chat_message_input)
-        val sendMessage = findViewById<Button>(R.id.button_chat_send)
+        //val sendMessage = findViewById<Button>(R.id.button_chat_send)
         val chatAdapter = ChatAdapter(this, listOfMessages)
         chatRecyclerView.scrollToPosition(chatAdapter.itemCount-1)
         chatRecyclerView.adapter = chatAdapter
@@ -138,23 +139,28 @@ class chatActivity : AppCompatActivity() {
                 chatAdapter.notifyDataSetChanged()
             }
         }
-        sendMessage.setOnClickListener {
-            val message = chatField.text.toString()
-            if (message != "") {
-                if (message.length < 300) {
-                    val map = mapOf(
-                        "user" to currentUser?.uid,
-                        "message" to message,
-                        "timestamp" to ServerValue.TIMESTAMP
-                    )
-                    ref1.push().setValue(map)
-                    ref2.push().setValue(map)
-                    chatField.text = null
-                    ref2.child(messageID!!).removeValue()
-                }else{
-                    Toast.makeText(this, getString(R.string.message_too_long),
-                        Toast.LENGTH_SHORT).show()
+        chatField.setOnEditorActionListener { _, actionId, _ ->
+            if(actionId == EditorInfo.IME_ACTION_SEND){
+                val message = chatField.text.toString()
+                if (message != "") {
+                    if (message.length < 300) {
+                        val map = mapOf(
+                            "user" to currentUser?.uid,
+                            "message" to message,
+                            "timestamp" to ServerValue.TIMESTAMP
+                        )
+                        ref1.push().setValue(map)
+                        ref2.push().setValue(map)
+                        chatField.text = null
+                        ref2.child(messageID!!).removeValue()
+                    }else{
+                        Toast.makeText(this, getString(R.string.message_too_long),
+                            Toast.LENGTH_SHORT).show()
+                    }
                 }
+                true
+            } else {
+                false
             }
         }
     }

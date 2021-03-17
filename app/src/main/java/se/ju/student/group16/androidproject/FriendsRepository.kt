@@ -6,12 +6,6 @@ class FriendsRepository{
     private val friends = mutableListOf<User>()
 
     fun addUser(uid: String, displayName: String, email: String){
-        /*
-        val id = when {
-            friends.count() == 0 -> 1
-            else -> friends.last()
-        }
-         */
         friends.add(
                 User(
                         uid,
