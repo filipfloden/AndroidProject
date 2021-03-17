@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import java.util.*
 
 private const val REQUEST_CODE = 1440
@@ -74,7 +75,7 @@ class UpdateMyEventActivity : AppCompatActivity() {
             for (guest in myEvent[0].guestList){
                 inviteFriendsList.add(guest.key)
             }
-
+            Log.d("awshit", myEvent[0].guestList.toString())
             Log.d("hellyeah", inviteFriendsList.toString())
 
         }.addOnFailureListener{
@@ -98,6 +99,20 @@ class UpdateMyEventActivity : AppCompatActivity() {
         updateEventButton.setOnClickListener{
             updateEvent(eventDate)
         }
+        deleteEventButton.setOnClickListener {
+            AlertDialog.Builder(this)
+                    .setTitle(getString(R.string.delete_event))
+                    .setMessage(getString(R.string.delete_confirmation))
+                    .setPositiveButton(getString(R.string.yes)){
+                        dialog, whichButton ->
+                        deleteEvent()
+                        Toast.makeText(this,getString(R.string.event_was_deleted), Toast.LENGTH_LONG).show()
+                        finish()
+                    }.setNegativeButton(getString(R.string.no)) { dialog, whichButtin ->
+                        //Don't delete it
+                    }.show()
+        }
+
         calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
             val displayChosenDate = dateDialog.findViewById<TextView>(R.id.chosenDateTextView)
             var selectedMonth = ""
@@ -147,18 +162,29 @@ class UpdateMyEventActivity : AppCompatActivity() {
         val eventDescription = findViewById<EditText>(R.id.event_description).text.toString()
 
         if(eventTheme.isNotEmpty() && eventDescription.isNotEmpty() && eventTitle.isNotEmpty()){
-            val eventInfo = mapOf("host" to currentUser,"title" to eventTitle, "theme" to eventTheme,
+            val eventInfo = mapOf("host" to currentUser?.uid,"title" to eventTitle, "theme" to eventTheme,
                     "description" to eventDescription, "date" to eventDate, "latitude" to latitude, "longitude" to longitude)
             Log.d("funkar","skicka till firebase")
-            database.child("event").child(myEvent[0].eventID).setValue(eventInfo)
+            Log.d("event id",myEvent[0].eventID)
+            Log.d("all info",eventInfo.toString())
+
+            database.child(eventPath).child(myEvent[0].eventID).setValue(eventInfo)
+            Log.d("all friends",inviteFriendsList.toString())
+
             for (invitedFriend in inviteFriendsList) {
-                database.child("event").child(myEvent[0].eventID).child("guest-list").child(invitedFriend.uid).setValue("pending")
+                Log.d("this friend",invitedFriend.toString())
+
+                database.child(eventPath).child(myEvent[0].eventID).child("guest-list").child(invitedFriend.toString()).setValue("pending")
             }
-            Toast.makeText(this,getString(R.string.event_was_created), Toast.LENGTH_LONG).show()
+            Toast.makeText(this,getString(R.string.event_was_updated), Toast.LENGTH_LONG).show()
             finish()
         }else {
             Log.d("funkar inte", "skicka error")
         }
+    }
+
+    private fun deleteEvent(){
+        database.child(eventPath).child(myEvent[0].eventID).removeValue()
     }
 }
 
