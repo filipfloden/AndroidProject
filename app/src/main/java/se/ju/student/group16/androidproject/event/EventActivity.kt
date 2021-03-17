@@ -1,4 +1,4 @@
-package se.ju.student.group16.androidproject
+package se.ju.student.group16.androidproject.event
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,7 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import se.ju.student.group16.androidproject.friend.FriendsFragment
+import se.ju.student.group16.androidproject.R
+import se.ju.student.group16.androidproject.SettingsFragment
 import se.ju.student.group16.androidproject.databinding.ActivityEventBinding
+import se.ju.student.group16.androidproject.firebaseRepository
 
 class EventActivity : AppCompatActivity() {
 

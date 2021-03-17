@@ -1,4 +1,6 @@
-package se.ju.student.group16.androidproject
+package se.ju.student.group16.androidproject.friend
+
+import se.ju.student.group16.androidproject.User
 
 val friendsRepository = FriendsRepository().apply{}
 

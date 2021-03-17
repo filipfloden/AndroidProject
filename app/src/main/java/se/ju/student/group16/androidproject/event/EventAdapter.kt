@@ -1,17 +1,13 @@
-package se.ju.student.group16.androidproject
+package se.ju.student.group16.androidproject.event
 
 import android.app.Activity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
-import java.text.SimpleDateFormat
+import se.ju.student.group16.androidproject.R
 
 class EventAdapter(private val context: Activity, private val events: MutableList<Events>) : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
 

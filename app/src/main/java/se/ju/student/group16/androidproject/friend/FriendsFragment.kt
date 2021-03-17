@@ -1,19 +1,16 @@
-package se.ju.student.group16.androidproject
+package se.ju.student.group16.androidproject.friend
 
 import android.content.Intent
-import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import se.ju.student.group16.androidproject.databinding.FragmentEventBinding
 import se.ju.student.group16.androidproject.databinding.FragmentFriendsBinding
+import se.ju.student.group16.androidproject.firebaseRepository
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

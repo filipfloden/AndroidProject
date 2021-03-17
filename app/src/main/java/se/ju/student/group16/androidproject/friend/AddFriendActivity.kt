@@ -1,16 +1,15 @@
-package se.ju.student.group16.androidproject
+package se.ju.student.group16.androidproject.friend
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import java.util.*
+import se.ju.student.group16.androidproject.R
+import se.ju.student.group16.androidproject.User
+import se.ju.student.group16.androidproject.UsersAdapter
+import se.ju.student.group16.androidproject.firebaseRepository
 
 
 class AddFriendActivity : AppCompatActivity() {

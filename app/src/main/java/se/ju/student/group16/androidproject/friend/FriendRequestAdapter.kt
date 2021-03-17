@@ -1,4 +1,4 @@
-package se.ju.student.group16.androidproject
+package se.ju.student.group16.androidproject.friend
 
 import android.app.Activity
 import android.util.Log
@@ -10,6 +10,8 @@ import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import se.ju.student.group16.androidproject.R
+import se.ju.student.group16.androidproject.User
 
 class FriendRequestAdapter(private val context: Activity, private val user: MutableList<User>) : ArrayAdapter<User>(context, R.layout.fr_row, user) {
 

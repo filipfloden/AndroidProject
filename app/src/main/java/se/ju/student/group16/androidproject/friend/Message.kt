@@ -1,4 +1,4 @@
-package se.ju.student.group16.androidproject
+package se.ju.student.group16.androidproject.friend
 
 data class Message(
     val user: String,

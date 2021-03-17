@@ -1,4 +1,4 @@
-package se.ju.student.group16.androidproject
+package se.ju.student.group16.androidproject.event
 
 import android.content.Intent
 import android.os.Bundle
