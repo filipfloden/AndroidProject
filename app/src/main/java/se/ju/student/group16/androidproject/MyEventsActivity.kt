@@ -13,8 +13,6 @@ import java.lang.reflect.Type
 
 class MyEventsActivity : AppCompatActivity() {
 
-    private val myEventsList = eventRepository.getAllMyEvents()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_events)
@@ -24,12 +22,13 @@ class MyEventsActivity : AppCompatActivity() {
                 this,
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
-                myEventsList
+                eventRepository.getAllMyEvents()
         )
         myEventsListView.adapter = eventAdapter
 
         myEventsListView.setOnItemClickListener { _, _, position, _ ->
-            startActivity(Intent(this, UpdateMyEventActivity::class.java).putExtra("clickedId", myEventsList[position].eventID))
+            Log.d("Event", eventAdapter.getItem(position).toString())
+            startActivity(Intent(this, UpdateMyEventActivity::class.java).putExtra("clickedId", eventAdapter.getItem(position)?.eventID))
         }
     }
 }

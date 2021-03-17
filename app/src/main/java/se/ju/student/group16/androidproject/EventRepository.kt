@@ -18,7 +18,7 @@ class EventRepository {
                    eventDate: String,
                    eventLong: Double,
                    eventLat: Double,
-                   guestList: Map<User, String>){
+                   guestList: Map<String, String>){
         myEvents.add(
                 Events(
                         eventID,
@@ -41,7 +41,7 @@ class EventRepository {
                           eventDate: String,
                           eventLong: Double,
                           eventLat: Double,
-                          guestList: Map<User, String>){
+                          guestList: Map<String, String>){
         upcomingEvents.add(
                 Events(
                         eventID,
@@ -80,7 +80,7 @@ class EventRepository {
                           newEventDate: String,
                           newEventLong: Double,
                           newEventLat: Double,
-                          newGuestList: Map<User, String>){
+                          newGuestList: Map<String, String>){
         getMyEventById(eventID)?.run {
             eventTitle = newEventTitle
             eventDescription = newEventDescription

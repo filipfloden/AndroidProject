@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import java.util.*
 
 private const val REQUEST_CODE = 1440
 
@@ -55,14 +54,14 @@ class UpdateMyEventActivity : AppCompatActivity() {
                 .add(
                     Events(
                         it.key.toString(),
+                        it.child("host").value.toString(),
                         it.child("title").value.toString(),
                         it.child("description").value.toString(),
                         it.child("theme").value.toString(),
                         it.child("date").value.toString(),
                         it.child("latitude").value as Double,
                         it.child("longitude").value as Double,
-                        it.child("host").value.toString(),
-                        it.child("guest-list").value as Map<User, String>
+                        it.child("guest-list").value as Map<String, String>
                     )
                 )
             eventTitleTextView.setText(myEvent[0].eventTitle)
@@ -73,7 +72,7 @@ class UpdateMyEventActivity : AppCompatActivity() {
             latitude = myEvent[0].eventLat
             longitude = myEvent[0].eventLong
             for (guest in myEvent[0].guestList){
-                inviteFriendsList.add(guest.key)
+                //inviteFriendsList.add(guest.key)
             }
             Log.d("awshit", myEvent[0].guestList.toString())
             Log.d("hellyeah", inviteFriendsList.toString())
