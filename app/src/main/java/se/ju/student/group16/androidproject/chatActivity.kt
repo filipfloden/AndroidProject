@@ -139,7 +139,7 @@ class chatActivity : AppCompatActivity() {
                 chatAdapter.notifyDataSetChanged()
             }
         }
-        chatField.setOnEditorActionListener { v, actionId, event ->
+        chatField.setOnEditorActionListener { _, actionId, _ ->
             if(actionId == EditorInfo.IME_ACTION_SEND){
                 val message = chatField.text.toString()
                 if (message != "") {
@@ -163,27 +163,5 @@ class chatActivity : AppCompatActivity() {
                 false
             }
         }
-        /*
-        sendMessage.setOnClickListener {
-            val message = chatField.text.toString()
-            if (message != "") {
-                if (message.length < 300) {
-                    val map = mapOf(
-                        "user" to currentUser?.uid,
-                        "message" to message,
-                        "timestamp" to ServerValue.TIMESTAMP
-                    )
-                    ref1.push().setValue(map)
-                    ref2.push().setValue(map)
-                    chatField.text = null
-                    ref2.child(messageID!!).removeValue()
-                }else{
-                    Toast.makeText(this, getString(R.string.message_too_long),
-                        Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
-         */
     }
 }
