@@ -50,7 +50,6 @@ class ChatAdapter(private val context: Activity, private val messages: MutableLi
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        //Log.d("Compare", currentUser?.uid.toString() + " | " + messages[position].user)
         if (currentUser?.uid.toString() == messages[position].user){
             viewHolder.linearLayout.backgroundTintList = ContextCompat.getColorStateList(context, R.color.ChatBlue)
             val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT)
