@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import se.ju.student.group16.androidproject.databinding.FragmentSettingsBinding
+import se.ju.student.group16.androidproject.friend.friendsRepository
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

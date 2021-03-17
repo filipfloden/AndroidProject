@@ -1,9 +1,8 @@
-package se.ju.student.group16.androidproject
+package se.ju.student.group16.androidproject.event
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,18 +14,12 @@ import android.widget.Button
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
-import com.google.android.gms.common.api.Scope
-import com.google.android.gms.tasks.Tasks
-import com.google.android.material.bottomnavigation.BottomNavigationMenu
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.tabs.TabItem
-import com.google.android.material.tabs.TabLayout
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import se.ju.student.group16.androidproject.friend.FriendsFragment
+import se.ju.student.group16.androidproject.R
+import se.ju.student.group16.androidproject.SettingsFragment
 import se.ju.student.group16.androidproject.databinding.ActivityEventBinding
+import se.ju.student.group16.androidproject.firebaseRepository
 
 class EventActivity : AppCompatActivity() {
 

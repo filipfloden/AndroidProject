@@ -1,4 +1,4 @@
-package se.ju.student.group16.androidproject
+package se.ju.student.group16.androidproject.event
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,10 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import java.lang.reflect.Type
+import se.ju.student.group16.androidproject.R
+import se.ju.student.group16.androidproject.firebaseRepository
 
 class MyEventsActivity : AppCompatActivity() {
 

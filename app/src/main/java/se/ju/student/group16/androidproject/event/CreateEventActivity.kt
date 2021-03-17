@@ -1,4 +1,4 @@
-package se.ju.student.group16.androidproject
+package se.ju.student.group16.androidproject.event
 
 import android.app.Activity
 import android.app.Dialog
@@ -9,19 +9,15 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.Fragment
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import se.ju.student.group16.androidproject.*
+import se.ju.student.group16.androidproject.friend.InviteFriendsAdapter
+import se.ju.student.group16.androidproject.friend.friendsRepository
 
 
 private const val REQUEST_CODE = 1337
-
 
 class CreateEventActivity : AppCompatActivity() {
 
@@ -113,7 +109,7 @@ class CreateEventActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
             latitude = data!!.getDoubleExtra("latitude",0.0)
-            longitude = data!!.getDoubleExtra("longitude",0.0)
+            longitude = data.getDoubleExtra("longitude",0.0)
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
@@ -125,7 +121,8 @@ class CreateEventActivity : AppCompatActivity() {
         val eventDescription = findViewById<EditText>(R.id.event_description).text.toString()
         val guestList = mutableMapOf<String, String>()
 
-        if(eventTheme.isNotEmpty() && eventDescription.isNotEmpty() && eventTitle.isNotEmpty()){
+        if(eventTheme.isNotEmpty() && eventDescription.isNotEmpty() && eventTitle.isNotEmpty() && guestList.isNotEmpty()
+                && eventDate.isNotEmpty() && !longitude.isNaN() && !latitude.isNaN() && inviteFriendsList.isNotEmpty()){
             val eventInfo = mapOf("host" to currentUser,"title" to eventTitle, "theme" to eventTheme,
                     "description" to eventDescription, "date" to eventDate, "latitude" to latitude, "longitude" to longitude)
             Log.d("funkar","skicka till firebase")
@@ -142,6 +139,7 @@ class CreateEventActivity : AppCompatActivity() {
             finish()
         }else{
             Log.d("funkar inte", "skicka error")
+            Toast.makeText(this,getString(R.string.fill_all_fields), Toast.LENGTH_LONG).show()
         }
     }
 }

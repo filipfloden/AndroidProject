@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
+import se.ju.student.group16.androidproject.event.EventActivity
+import se.ju.student.group16.androidproject.event.eventRepository
+import se.ju.student.group16.androidproject.friend.friendsRepository
 
 class LoadDataActivity : AppCompatActivity() {
 

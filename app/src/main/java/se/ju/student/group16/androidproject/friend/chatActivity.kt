@@ -1,21 +1,17 @@
-package se.ju.student.group16.androidproject
+package se.ju.student.group16.androidproject.friend
 
-import android.app.PendingIntent
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.EditorInfo
 import android.widget.*
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import org.w3c.dom.Comment
-import java.text.SimpleDateFormat
+import se.ju.student.group16.androidproject.R
+import se.ju.student.group16.androidproject.User
 
 class chatActivity : AppCompatActivity() {
 

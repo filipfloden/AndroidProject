@@ -45,4 +45,5 @@
     <string name="delete_confirmation">Are you sure?</string>
     <string name="event_was_updated">Event was updated</string>
     <string name="event_was_deleted">Event was deleted</string>
+    <string name="fill_all_fields">Please fill all fields</string>
 </resources>

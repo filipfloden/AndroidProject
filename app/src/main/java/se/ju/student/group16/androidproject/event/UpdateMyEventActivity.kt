@@ -1,14 +1,16 @@
-package se.ju.student.group16.androidproject
+package se.ju.student.group16.androidproject.event
 
 import android.app.Activity
 import android.app.Dialog
-import android.app.usage.UsageEvents
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import se.ju.student.group16.androidproject.*
+import se.ju.student.group16.androidproject.friend.InviteFriendsAdapter
+import se.ju.student.group16.androidproject.friend.friendsRepository
 
 private const val REQUEST_CODE = 1440
 
@@ -47,7 +49,7 @@ class UpdateMyEventActivity : AppCompatActivity() {
         val inviteFriendsAdapter = InviteFriendsAdapter(this, friendsList)
         inviteFriendsListView.adapter = inviteFriendsAdapter
 
-        var eventDate = ""
+        var eventDate: String
 
         val thisEventID = intent.getStringExtra("clickedId")!!
         val thisEvent = eventRepository.getMyEventById(thisEventID)
@@ -60,7 +62,7 @@ class UpdateMyEventActivity : AppCompatActivity() {
         latitude = thisEvent.eventLat
         longitude = thisEvent.eventLong
         for (guest in thisEvent.guestList){
-            inviteFriendsList.put(guest.key, guest.value)
+            inviteFriendsList[guest.key] = guest.value
         }
 
         pickADateButton.setOnClickListener{
@@ -141,13 +143,26 @@ class UpdateMyEventActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun updateEvent(thisEvent: Events ,eventDate: String){
+    private fun updateEvent(thisEvent: Events, eventDate: String) {
+
+        val currentUser = firebaseRepository.getCurrentUser()
         val eventTitle = findViewById<EditText>(R.id.event_title).text.toString()
         val eventTheme = findViewById<EditText>(R.id.event_theme).text.toString()
         val eventDescription = findViewById<EditText>(R.id.event_description).text.toString()
-        eventRepository.updateMyEventById(thisEvent.eventID, eventTitle, eventDescription, eventTheme, eventDate, longitude, latitude, inviteFriendsList)
-        Toast.makeText(this,getString(R.string.event_was_updated), Toast.LENGTH_LONG).show()
-        finish()
+        if (eventTheme.isNotEmpty() && eventDescription.isNotEmpty() && eventTitle.isNotEmpty()
+                && eventDate.isNotEmpty() && !longitude.isNaN() && !latitude.isNaN() && inviteFriendsList.isNotEmpty()) {
+            val eventInfo = mapOf("host" to currentUser?.uid, "title" to eventTitle, "theme" to eventTheme,
+                    "description" to eventDescription, "date" to eventDate, "latitude" to latitude,
+                    "longitude" to longitude, "guest-list" to inviteFriendsList)
+            Log.d("en till", eventInfo.toString())
+            database.child(eventPath).child(thisEvent.eventID).setValue(eventInfo)
+            eventRepository.updateMyEventById(thisEvent.eventID, eventTitle, eventDescription, eventTheme,
+                    eventDate, longitude, latitude, inviteFriendsList)
+            Toast.makeText(this, getString(R.string.event_was_updated), Toast.LENGTH_LONG).show()
+            finish()
+        } else {
+            Toast.makeText(this,getString(R.string.fill_all_fields), Toast.LENGTH_LONG).show()
+        }
     }
 }
 

@@ -18,10 +18,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProject">
-        <activity android:name=".UpdateMyEventActivity"></activity>
+        <activity android:name=".event.UpdateMyEventActivity"></activity>
         <activity android:name=".LoadDataActivity"></activity>
-        <activity android:name=".chatActivity" />
-        <activity android:name=".MyEventsActivity" />
+        <activity android:name=".friend.chatActivity" />
+        <activity android:name=".event.MyEventsActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -38,12 +38,12 @@
             android:name=".GoogleMapsActivity"
             android:label="@string/title_activity_google_maps"
             android:theme="@style/Theme.AppCompat.Dialog" />
-        <activity android:name=".CreateEventActivity" />
-        <activity android:name=".AddFriendActivity" />
+        <activity android:name=".event.CreateEventActivity" />
+        <activity android:name=".friend.AddFriendActivity" />
         <activity android:name=".changePassword" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".EventActivity" />
+        <activity android:name=".event.EventActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

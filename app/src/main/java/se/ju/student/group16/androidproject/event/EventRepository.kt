@@ -1,4 +1,4 @@
-package se.ju.student.group16.androidproject
+package se.ju.student.group16.androidproject.event
 
 val eventRepository = EventRepository().apply{}
 
