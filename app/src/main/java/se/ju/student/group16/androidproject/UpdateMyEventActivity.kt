@@ -2,6 +2,7 @@ package se.ju.student.group16.androidproject
 
 import android.app.Activity
 import android.app.Dialog
+import android.app.usage.UsageEvents
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +17,7 @@ class UpdateMyEventActivity : AppCompatActivity() {
     private val database = firebaseRepository.getDatabaseReference()
     private val eventPath = "event"
     private var myEvent = mutableListOf<Events>()
-    private var inviteFriendsList = mutableListOf<User>()
+    private var inviteFriendsList = mutableMapOf<String, String>()
     private var latitude = 0.0
     private var longitude = 0.0
 
@@ -48,39 +49,19 @@ class UpdateMyEventActivity : AppCompatActivity() {
 
         var eventDate = ""
 
-        val thisEvent = intent.getStringExtra("clickedId")
-        database.child(eventPath).child(thisEvent!!).get().addOnSuccessListener{
-            myEvent
-                .add(
-                    Events(
-                        it.key.toString(),
-                        it.child("host").value.toString(),
-                        it.child("title").value.toString(),
-                        it.child("description").value.toString(),
-                        it.child("theme").value.toString(),
-                        it.child("date").value.toString(),
-                        it.child("latitude").value as Double,
-                        it.child("longitude").value as Double,
-                        it.child("guest-list").value as Map<String, String>
-                    )
-                )
-            eventTitleTextView.setText(myEvent[0].eventTitle)
-            eventThemeTextView.setText(myEvent[0].eventTheme)
-            eventDescriptionTextView.setText(myEvent[0].eventDescription)
-            eventDate = myEvent[0].eventDate
-            pickADateButton.setText(eventDate)
-            latitude = myEvent[0].eventLat
-            longitude = myEvent[0].eventLong
-            for (guest in myEvent[0].guestList){
-                //inviteFriendsList.add(guest.key)
-            }
-            Log.d("awshit", myEvent[0].guestList.toString())
-            Log.d("hellyeah", inviteFriendsList.toString())
-
-        }.addOnFailureListener{
-            Log.e("firebase", "Error getting data", it)
+        val thisEventID = intent.getStringExtra("clickedId")!!
+        val thisEvent = eventRepository.getMyEventById(thisEventID)
+        Log.d("jajjemän", thisEvent.toString())
+        eventTitleTextView.text = thisEvent!!.eventTitle
+        eventThemeTextView.text = thisEvent.eventTheme
+        eventDescriptionTextView.text = thisEvent.eventDescription
+        eventDate = thisEvent.eventDate
+        pickADateButton.text = eventDate
+        latitude = thisEvent.eventLat
+        longitude = thisEvent.eventLong
+        for (guest in thisEvent.guestList){
+            inviteFriendsList.put(guest.key, guest.value)
         }
-
 
         pickADateButton.setOnClickListener{
             dateDialog.show()
@@ -92,11 +73,18 @@ class UpdateMyEventActivity : AppCompatActivity() {
             inviteFriendsDialog.show()
         }
         inviteFriendsDoneButton.setOnClickListener{
-            inviteFriendsList = inviteFriendsAdapter.getCheckedFriends()
+            val invitedFriend = inviteFriendsAdapter.getCheckedFriends()
+            for (friend in invitedFriend){
+                if(inviteFriendsList.containsKey(friend.toString())){
+                    break
+                }else{
+                    inviteFriendsList[friend.toString()] = "pending"
+                }
+            }
             inviteFriendsDialog.dismiss()
         }
         updateEventButton.setOnClickListener{
-            updateEvent(eventDate)
+            updateEvent(thisEvent, eventDate)
         }
         deleteEventButton.setOnClickListener {
             AlertDialog.Builder(this)
@@ -148,38 +136,18 @@ class UpdateMyEventActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
             latitude = data!!.getDoubleExtra("latitude",0.0)
-            longitude = data!!.getDoubleExtra("longitude",0.0)
+            longitude = data.getDoubleExtra("longitude",0.0)
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-
-    private fun updateEvent(eventDate: String){
-        val currentUser = firebaseRepository.getCurrentUser()
+    private fun updateEvent(thisEvent: Events ,eventDate: String){
         val eventTitle = findViewById<EditText>(R.id.event_title).text.toString()
         val eventTheme = findViewById<EditText>(R.id.event_theme).text.toString()
         val eventDescription = findViewById<EditText>(R.id.event_description).text.toString()
-
-        if(eventTheme.isNotEmpty() && eventDescription.isNotEmpty() && eventTitle.isNotEmpty()){
-            val eventInfo = mapOf("host" to currentUser?.uid,"title" to eventTitle, "theme" to eventTheme,
-                    "description" to eventDescription, "date" to eventDate, "latitude" to latitude, "longitude" to longitude)
-            Log.d("funkar","skicka till firebase")
-            Log.d("event id",myEvent[0].eventID)
-            Log.d("all info",eventInfo.toString())
-
-            database.child(eventPath).child(myEvent[0].eventID).setValue(eventInfo)
-            Log.d("all friends",inviteFriendsList.toString())
-
-            for (invitedFriend in inviteFriendsList) {
-                Log.d("this friend",invitedFriend.toString())
-
-                database.child(eventPath).child(myEvent[0].eventID).child("guest-list").child(invitedFriend.uid).setValue("pending")
-            }
-            Toast.makeText(this,getString(R.string.event_was_updated), Toast.LENGTH_LONG).show()
-            finish()
-        }else {
-            Log.d("funkar inte", "skicka error")
-        }
+        eventRepository.updateMyEventById(thisEvent.eventID, eventTitle, eventDescription, eventTheme, eventDate, longitude, latitude, inviteFriendsList)
+        Toast.makeText(this,getString(R.string.event_was_updated), Toast.LENGTH_LONG).show()
+        finish()
     }
 }
 
