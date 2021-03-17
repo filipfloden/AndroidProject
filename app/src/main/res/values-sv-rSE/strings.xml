@@ -40,4 +40,9 @@
     <string name="delete_event">Tabort event</string>
     <string name="is_typing">◦ ◦ ◦</string>
     <string name="message_too_long">Meddelande gränsen är 300 karaktärer</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nej</string>
+    <string name="delete_confirmation">Är du säker?</string>
+    <string name="event_was_updated">Eventet uppdaterats</string>
+    <string name="event_was_deleted">Eventet borttaget</string>
 </resources>
