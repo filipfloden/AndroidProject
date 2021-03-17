@@ -49,12 +49,18 @@ class EventRepository {
         upcomingEvents.find {
             it.eventID == eventID
         }
-    fun deleteEventById(eventID: String) =
-        upcomingEvents.remove(
-            upcomingEvents.find{
+    fun deleteMyEventById(eventID: String) =
+        myEvents.remove(
+            myEvents.find{
                 it.eventID == eventID
             }
         )
+    fun deleteUpcomingEventById(eventID: String) =
+            upcomingEvents.remove(
+                    upcomingEvents.find{
+                        it.eventID == eventID
+                    }
+            )
     fun clearEvents(){
         myEvents.clear()
         upcomingEvents.clear()
