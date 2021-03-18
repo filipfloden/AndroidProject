@@ -121,7 +121,7 @@ class CreateEventActivity : AppCompatActivity() {
         val eventDescription = findViewById<EditText>(R.id.event_description).text.toString()
         val guestList = mutableMapOf<String, String>()
 
-        if(eventTheme.isNotEmpty() && eventDescription.isNotEmpty() && eventTitle.isNotEmpty() && guestList.isNotEmpty()
+        if(eventTheme.isNotEmpty() && eventDescription.isNotEmpty() && eventTitle.isNotEmpty()
                 && eventDate.isNotEmpty() && !longitude.isNaN() && !latitude.isNaN() && inviteFriendsList.isNotEmpty()){
             val eventInfo = mapOf("host" to currentUser,"title" to eventTitle, "theme" to eventTheme,
                     "description" to eventDescription, "date" to eventDate, "latitude" to latitude, "longitude" to longitude)
@@ -138,7 +138,7 @@ class CreateEventActivity : AppCompatActivity() {
             eventRepository.addMyEvent(eventID.toString(), currentUser, eventTitle, eventDescription, eventTheme, eventDate, longitude, latitude, guestList)
             finish()
         }else{
-            Log.d("funkar inte", "skicka error")
+            Log.d("funkar inte", eventTitle+eventDescription+eventTheme+eventDate+ longitude+ latitude+ guestList)
             Toast.makeText(this,getString(R.string.fill_all_fields), Toast.LENGTH_LONG).show()
         }
     }
