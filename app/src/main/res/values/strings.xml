@@ -48,4 +48,6 @@
     <string name="fill_all_fields">Please fill all fields</string>
     <string name="where">Where?</string>
     <string name="when">When?</string>
+    <string name="event_was_accepted">Event was accepted</string>
+    <string name="event_was_declined">Event was declined</string>
 </resources>

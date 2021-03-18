@@ -45,4 +45,9 @@
     <string name="delete_confirmation">Är du säker?</string>
     <string name="event_was_updated">Eventet uppdaterats</string>
     <string name="event_was_deleted">Eventet borttaget</string>
+    <string name="fill_all_fields">Vänligen fyll alla fält</string>
+    <string name="where">Vart?</string>
+    <string name="when">När?</string>
+    <string name="event_was_accepted">Evenemanget godkändes</string>
+    <string name="event_was_declined">Evenemanget skapades</string>
 </resources>
