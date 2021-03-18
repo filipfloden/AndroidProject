@@ -56,7 +56,6 @@
             android:background="@drawable/rounded_corners"
             android:text="@string/create_event"
             android:textColor="@color/AlmostBlack"/>
-
     </LinearLayout>
 
 </RelativeLayout>

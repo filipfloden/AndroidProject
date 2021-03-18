@@ -79,9 +79,10 @@ class UpdateMyEventActivity : AppCompatActivity() {
                 if(inviteFriendsList.containsKey(friend.toString())){
                     break
                 }else{
-                    inviteFriendsList[friend.toString()] = "pending"
+                    inviteFriendsList[friend.uid] = "pending"
                 }
             }
+            Log.d("list", inviteFriendsList.toString())
             inviteFriendsDialog.dismiss()
         }
         updateEventButton.setOnClickListener{
@@ -154,10 +155,18 @@ class UpdateMyEventActivity : AppCompatActivity() {
                     "description" to eventDescription, "date" to eventDate, "latitude" to latitude,
                     "longitude" to longitude, "guest-list" to inviteFriendsList)
             Log.d("en till", eventInfo.toString())
-            database.child(eventPath).child(thisEvent.eventID).setValue(eventInfo)
             eventRepository.updateMyEventById(thisEvent.eventID, eventTitle, eventDescription, eventTheme,
                     eventDate, longitude, latitude, inviteFriendsList)
+            database.child(eventPath).child(thisEvent.eventID).setValue(eventInfo)
             Toast.makeText(this, getString(R.string.event_was_updated), Toast.LENGTH_LONG).show()
+            for (invite in inviteFriendsList){
+                database.child("users").child(invite.key).child("upcoming-events").child(thisEvent.eventID).removeValue()
+                database.child("users").child(invite.key).child("upcoming-events").child(thisEvent.eventID).setValue(true)
+            }
+            /*
+            database.child("users").child(current).child("upcoming-events").child(thisEvent.eventID).setValue(false)
+            database.child("users").child(invite.key).child("upcoming-events").child(thisEvent.eventID).setValue(true)
+            */
             finish()
         } else {
             Toast.makeText(this,getString(R.string.fill_all_fields), Toast.LENGTH_LONG).show()

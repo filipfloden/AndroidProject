@@ -33,7 +33,7 @@ class EventRepository {
                 )
         )
     }
-    fun addUpcomingEvents(eventID: String,
+    fun addUpcomingEvent(eventID: String,
                           eventHost: String,
                           eventTitle: String,
                           eventDescription: String,
@@ -59,6 +59,10 @@ class EventRepository {
 
     fun getMyEventById(eventID: String) =
         myEvents.find {
+            it.eventID == eventID
+        }
+    fun getUpcomingEventById(eventID: String) =
+        upcomingEvents.find {
             it.eventID == eventID
         }
     fun deleteMyEventById(eventID: String) =
