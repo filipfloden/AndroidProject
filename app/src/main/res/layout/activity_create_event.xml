@@ -23,6 +23,7 @@
             android:background="@drawable/edittext_rounded_corners"
             android:padding="10dp"
             android:hint="@string/enter_title"
+            android:singleLine="true"
             android:textColorHint="@color/Grey"
             android:textColor="@color/Grey"/>
 
@@ -36,6 +37,7 @@
             android:background="@drawable/edittext_rounded_corners"
             android:padding="10dp"
             android:hint="@string/enter_event_theme"
+            android:singleLine="true"
             android:textColorHint="@color/Grey"
             android:textColor="@color/Grey"/>
 
