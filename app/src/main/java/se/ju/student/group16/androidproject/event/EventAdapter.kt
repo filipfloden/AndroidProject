@@ -20,6 +20,7 @@ class EventAdapter(private val context: Activity, private val events: MutableLis
         val eventTitle: TextView = view.findViewById(R.id.eventTitleTextView)
         val eventTheme: TextView = view.findViewById(R.id.eventThemeTextView)
         val eventDescription: TextView = view.findViewById(R.id.eventDescTextView)
+        val readMore: TextView = view.findViewById(R.id.eventInfoBtn)
 
         init {
             // Define click listener for the ViewHolder's View.
@@ -44,6 +45,10 @@ class EventAdapter(private val context: Activity, private val events: MutableLis
         viewHolder.eventTitle.text = events[position].toString()
         viewHolder.eventTheme.text = events[position].eventTheme
         viewHolder.eventDescription.text = events[position].eventDescription
+
+        viewHolder.readMore.setOnClickListener {
+            Log.d("read more", events[position].toString())
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
