@@ -15,4 +15,6 @@
     <color name="ChatBlue">#3BB9FF</color>
     <color name="Transparent">@android:color/transparent</color>
     <color name="LightGrey">#C0C0C0</color>
+    <color name="Red">255, 0, 0</color>
+
 </resources>
