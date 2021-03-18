@@ -57,7 +57,6 @@ class FriendsFragment : Fragment() {
                 database.child(usersPath).child(uid).get().addOnSuccessListener {
                     displayName = it.child(displayNamePath).value.toString()
                     email = it.child(emailPath).value.toString()
-                    Log.d("New friend", uid + displayName + email)
                     if(friendsRepository.getFriendById(uid) == null)
                         friendsRepository.addUser(uid, displayName, email)
                     friendsAdapter.notifyDataSetChanged()
