@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".event.ThisEventActivity">
+    tools:context=".event.ThisEventActivity"
+    android:background="@color/backgroundColor"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,15 +17,16 @@
         <TextView
             android:id="@+id/eventTitle"
             android:layout_width="match_parent"
-            android:layout_height="49dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/edittext_rounded_corners"
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/Grey"
-            android:textColorHint="@color/Grey" />
+            android:textColorHint="@color/Grey"
+            android:textSize="30sp"/>
 
         <TextView
             android:id="@+id/eventTheme"
@@ -51,43 +54,83 @@
             android:padding="10dp"
             android:textColor="@color/Grey"
             android:textColorHint="@color/Grey" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/edittext_rounded_corners"
-            android:padding="10dp"
-            android:text="@string/when"
-            android:singleLine="true"
-            android:textColor="@color/Grey"
-            android:textColorHint="@color/Grey" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/edittext_rounded_corners"
-            android:padding="10dp"
-            android:text="@string/where"
 
-            android:singleLine="true"
-            android:textColor="@color/Grey"
-            android:textColorHint="@color/Grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/edittext_rounded_corners"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:text="@string/when"
+                android:textColor="@color/Grey"
+                android:textColorHint="@color/Grey" />
+
+            <TextView
+                android:id="@+id/eventDate"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/edittext_rounded_corners"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/Grey"
+                android:textColorHint="@color/Grey" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/edittext_rounded_corners"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:text="@string/where"
+                android:textColor="@color/Grey"
+                android:textColorHint="@color/Grey" />
+
+            <TextView
+                android:id="@+id/eventLocation"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/edittext_rounded_corners"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/Grey"
+                android:textColorHint="@color/Grey" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="50dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp">
 
             <Button
-                android:id="@+id/inviteAccept"
+                android:id="@+id/inviteAcceptBtn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
@@ -97,10 +140,9 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/inviteDecline"
+                android:id="@+id/inviteDeclineBtn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:text="@string/no"
                 android:textColor="@color/AlmostBlack"
