@@ -44,7 +44,11 @@
             android:layout_marginBottom="20dp"
             android:overScrollMode="never"
             app:layout_constrainedHeight="true" />
-
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </View>
         <Button
             android:id="@+id/createEventBtn"
             android:layout_width="match_parent"

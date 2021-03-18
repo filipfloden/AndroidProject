@@ -82,17 +82,6 @@ class LoadDataActivity : AppCompatActivity() {
                             info.child("longitude").value as Double,
                             info.child("guest-list").value as Map<String, String>
                     )
-                    eventRepository.addUpcomingEvent(
-                        event.key.toString(),
-                        info.child("host").value.toString(),
-                        info.child("title").value.toString(),
-                        info.child("description").value.toString(),
-                        info.child("theme").value.toString(),
-                        info.child("date").value.toString(),
-                        info.child("latitude").value as Double,
-                        info.child("longitude").value as Double,
-                        info.child("guest-list").value as Map<String, String>
-                    )
                 }.addOnFailureListener{
                     Log.e("firebase", "Error getting data", it)
                 }

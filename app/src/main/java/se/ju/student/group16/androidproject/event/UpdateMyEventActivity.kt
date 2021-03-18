@@ -51,8 +51,7 @@ class UpdateMyEventActivity : AppCompatActivity() {
 
         var eventDate: String
 
-        val thisEventID = intent.getStringExtra("clickedId")!!
-        val thisEvent = eventRepository.getMyEventById(thisEventID)
+        val thisEvent = eventRepository.getMyEventById(intent.getStringExtra("clickedId").toString())
         eventTitleTextView.text = thisEvent!!.eventTitle
         eventThemeTextView.text = thisEvent.eventTheme
         eventDescriptionTextView.text = thisEvent.eventDescription
@@ -94,7 +93,7 @@ class UpdateMyEventActivity : AppCompatActivity() {
                     .setMessage(getString(R.string.delete_confirmation))
                     .setPositiveButton(getString(R.string.yes)){
                         dialog, whichButton ->
-                        eventRepository.deleteMyEventById(myEvent[0].eventID)
+                        eventRepository.deleteMyEventById(thisEvent.eventID)
                         Toast.makeText(this,getString(R.string.event_was_deleted), Toast.LENGTH_LONG).show()
                         finish()
                     }.setNegativeButton(getString(R.string.no)) { dialog, whichButtin ->
@@ -159,14 +158,12 @@ class UpdateMyEventActivity : AppCompatActivity() {
                     eventDate, longitude, latitude, inviteFriendsList)
             database.child(eventPath).child(thisEvent.eventID).setValue(eventInfo)
             Toast.makeText(this, getString(R.string.event_was_updated), Toast.LENGTH_LONG).show()
+            inviteFriendsList[currentUser?.uid.toString()] = "pending"
             for (invite in inviteFriendsList){
-                database.child("users").child(invite.key).child("upcoming-events").child(thisEvent.eventID).removeValue()
+                database.child("users").child(invite.key).child("upcoming-events").child(thisEvent.eventID).setValue(false)
                 database.child("users").child(invite.key).child("upcoming-events").child(thisEvent.eventID).setValue(true)
             }
-            /*
-            database.child("users").child(current).child("upcoming-events").child(thisEvent.eventID).setValue(false)
-            database.child("users").child(invite.key).child("upcoming-events").child(thisEvent.eventID).setValue(true)
-            */
+            startActivity(Intent(this, EventActivity::class.java))
             finish()
         } else {
             Toast.makeText(this,getString(R.string.fill_all_fields), Toast.LENGTH_LONG).show()

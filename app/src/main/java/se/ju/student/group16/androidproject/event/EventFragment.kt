@@ -83,8 +83,20 @@ class EventFragment : Fragment() {
                 // A comment has changed, use the key to determine if we are displaying this
                 // comment and if so displayed the changed comment.
                 val newComment = dataSnapshot.value
-                val commentKey = dataSnapshot.key
-
+                val eventID = dataSnapshot.key.toString()
+                database.child("event").child(eventID).get().addOnSuccessListener {
+                    val eventTitle = it.child("title").value as String
+                    val eventDescription = it.child("description").value as String
+                    val eventTheme = it.child("theme").value as String
+                    val eventDate = it.child("date").value as String
+                    val eventLong = it.child("longitude").value as Double
+                    val eventLat = it.child("latitude").value as Double
+                    val eventGuestList = it.child("guest-list").value as Map<String, String>
+                    if(eventRepository.getUpcomingEventById(eventID) != null)
+                        //eventRepository.updateMyEventById(eventID, eventTitle, eventDescription, eventTheme, eventDate, eventLong, eventLat, eventGuestList)
+                        eventRepository.updateUpcomingEvent(eventID, eventTitle, eventDescription, eventTheme, eventDate, eventLong, eventLat, eventGuestList)
+                        eventAdapter.notifyDataSetChanged()
+                }
                 eventAdapter.notifyDataSetChanged()
                 // ...
             }

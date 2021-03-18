@@ -1,10 +1,14 @@
 package se.ju.student.group16.androidproject.friend
 
+import android.app.PendingIntent
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.EditorInfo
 import android.widget.*
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import se.ju.student.group16.androidproject.R
 import se.ju.student.group16.androidproject.User
+import se.ju.student.group16.androidproject.event.EventActivity
 
 class chatActivity : AppCompatActivity() {
 
@@ -43,11 +48,12 @@ class chatActivity : AppCompatActivity() {
         val ref2 = database.child(messagesPath).child(chattingWithUID + "_" + currentUser?.uid.toString())
 
         /*
-        val intent = Intent(this, chatActivity::class.java).apply {
+        val intent = Intent(this, chatActivity::class.java).putExtra("chattingWith", chattingWithUID).apply {
             flags = Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
          */
+
         database.child(usersPath).child(chattingWithUID.toString()).get().addOnSuccessListener {
             chattingWithUser = User(chattingWithUID.toString(), it.child("displayname").value.toString(), it.child("email").value.toString())
             chattingWithName.text = chattingWithUser.toString()
@@ -80,6 +86,7 @@ class chatActivity : AppCompatActivity() {
                     Log.d("notfication sent", "true")
                 }
                  */
+
 
 
                 // ...
@@ -160,4 +167,11 @@ class chatActivity : AppCompatActivity() {
             }
         }
     }
+    /*
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, EventActivity::class.java))
+        finish()
+    }
+     */
 }
