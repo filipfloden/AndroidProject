@@ -18,8 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProject">
-        <activity android:name=".event.UpdateMyEventActivity"></activity>
-        <activity android:name=".LoadDataActivity"></activity>
+        <activity android:name=".event.ThisEventActivity"></activity>
+        <activity android:name=".event.UpdateMyEventActivity" />
+        <activity android:name=".LoadDataActivity" />
         <activity android:name=".friend.chatActivity" />
         <activity android:name=".event.MyEventsActivity" />
         <!--
