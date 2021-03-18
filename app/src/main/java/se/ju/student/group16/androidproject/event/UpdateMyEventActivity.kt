@@ -53,7 +53,6 @@ class UpdateMyEventActivity : AppCompatActivity() {
 
         val thisEventID = intent.getStringExtra("clickedId")!!
         val thisEvent = eventRepository.getMyEventById(thisEventID)
-        Log.d("jajjemän", thisEvent.toString())
         eventTitleTextView.text = thisEvent!!.eventTitle
         eventThemeTextView.text = thisEvent.eventTheme
         eventDescriptionTextView.text = thisEvent.eventDescription
