@@ -102,7 +102,6 @@ class CreateEventActivity : AppCompatActivity() {
                 intent.putExtra("lat", latitude)
                 startActivityForResult(intent, REQUEST_CODE)
             }
-
         }
     }
 
@@ -134,8 +133,10 @@ class CreateEventActivity : AppCompatActivity() {
                 guestList[invitedFriend.uid] = "pending"
             }
             database.child(users).child(currentUser).child("my-events").child(eventID.toString()).setValue(true)
+            database.child(users).child(currentUser).child("upcoming-events").child(eventID.toString()).setValue(true)
             Toast.makeText(this,getString(R.string.event_was_created), Toast.LENGTH_LONG).show()
             eventRepository.addMyEvent(eventID.toString(), currentUser, eventTitle, eventDescription, eventTheme, eventDate, longitude, latitude, guestList)
+            eventRepository.addUpcomingEvent(eventID.toString(), currentUser, eventTitle, eventDescription, eventTheme, eventDate, longitude, latitude, guestList)
             finish()
         }else{
             Log.d("funkar inte", eventTitle+eventDescription+eventTheme+eventDate+ longitude+ latitude+ guestList)
