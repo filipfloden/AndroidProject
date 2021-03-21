@@ -50,4 +50,6 @@
     <string name="when">When?</string>
     <string name="event_was_accepted">Event was accepted</string>
     <string name="event_was_declined">Event was declined</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

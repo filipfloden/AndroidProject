@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="se.ju.student.group16.androidproject">
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -18,7 +19,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProject">
-        <activity android:name=".event.ThisEventActivity"></activity>
+        <receiver android:name=".EventWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/event_widget_info" />
+        </receiver>
+
+        <activity android:name=".event.ThisEventActivity" />
         <activity android:name=".event.UpdateMyEventActivity" />
         <activity android:name=".LoadDataActivity" />
         <activity android:name=".friend.chatActivity" />
@@ -43,7 +54,6 @@
         <activity android:name=".friend.AddFriendActivity" />
         <activity android:name=".changePassword" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".event.EventActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
