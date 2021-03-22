@@ -94,8 +94,18 @@ class UpdateMyEventActivity : AppCompatActivity() {
                     .setPositiveButton(getString(R.string.yes)){
                         dialog, whichButton ->
                         eventRepository.deleteMyEventById(thisEvent.eventID)
+                        for (guest in thisEvent.guestList){
+                            database.child("users").child(guest.key)
+                                .child("upcoming-events").child(thisEvent.eventID)
+                                .removeValue()
+                        }
+                        database.child("users").child(firebaseRepository.getCurrentUser()?.uid.toString())
+                            .child("my-events").child(thisEvent.eventID).removeValue()
+                        database.child("users").child(firebaseRepository.getCurrentUser()?.uid.toString())
+                            .child("upcoming-events").child(thisEvent.eventID).removeValue()
+                        database.child("event").child(thisEvent.eventID).removeValue()
                         Toast.makeText(this,getString(R.string.event_was_deleted), Toast.LENGTH_LONG).show()
-                        finish()
+                        finishAffinity()
                     }.setNegativeButton(getString(R.string.no)) { dialog, whichButtin ->
                         //Don't delete it
                     }.show()

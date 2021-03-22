@@ -1,10 +1,12 @@
 package se.ju.student.group16.androidproject
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import se.ju.student.group16.androidproject.event.EventActivity
+import se.ju.student.group16.androidproject.event.ThisEventActivity
 import se.ju.student.group16.androidproject.event.eventRepository
 import se.ju.student.group16.androidproject.friend.friendsRepository
 
@@ -18,10 +20,17 @@ class LoadDataActivity : AppCompatActivity() {
     private val myEventsPath = "my-events"
     private val upcomingEventsPath = "upcoming-events"
     private val eventPath = "event"
+    private lateinit var eventActivity: String
+    private lateinit var thisEventActivity: String
+    private lateinit var thisEvent: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_load_data)
+        eventActivity = intent.getStringExtra("event-activity").toString()
+        thisEventActivity = intent.getStringExtra("this-event-activity").toString()
+        thisEvent = intent.getStringExtra("thisEvent").toString()
+        Log.d("Extra", "$eventActivity | $thisEvent | $thisEventActivity")
         friendsRepository.clearFriends()
         eventRepository.clearEvents()
         getFriends()
@@ -87,7 +96,11 @@ class LoadDataActivity : AppCompatActivity() {
                 }
             }
             Log.d("Finished", "Getting my events")
-            startActivity(Intent(this, EventActivity::class.java))
+            if (thisEvent == "null") {
+                startActivity(Intent(this, EventActivity::class.java))
+            }else {
+                startActivity(Intent(this, ThisEventActivity::class.java).putExtra("thisEvent", thisEvent))
+            }
             finish()
         }
     }

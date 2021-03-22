@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
         database.keepSynced(true)
 
         if(firebaseRepository.getCurrentUser() != null){
-            startActivity(Intent(this, LoadDataActivity::class.java))
+            startActivity(Intent(this, LoadDataActivity::class.java).putExtra("event-activity", "EventActivity"))
             finish()
         }
 
