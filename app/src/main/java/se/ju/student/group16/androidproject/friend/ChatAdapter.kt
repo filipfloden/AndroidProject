@@ -1,6 +1,7 @@
 package se.ju.student.group16.androidproject.friend
 
 import android.app.Activity
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,18 +49,19 @@ class ChatAdapter(private val context: Activity, private val messages: MutableLi
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         if (currentUser?.uid.toString() == messages[position].user){
-            viewHolder.linearLayout.backgroundTintList = ContextCompat.getColorStateList(context, R.color.ChatBlue)
+            viewHolder.textView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.ChatBlue)
             val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT)
             params.leftMargin = 350
             params.rightMargin = 50
             viewHolder.frameLayout.layoutParams = params
         }
         else{
-            viewHolder.linearLayout.backgroundTintList = ContextCompat.getColorStateList(context, R.color.WhiteGrey)
+            viewHolder.textView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.WhiteGrey)
             val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
             params.rightMargin = 350
             params.leftMargin = 50
             viewHolder.frameLayout.layoutParams = params
+            viewHolder.messageTime.gravity = Gravity.START
         }
         if (messages[position].message == context.getString(R.string.is_typing)){
             viewHolder.linearLayout.backgroundTintList = ContextCompat.getColorStateList(context, R.color.LightGrey)
@@ -71,5 +73,4 @@ class ChatAdapter(private val context: Activity, private val messages: MutableLi
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = messages.size
-
 }
