@@ -5,15 +5,7 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.widget.RemoteViews
-import se.ju.student.group16.androidproject.event.EventActivity
-import se.ju.student.group16.androidproject.event.ThisEventActivity
-import se.ju.student.group16.androidproject.event.eventRepository
-import se.ju.student.group16.androidproject.friend.AddFriendActivity
-import se.ju.student.group16.androidproject.friend.friendsRepository
-import kotlin.random.Random
-
 /**
  * Implementation of App Widget functionality.
  */
@@ -42,7 +34,7 @@ internal fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManage
     val currentUser = firebaseRepository.getCurrentUser()
     lateinit var lastEvent: String
     val views = RemoteViews(context.packageName, R.layout.event_widget)
-    //views.setRemoteAdapter(R.id.widget_stackview, Intent(context, EventActivity::class.java))
+    views.setRemoteAdapter(R.id.widget_stackview, Intent(context, WidgetService::class.java))
     database.child("users").child(currentUser?.uid.toString()).child("upcoming-events").get().addOnSuccessListener {
         if (it.hasChildren()) {
             lastEvent = it.children.last().key.toString()
@@ -55,7 +47,9 @@ internal fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManage
             views.setTextViewText(R.id.widgetEventTheme,  info.child("theme").value.toString())
             views.setTextViewText(R.id.widgetEventDesc,  info.child("description").value.toString())
             views.setOnClickPendingIntent(R.id.next_event, PendingIntent
-                .getActivity(context, 0, Intent(context, LoadDataActivity::class.java).putExtra("thisEvent", lastEvent).putExtra("next-activity", "ThisEventActivity"), 0))
+                .getActivity(context, 0, Intent(context, LoadDataActivity::class.java)
+                    .putExtra("next-activity", "ThisEventActivity")
+                    .putExtra("thisEvent", lastEvent), 0))
             // Instruct the widget manager to update the widget
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }

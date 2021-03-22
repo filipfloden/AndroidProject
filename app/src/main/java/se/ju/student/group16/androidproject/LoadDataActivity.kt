@@ -20,17 +20,14 @@ class LoadDataActivity : AppCompatActivity() {
     private val myEventsPath = "my-events"
     private val upcomingEventsPath = "upcoming-events"
     private val eventPath = "event"
-    private lateinit var eventActivity: String
-    private lateinit var thisEventActivity: String
+    private lateinit var activity: String
     private lateinit var thisEvent: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_load_data)
-        eventActivity = intent.getStringExtra("event-activity").toString()
-        thisEventActivity = intent.getStringExtra("this-event-activity").toString()
         thisEvent = intent.getStringExtra("thisEvent").toString()
-        Log.d("Extra", "$eventActivity | $thisEvent | $thisEventActivity")
+        activity = intent.getStringExtra("next-activity").toString()
         friendsRepository.clearFriends()
         eventRepository.clearEvents()
         getFriends()
@@ -96,10 +93,9 @@ class LoadDataActivity : AppCompatActivity() {
                 }
             }
             Log.d("Finished", "Getting my events")
-            if (thisEvent == "null") {
-                startActivity(Intent(this, EventActivity::class.java))
-            }else {
-                startActivity(Intent(this, ThisEventActivity::class.java).putExtra("thisEvent", thisEvent))
+            when(activity) {
+                "EventActivity" -> startActivity(Intent(this, EventActivity::class.java))
+                "ThisEventActivity" -> startActivity(Intent(this, ThisEventActivity::class.java).putExtra("thisEvent", thisEvent))
             }
             finish()
         }

@@ -6,12 +6,8 @@
     android:gravity="center_vertical"
     android:theme="@style/ThemeOverlay.AndroidProject.AppWidgetContainer">
 
-    <!--<StackView
-        android:id="@+id/widget_stackview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">-->
-
-        <LinearLayout
+        <StackView
+            android:id="@+id/widget_stackview"
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_margin="10dp"
@@ -51,6 +47,5 @@
                 android:text="Next"
                 android:layout_gravity="center_horizontal"/>
 
-        </LinearLayout>
-    <!--</StackView>-->
+        </StackView>
 </RelativeLayout>
