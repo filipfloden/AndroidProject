@@ -28,7 +28,9 @@ class WidgetService: RemoteViewsService.RemoteViewsFactory {
     override fun onCreate() {
         for (i in 1..mCount){
             Log.d("Widget", i.toString())
+            widgetItems.add("Hello")
         }
+        Log.d("Widget", widgetItems.toString())
     }
 
     override fun onDataSetChanged() {
@@ -36,7 +38,7 @@ class WidgetService: RemoteViewsService.RemoteViewsFactory {
     }
 
     override fun onDestroy() {
-        TODO("Not yet implemented")
+        Log.d("Widget", "Destroyed")
     }
 
     override fun getCount(): Int {

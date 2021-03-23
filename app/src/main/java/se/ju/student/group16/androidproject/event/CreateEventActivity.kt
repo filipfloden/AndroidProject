@@ -129,11 +129,11 @@ class CreateEventActivity : AppCompatActivity() {
             database.child("event").child(eventID.toString()).setValue(eventInfo)
             for (invitedFriend in inviteFriendsList) {
                 database.child("event").child(eventID.toString()).child("guest-list").child(invitedFriend.uid).setValue("pending")
-                database.child(users).child(invitedFriend.uid).child("upcoming-events").child(eventID.toString()).setValue(true)
+                database.child(users).child(invitedFriend.uid).child("upcoming-events").child(eventID.toString()).setValue("pending")
                 guestList[invitedFriend.uid] = "pending"
             }
-            database.child(users).child(currentUser).child("my-events").child(eventID.toString()).setValue(true)
-            database.child(users).child(currentUser).child("upcoming-events").child(eventID.toString()).setValue(true)
+            database.child(users).child(currentUser).child("my-events").child(eventID.toString()).setValue("host")
+            database.child(users).child(currentUser).child("upcoming-events").child(eventID.toString()).setValue("pending")
             Toast.makeText(this,getString(R.string.event_was_created), Toast.LENGTH_LONG).show()
             eventRepository.addMyEvent(eventID.toString(), currentUser, eventTitle, eventDescription, eventTheme, eventDate, longitude, latitude, guestList)
             eventRepository.addUpcomingEvent(eventID.toString(), currentUser, eventTitle, eventDescription, eventTheme, eventDate, longitude, latitude, guestList)

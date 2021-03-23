@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import se.ju.student.group16.androidproject.R
+import se.ju.student.group16.androidproject.firebaseRepository
 import se.ju.student.group16.androidproject.friend.chatActivity
 
 class EventAdapter(private val context: Activity, private val events: MutableList<Events>) : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
@@ -23,6 +24,7 @@ class EventAdapter(private val context: Activity, private val events: MutableLis
         val eventTitle: TextView = view.findViewById(R.id.eventTitleTextView)
         val eventTheme: TextView = view.findViewById(R.id.eventThemeTextView)
         val eventDescription: TextView = view.findViewById(R.id.eventDescTextView)
+        val attendanceStatus: TextView = view.findViewById(R.id.attendance_status)
         val readMore: TextView = view.findViewById(R.id.eventInfoBtn)
 
         init {
@@ -48,6 +50,11 @@ class EventAdapter(private val context: Activity, private val events: MutableLis
         viewHolder.eventTitle.text = events[position].toString()
         viewHolder.eventTheme.text = events[position].eventTheme
         viewHolder.eventDescription.text = events[position].eventDescription
+        if (events[position].eventHost == firebaseRepository.getCurrentUser()?.uid)
+            viewHolder.attendanceStatus.text = "Host"
+        else
+            viewHolder.attendanceStatus.text = events[position].guestList[firebaseRepository.getCurrentUser()?.uid]
+        Log.d("Status", events[position].guestList[firebaseRepository.getCurrentUser()?.uid].toString())
 
         viewHolder.readMore.setOnClickListener {
             Log.d("read more", events[position].toString())

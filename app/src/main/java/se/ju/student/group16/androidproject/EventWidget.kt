@@ -34,7 +34,8 @@ internal fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManage
     val currentUser = firebaseRepository.getCurrentUser()
     lateinit var lastEvent: String
     val views = RemoteViews(context.packageName, R.layout.event_widget)
-    views.setRemoteAdapter(R.id.widget_stackview, Intent(context, WidgetService::class.java))
+    //views.setRemoteAdapter(R.id.widget_stackview, Intent(context, WidgetService::class.java))
+
     database.child("users").child(currentUser?.uid.toString()).child("upcoming-events").get().addOnSuccessListener {
         if (it.hasChildren()) {
             lastEvent = it.children.last().key.toString()
@@ -54,4 +55,5 @@ internal fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManage
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
     }
+    //appWidgetManager.updateAppWidget(appWidgetId, views)
 }
