@@ -56,7 +56,8 @@ class SignUpActivity : AppCompatActivity() {
                         dbPath.child("displayname").setValue(usernameInput.text.toString())
                         dbPath.child("email").setValue(currentUser?.email)
 
-                        val intent = Intent(this, EventActivity::class.java)
+                        val intent = Intent(this, LoadDataActivity::class.java)
+                                .putExtra("next-activity", "EventActivity")
                         startActivity(intent)
                         finish()
                     } else {

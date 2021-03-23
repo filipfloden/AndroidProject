@@ -57,6 +57,8 @@ class LoginActivity : AppCompatActivity() {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("login", "signInWithEmail:success")
                                 val intent = Intent(this, LoadDataActivity::class.java)
+                                        .putExtra("next-activity", "EventActivity")
+                                finish()
                                 startActivity(intent)
                                 finish()
                             } else {
@@ -115,7 +117,8 @@ class LoginActivity : AppCompatActivity() {
                         val dbPath = database.child("users").child(auth.currentUser!!.uid)
                         dbPath.child("displayname").setValue(currentUser?.displayName)
                         dbPath.child("email").setValue(currentUser?.email)
-                        startActivity(Intent(this, LoadDataActivity::class.java))
+                        startActivity(Intent(this, LoadDataActivity::class.java).putExtra("next-activity", "EventActivity"))
+                        finish()
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithCredential:failure", task.exception)
