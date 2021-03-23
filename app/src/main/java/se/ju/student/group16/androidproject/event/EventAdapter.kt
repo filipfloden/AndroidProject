@@ -2,6 +2,7 @@ package se.ju.student.group16.androidproject.event
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -54,6 +55,10 @@ class EventAdapter(private val context: Activity, private val events: MutableLis
             viewHolder.attendanceStatus.text = "Host"
         else
             viewHolder.attendanceStatus.text = events[position].guestList[firebaseRepository.getCurrentUser()?.uid]
+            if (events[position].guestList[firebaseRepository.getCurrentUser()?.uid] == "accepted")
+                viewHolder.attendanceStatus.setTextColor(Color.GREEN)
+            else
+                viewHolder.attendanceStatus.setTextColor(Color.RED)
         Log.d("Status", events[position].guestList[firebaseRepository.getCurrentUser()?.uid].toString())
 
         viewHolder.readMore.setOnClickListener {

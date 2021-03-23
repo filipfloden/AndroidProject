@@ -36,12 +36,14 @@ class ThisEventActivity : AppCompatActivity() {
             val database = firebaseRepository.getDatabaseReference()
             val currentUser = firebaseRepository.getCurrentUser()
             database.child("event").child(thisEvent!!.eventID).child("guest-list").child(currentUser!!.uid).setValue("accepted")
+            database.child("users").child(currentUser.uid).child("upcoming-events").child(thisEvent.eventID).setValue("accepted")
             Toast.makeText(this,getString(R.string.event_was_accepted), Toast.LENGTH_LONG).show()
         }
         inviteDeclineBtn.setOnClickListener {
             val database = firebaseRepository.getDatabaseReference()
             val currentUser = firebaseRepository.getCurrentUser()
             database.child("event").child(thisEvent!!.eventID).child("guest-list").child(currentUser!!.uid).setValue("declined")
+            database.child("users").child(currentUser.uid).child("upcoming-events").child(thisEvent.eventID).setValue("declined")
             Toast.makeText(this,getString(R.string.event_was_declined), Toast.LENGTH_LONG).show()
 
         }
