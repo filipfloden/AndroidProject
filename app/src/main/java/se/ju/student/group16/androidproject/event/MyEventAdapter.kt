@@ -26,9 +26,8 @@ class MyEventAdapter(private val context: Activity, private val myEvents: Mutabl
         val inflater = context.layoutInflater
         val rowView = inflater.inflate(R.layout.my_event_row, null, true)
         val myEventTitle = rowView.findViewById<TextView>(R.id.my_event_title)
+        val noEvents = rowView.findViewById<TextView>(R.id.no_events_text)
         myEventTitle.text = myEvents[position].eventTitle
-
-        //val textRow = rowView.findViewById<TextView>(R.id.my_event_title)
 
         myEventTitle.setOnClickListener {
             //Log.d("Event", eventAdapter.getItem(position).toString())
