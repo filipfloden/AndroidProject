@@ -21,10 +21,8 @@
             android:paddingLeft="8dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="@string/add_friend"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
         <ListView
             android:id="@+id/myEventsListView"

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import se.ju.student.group16.androidproject.R
@@ -51,14 +52,19 @@ class EventAdapter(private val context: Activity, private val events: MutableLis
         viewHolder.eventTitle.text = events[position].toString()
         viewHolder.eventTheme.text = events[position].eventTheme
         viewHolder.eventDescription.text = events[position].eventDescription
-        if (events[position].eventHost == firebaseRepository.getCurrentUser()?.uid)
+        if (events[position].eventHost == firebaseRepository.getCurrentUser()?.uid) {
             viewHolder.attendanceStatus.text = "Host"
-        else
+            viewHolder.attendanceStatus.setTextColor(ContextCompat.getColorStateList(context, R.color.ChatBlue))
+        }
+        else {
             viewHolder.attendanceStatus.text = events[position].guestList[firebaseRepository.getCurrentUser()?.uid]
             if (events[position].guestList[firebaseRepository.getCurrentUser()?.uid] == "accepted")
                 viewHolder.attendanceStatus.setTextColor(Color.GREEN)
-            else
+            else if (events[position].guestList[firebaseRepository.getCurrentUser()?.uid] == "declined")
                 viewHolder.attendanceStatus.setTextColor(Color.RED)
+            else
+                viewHolder.attendanceStatus.setTextColor(ContextCompat.getColorStateList(context, R.color.Orange))
+        }
         Log.d("Status", events[position].guestList[firebaseRepository.getCurrentUser()?.uid].toString())
 
         viewHolder.readMore.setOnClickListener {

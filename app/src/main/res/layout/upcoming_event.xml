@@ -55,7 +55,7 @@
                     android:id="@+id/attendance_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#ffae1a"/>
+                    android:textColor="@color/Orange"/>
             </LinearLayout>
 
             <Button
