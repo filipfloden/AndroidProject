@@ -48,17 +48,26 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val showEvent = intent.getBooleanExtra("showEvent", false)
         val doneButton = findViewById<Button>(R.id.mapDone)
 
-        if (lat != 0.0 || lng != 0.0){
-            val eventLocation = LatLng(lat, lng)
-            googleMap.addMarker(MarkerOptions()
-                    .position(eventLocation))
-        }
+
 
         if(showEvent){
+            if (lat != 0.0 || lng != 0.0){
+                val eventLocation = LatLng(lng, lat)
+                googleMap.addMarker(MarkerOptions()
+                        .position(eventLocation))
+            }
+            val defaultZoom = 5f
+            val defaultMapLocation = LatLng(lng, lat)
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultMapLocation, defaultZoom))
             doneButton.setOnClickListener {
                 finish()
             }
         }else{
+            if (lat != 0.0 || lng != 0.0){
+                val eventLocation = LatLng(lng, lat)
+                googleMap.addMarker(MarkerOptions()
+                        .position(eventLocation))
+            }
 
             doneButton.setOnClickListener {
                 if (marker.isEmpty()){

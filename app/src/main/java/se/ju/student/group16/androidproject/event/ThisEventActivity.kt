@@ -35,7 +35,7 @@ class ThisEventActivity : AppCompatActivity() {
         eventLocation.setOnClickListener {
             val intent = Intent(this, GoogleMapsActivity::class.java)
             intent.putExtra("long", thisEvent!!.eventLong)
-            intent.putExtra("lat", thisEvent.eventLong)
+            intent.putExtra("lat", thisEvent.eventLat)
             intent.putExtra("showEvent", true)
             startActivity(intent)
         }
