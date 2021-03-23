@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".event.CreateEventActivity"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    tools:context=".event.CreateEventActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,7 +72,7 @@
                 android:textSize="14sp"
                 android:textColor="@color/AlmostBlack"
                 android:drawableTop="@drawable/ic_event"
-                android:drawableTint="@color/AlmostBlack" />
+                android:drawableTint="@color/AlmostBlack"/>
             <Button
                 android:id="@+id/invite_Friends_Btn"
                 android:layout_width="0dp"
@@ -84,7 +83,7 @@
                 android:textSize="14sp"
                 android:textColor="@color/AlmostBlack"
                 android:drawableTop="@drawable/ic_person_"
-                android:drawableTint="@color/AlmostBlack" />
+                android:drawableTint="@color/AlmostBlack"/>
             <Button
                 android:id="@+id/googleMapsBtn"
                 android:layout_width="0dp"
@@ -113,6 +112,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/rounded_corners"
+            android:backgroundTint="@color/teal_200"
             android:gravity="center"
             android:text="@string/create_event"
             android:textColor="@color/AlmostBlack"/>

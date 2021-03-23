@@ -6,7 +6,7 @@
     android:gravity="center_vertical"
     android:theme="@style/ThemeOverlay.AndroidProject.AppWidgetContainer">
 
-        <StackView
+        <LinearLayout
             android:id="@+id/widget_stackview"
             android:layout_width="match_parent"
             android:layout_height="400dp"
@@ -44,8 +44,8 @@
                 android:id="@+id/next_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Next"
+                android:text="View"
                 android:layout_gravity="center_horizontal"/>
 
-        </StackView>
+        </LinearLayout>
 </RelativeLayout>
