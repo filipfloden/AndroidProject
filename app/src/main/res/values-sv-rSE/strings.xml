@@ -50,4 +50,8 @@
     <string name="when">När?</string>
     <string name="event_was_accepted">Evenemanget godkändes</string>
     <string name="event_was_declined">Evenemanget skapades</string>
+    <string name="appwidget_text">Event</string>
+    <string name="add_widget">Lägg till widget</string>
+    <string name="location">Plats</string>
+    <string name="no_my_events_text">Mina event - Du har inte skapat några events</string>
 </resources>

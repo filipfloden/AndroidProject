@@ -44,14 +44,14 @@ class UsersAdapter(private val context: Activity, private val user: MutableList<
     }
 
     fun filter(text: String?) {
-        var tempUsers = userCopy.toMutableList()
-        val text = text!!.toLowerCase()
+        val tempUsers = userCopy.toMutableList()
+        val inputText = text!!.toLowerCase()
         user.clear()
-        if (text.isEmpty()) {
+        if (inputText.isEmpty()) {
             user.addAll(tempUsers)
         } else {
             for (i in tempUsers) {
-                if (i.displayname.toLowerCase().contains(text)) {
+                if (i.displayname.toLowerCase().contains(inputText)) {
                     user.add(i)
                 }
             }

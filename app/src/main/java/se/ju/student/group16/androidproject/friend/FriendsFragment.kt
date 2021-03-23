@@ -68,8 +68,6 @@ class FriendsFragment : Fragment() {
 
                 // A comment has changed, use the key to determine if we are displaying this
                 // comment and if so displayed the changed comment.
-                val newComment = dataSnapshot.value
-                val commentKey = dataSnapshot.key
 
                 // ...
             }
@@ -90,9 +88,6 @@ class FriendsFragment : Fragment() {
 
                 // A comment has changed position, use the key to determine if we are
                 // displaying this comment and if so move it.
-                val movedComment = dataSnapshot.value
-                val commentKey = dataSnapshot.key
-
                 // ...
             }
 

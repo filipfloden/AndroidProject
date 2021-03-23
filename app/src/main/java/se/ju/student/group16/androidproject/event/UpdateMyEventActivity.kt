@@ -92,7 +92,7 @@ class UpdateMyEventActivity : AppCompatActivity() {
                     .setTitle(getString(R.string.delete_event))
                     .setMessage(getString(R.string.delete_confirmation))
                     .setPositiveButton(getString(R.string.yes)){
-                        dialog, whichButton ->
+                        _, _ ->
                         eventRepository.deleteMyEventById(thisEvent.eventID)
                         for (guest in thisEvent.guestList){
                             database.child("users").child(guest.key)
@@ -107,17 +107,17 @@ class UpdateMyEventActivity : AppCompatActivity() {
                         Toast.makeText(this,getString(R.string.event_was_deleted), Toast.LENGTH_LONG).show()
 
                         finish()
-                    }.setNegativeButton(getString(R.string.no)) { dialog, whichButtin ->
+                    }.setNegativeButton(getString(R.string.no)) { _, _ ->
                         //Don't delete it
                     }.show()
         }
 
-        calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
+        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val displayChosenDate = dateDialog.findViewById<TextView>(R.id.chosenDateTextView)
-            var selectedMonth = ""
-            var selectedDay = ""
+            var selectedMonth: String
+            var selectedDay: String
             if (dayOfMonth < 10){
-                selectedDay = "0"+dayOfMonth.toString()
+                selectedDay = "0$dayOfMonth"
             }else{
                 selectedDay = dayOfMonth.toString()
             }

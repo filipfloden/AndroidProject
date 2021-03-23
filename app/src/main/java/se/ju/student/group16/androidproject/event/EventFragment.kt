@@ -82,7 +82,6 @@ class EventFragment : Fragment() {
 
                 // A comment has changed, use the key to determine if we are displaying this
                 // comment and if so displayed the changed comment.
-                val newComment = dataSnapshot.value
                 val eventID = dataSnapshot.key.toString()
                 database.child("event").child(eventID).get().addOnSuccessListener {
                     val eventTitle = it.child("title").value as String
@@ -117,8 +116,6 @@ class EventFragment : Fragment() {
 
                 // A comment has changed position, use the key to determine if we are
                 // displaying this comment and if so move it.
-                val movedComment = dataSnapshot.value
-                val commentKey = dataSnapshot.key
                 eventAdapter.notifyDataSetChanged()
                 // ...
             }

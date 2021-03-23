@@ -12,16 +12,12 @@ import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 
 class changePassword : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_password)
 
         val changePasswordBtn = findViewById<Button>(R.id.btn_change_password)
-        val currentPassword = findViewById<EditText>(R.id.et_current_password)
-        val newPassword = findViewById<EditText>(R.id.et_new_password)
-        val confirmPassword = findViewById<EditText>(R.id.et_confirm_password)
 
         changePasswordBtn.setOnClickListener{
             changePassword()
@@ -33,21 +29,21 @@ class changePassword : AppCompatActivity() {
         val newPassword = findViewById<EditText>(R.id.et_new_password)
         val confirmPassword = findViewById<EditText>(R.id.et_confirm_password)
 
-        auth = FirebaseAuth.getInstance()
+        val auth = firebaseRepository.getAuth()
 
         if(currentPassword.text.isNotEmpty() && newPassword.text.isNotEmpty() && confirmPassword.text.isNotEmpty()){
 
-            if(newPassword.text.toString().equals(confirmPassword.text.toString())){
+            if(newPassword.text.toString() == confirmPassword.text.toString()){
 
-                val user = auth.currentUser
-                if(user != null && user.email != null){
-                    val credential = EmailAuthProvider.getCredential(user.email!!, currentPassword.text.toString())
+                val currentUser = firebaseRepository.getCurrentUser()
+                if(currentUser != null && currentUser.email != null){
+                    val credential = EmailAuthProvider.getCredential(currentUser.email!!, currentPassword.text.toString())
 
-                    user?.reauthenticate(credential)?.addOnCompleteListener{
+                    currentUser.reauthenticate(credential).addOnCompleteListener{
                         if(it.isSuccessful){
                             Toast.makeText(this,"Re-Authentication success.", Toast.LENGTH_SHORT).show()
-                            user?.updatePassword(newPassword.text.toString())?.addOnCompleteListener{  task ->
-                                if(it.isSuccessful){
+                            currentUser.updatePassword(newPassword.text.toString()).addOnCompleteListener{  task ->
+                                if(task.isSuccessful){
                                     Toast.makeText(this,"User Password changed", Toast.LENGTH_SHORT).show()
                                     auth.signOut()
                                     startActivity(Intent(this, LoginActivity::class.java))

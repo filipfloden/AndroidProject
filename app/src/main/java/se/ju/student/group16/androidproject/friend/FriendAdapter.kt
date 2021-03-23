@@ -40,13 +40,13 @@ class FriendAdapter(private val context: Activity, private val friends: MutableL
 
     fun filter(text: String?) {
         var tempFriends = friendsCopy.toMutableList()
-        val text = text!!.toLowerCase()
+        val inputText = text!!.toLowerCase()
         friends.clear()
-        if (text.isEmpty()) {
+        if (inputText.isEmpty()) {
             friends.addAll(tempFriends)
         } else {
             for (i in tempFriends) {
-                if (i.displayname.toLowerCase().contains(text)) {
+                if (i.displayname.toLowerCase().contains(inputText)) {
                     friends.add(i)
                 }
             }

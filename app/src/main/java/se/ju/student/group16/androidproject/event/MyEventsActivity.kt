@@ -19,7 +19,6 @@ class MyEventsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_events)
         val myEventsListView = findViewById<ListView>(R.id.myEventsListView)
-        val currentUser = firebaseRepository.getCurrentUser()
         val noMyEvents = findViewById<TextView>(R.id.no_events_text)
         eventAdapter = MyEventAdapter(
                 this,
@@ -28,9 +27,9 @@ class MyEventsActivity : AppCompatActivity() {
         myEventsListView.adapter = eventAdapter
 
         if (eventAdapter.isEmpty)
-            noMyEvents.text = "My events - You have not created any events"
+            noMyEvents.text = getString(R.string.no_my_events_text)
         else
-            noMyEvents.text = "My events"
+            noMyEvents.text = getString(R.string.my_events)
 
         eventAdapter.notifyDataSetChanged()
     }

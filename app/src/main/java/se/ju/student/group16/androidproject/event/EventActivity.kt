@@ -32,8 +32,6 @@ class EventActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_event)
 
-        val binding = ActivityEventBinding.inflate(layoutInflater)
-
         val bottom_nav = findViewById<BottomNavigationView>(R.id.bottom_nav)
         val eventFragment = EventFragment()
         val friendsFragment = FriendsFragment()

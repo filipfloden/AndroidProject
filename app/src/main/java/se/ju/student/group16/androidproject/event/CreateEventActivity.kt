@@ -72,12 +72,12 @@ class CreateEventActivity : AppCompatActivity() {
         createEventButton.setOnClickListener{
             createEvent(eventDate)
         }
-        calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
+        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val displayChosenDate = dateDialog.findViewById<TextView>(R.id.chosenDateTextView)
-            var selectedMonth = ""
-            var selectedDay = ""
+            var selectedMonth: String
+            var selectedDay: String
             if (dayOfMonth < 10){
-                selectedDay = "0"+dayOfMonth.toString()
+                selectedDay = "0$dayOfMonth"
             }else{
                 selectedDay = dayOfMonth.toString()
             }

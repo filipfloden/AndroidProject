@@ -97,8 +97,6 @@ class chatActivity : AppCompatActivity() {
 
                 // A comment has changed, use the key to determine if we are displaying this
                 // comment and if so displayed the changed comment.
-                val newComment = dataSnapshot.value
-                val commentKey = dataSnapshot.key
 
                 // ...
             }
@@ -108,7 +106,6 @@ class chatActivity : AppCompatActivity() {
 
                 // A comment has changed, use the key to determine if we are displaying this
                 // comment and if so remove it.
-                val commentKey = dataSnapshot.child("user").value
                 listOfMessages.remove(listOfMessages.find { it.message == getString(R.string.is_typing) })
                 chatAdapter.notifyDataSetChanged()
                 // ...
@@ -119,8 +116,6 @@ class chatActivity : AppCompatActivity() {
 
                 // A comment has changed position, use the key to determine if we are
                 // displaying this comment and if so move it.
-                val movedComment = dataSnapshot.value
-                val commentKey = dataSnapshot.key
 
                 // ...
             }
@@ -133,12 +128,12 @@ class chatActivity : AppCompatActivity() {
         }
         ref1.addChildEventListener(childEventListener)
         val messageID = ref2.push().key
-        chatField.doOnTextChanged { text, start, before, count ->
+        chatField.doOnTextChanged { _, _, _, _ ->
             chatRecyclerView.scrollToPosition(chatAdapter.itemCount -1)
             val map = mapOf("user" to currentUser?.uid, "message" to getString(R.string.is_typing), "timestamp" to ServerValue.TIMESTAMP)
             ref2.child(messageID!!).setValue(map)
             if (chatField.text.toString() == ""){
-                ref2.child(messageID!!).removeValue()
+                ref2.child(messageID).removeValue()
                 chatAdapter.notifyDataSetChanged()
             }
         }
