@@ -105,7 +105,8 @@ class UpdateMyEventActivity : AppCompatActivity() {
                             .child("upcoming-events").child(thisEvent.eventID).removeValue()
                         database.child("event").child(thisEvent.eventID).removeValue()
                         Toast.makeText(this,getString(R.string.event_was_deleted), Toast.LENGTH_LONG).show()
-                        finishAffinity()
+
+                        finish()
                     }.setNegativeButton(getString(R.string.no)) { dialog, whichButtin ->
                         //Don't delete it
                     }.show()
