@@ -45,6 +45,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         var marker = emptyMap<String, Double>()
         var lat = intent.getDoubleExtra("lat", 0.0)
         var lng = intent.getDoubleExtra("long", 0.0)
+        val showEvent = intent.getBooleanExtra("showEvent", false)
         val doneButton = findViewById<Button>(R.id.mapDone)
 
         if (lat != 0.0 || lng != 0.0){
@@ -53,28 +54,35 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .position(eventLocation))
         }
 
-        doneButton.setOnClickListener {
-            if (marker.isEmpty()){
-                Toast.makeText(this, "@string/location_toast", Toast.LENGTH_LONG).show()
+        if(showEvent){
+            doneButton.setOnClickListener {
+                finish()
             }
-            val data = Intent()
-            data.putExtra("longitude", lng)
-            data.putExtra("latitude", lat)
-            setResult(Activity.RESULT_OK, data)
-            finish()
-        }
+        }else{
 
-        mMap.setOnMapLongClickListener { latlng->
-            mMap.clear()
-            mMap.addMarker(MarkerOptions().position(latlng))
-            lng  = latlng.longitude
-            lat = latlng.latitude
-            marker = mapOf("lat" to lat, "lng" to lng)
+            doneButton.setOnClickListener {
+                if (marker.isEmpty()){
+                    Toast.makeText(this, "@string/location_toast", Toast.LENGTH_LONG).show()
+                }
+                val data = Intent()
+                data.putExtra("longitude", lng)
+                data.putExtra("latitude", lat)
+                setResult(Activity.RESULT_OK, data)
+                finish()
+            }
+
+            mMap.setOnMapLongClickListener { latlng->
+                mMap.clear()
+                mMap.addMarker(MarkerOptions().position(latlng))
+                lng  = latlng.longitude
+                lat = latlng.latitude
+                marker = mapOf("lat" to lat, "lng" to lng)
+            }
+            getLocationAccess()
+            val defaultZoom = 5f
+            val defaultMapLocation = LatLng(57.8, 14.2)
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultMapLocation, defaultZoom))
         }
-        getLocationAccess()
-        val defaultZoom = 5f
-        val defaultMapLocation = LatLng(57.8, 14.2)
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultMapLocation, defaultZoom))
     }
 
 

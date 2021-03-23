@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import se.ju.student.group16.androidproject.GoogleMapsActivity
 import se.ju.student.group16.androidproject.R
 import se.ju.student.group16.androidproject.firebaseRepository
 import java.util.*
@@ -22,7 +23,7 @@ class ThisEventActivity : AppCompatActivity() {
         val eventTheme = findViewById<TextView>(R.id.eventTheme)
         val eventDescription = findViewById<TextView>(R.id.eventDescription)
         val eventDate = findViewById<TextView>(R.id.eventDate)
-        val eventLocation = findViewById<TextView>(R.id.eventLocation)
+        val eventLocation = findViewById<Button>(R.id.locationButton)
         val inviteAcceptBtn = findViewById<Button>(R.id.inviteAcceptBtn)
         val inviteDeclineBtn = findViewById<Button>(R.id.inviteDeclineBtn)
         val thisEvent = eventRepository.getUpcomingEventById(intent.getStringExtra("thisEvent")!!)
@@ -31,7 +32,13 @@ class ThisEventActivity : AppCompatActivity() {
         eventTheme.text = thisEvent?.eventTheme
         eventDescription.text = thisEvent?.eventDescription
         eventDate.text = thisEvent?.eventDate
-        eventLocation.text = (thisEvent?.eventLat?.plus(thisEvent.eventLong)).toString()
+        eventLocation.setOnClickListener {
+            val intent = Intent(this, GoogleMapsActivity::class.java)
+            intent.putExtra("long", thisEvent!!.eventLong)
+            intent.putExtra("lat", thisEvent.eventLong)
+            intent.putExtra("showEvent", true)
+            startActivity(intent)
+        }
         inviteAcceptBtn.setOnClickListener {
             val database = firebaseRepository.getDatabaseReference()
             val currentUser = firebaseRepository.getCurrentUser()
@@ -43,7 +50,6 @@ class ThisEventActivity : AppCompatActivity() {
             val currentUser = firebaseRepository.getCurrentUser()
             database.child("event").child(thisEvent!!.eventID).child("guest-list").child(currentUser!!.uid).setValue("declined")
             Toast.makeText(this,getString(R.string.event_was_declined), Toast.LENGTH_LONG).show()
-
         }
     }
 
