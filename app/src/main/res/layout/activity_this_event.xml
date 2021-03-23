@@ -106,18 +106,19 @@
                 android:textColor="@color/Grey"
                 android:textColorHint="@color/Grey" />
 
-            <TextView
-                android:id="@+id/eventLocation"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/locationButton"
+                android:layout_width="0dp"
                 android:layout_height="49dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
-                android:background="@drawable/edittext_rounded_corners"
-                android:padding="10dp"
-                android:singleLine="true"
-                android:textColor="@color/Grey"
-                android:textColorHint="@color/Grey" />
+                android:layout_weight="1"
+                android:text="@string/location"
+                android:textColor="@color/AlmostBlack"
+                android:textSize="14sp" />
+
+
         </LinearLayout>
 
         <LinearLayout
