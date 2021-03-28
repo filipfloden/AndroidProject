@@ -64,7 +64,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }else{
             if (lat != 0.0 || lng != 0.0){
-                val eventLocation = LatLng(lng, lat)
+                val eventLocation = LatLng(lat, lng)
                 googleMap.addMarker(MarkerOptions()
                         .position(eventLocation))
             }

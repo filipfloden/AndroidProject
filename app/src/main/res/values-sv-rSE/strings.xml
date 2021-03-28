@@ -18,7 +18,7 @@
     <string name="current_password">Nuvarande lösenord</string>
     <string name="new_password">Nytt lösenord</string>
     <string name="confirm_password">Bekräfta lösenord</string>
-    <string name="enter_title">Välj title</string>
+    <string name="enter_title">Välj titel</string>
     <string name="add_button_text">+ Lägg till</string>
     <string name="invite_friends">Bjud in vänner</string>
     <string name="enter_event_description">Event beskrivning</string>
@@ -54,4 +54,8 @@
     <string name="add_widget">Lägg till widget</string>
     <string name="location">Plats</string>
     <string name="no_my_events_text">Mina event - Du har inte skapat några events</string>
+    <string name="read_more">Läs mer</string>
+    <string name="attendance_status">"Deltagande: "</string>
+    <string name="logout_text">Logga ut</string>
+    <string name="change_password_text">Byt lösenord</string>
 </resources>

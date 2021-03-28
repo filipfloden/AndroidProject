@@ -15,10 +15,6 @@ import se.ju.student.group16.androidproject.User
 class FriendAdapter(private val context: Activity, private val friends: MutableList<User>) : ArrayAdapter<User>(context, R.layout.friend_row, friends) {
 
     private var friendsCopy = friends
-    private lateinit var auth: FirebaseAuth
-    private lateinit var database: DatabaseReference
-    private val users = "users"
-    private val friendsPending = "friends-pending"
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val inflater = context.layoutInflater

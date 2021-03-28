@@ -24,9 +24,6 @@ class CreateEventActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private val users = "users"
-    private val friends = "friends"
-    private val displayname = "displayname"
-    private val email = "email"
     private var inviteFriendsList = mutableListOf<User>()
     private var latitude = 0.0
     private var longitude = 0.0

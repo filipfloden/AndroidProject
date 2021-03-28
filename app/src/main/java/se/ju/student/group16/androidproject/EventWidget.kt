@@ -55,5 +55,4 @@ internal fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManage
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
     }
-    //appWidgetManager.updateAppWidget(appWidgetId, views)
 }

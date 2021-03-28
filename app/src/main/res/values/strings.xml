@@ -17,7 +17,7 @@
     <string name="current_password">Current password</string>
     <string name="new_password">New password</string>
     <string name="confirm_password">Confirm password</string>
-    <string name="enter_title">Enter Title</string>
+    <string name="enter_title">Enter title</string>
     <string name="add_button_text">+ Add</string>
     <string name="invite_friends">Invite friends</string>
     <string name="pick_a_date">Pick a date</string>
@@ -53,4 +53,8 @@
     <string name="add_widget">Add widget</string>
     <string name="location">Location</string>
     <string name="no_my_events_text">My events - You have not created any events</string>
+    <string name="read_more">Read more</string>
+    <string name="attendance_status">Attendance:</string>
+    <string name="logout_text">Logout</string>
+    <string name="change_password_text">Change password</string>
 </resources>

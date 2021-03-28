@@ -18,7 +18,6 @@ class UpdateMyEventActivity : AppCompatActivity() {
 
     private val database = firebaseRepository.getDatabaseReference()
     private val eventPath = "event"
-    private var myEvent = mutableListOf<Events>()
     private var inviteFriendsList = mutableMapOf<String, String>()
     private var latitude = 0.0
     private var longitude = 0.0

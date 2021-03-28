@@ -31,13 +31,4 @@ class FriendsRepository{
     fun clearFriends(){
         friends.clear()
     }
-    /*
-    fun updateFriendById(id: Int, newTitle: String, newContent: String){
-        getToDoById(id)?.run {
-            title = newTitle
-            content = newContent
-        }
-    }
-
-     */
 }

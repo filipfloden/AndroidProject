@@ -23,9 +23,6 @@ import se.ju.student.group16.androidproject.firebaseRepository
 
 class EventActivity : AppCompatActivity() {
 
-    private val currentUser = firebaseRepository.getCurrentUser()
-    private val database = firebaseRepository.getDatabaseReference()
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)

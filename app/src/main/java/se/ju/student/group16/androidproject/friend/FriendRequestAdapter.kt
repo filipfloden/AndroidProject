@@ -19,10 +19,7 @@ class FriendRequestAdapter(private val context: Activity, private val user: Muta
     private lateinit var database: DatabaseReference
     private val users = "users"
     private val friends = "friends"
-    private val received = "received"
     private val friendsPending = "friends-pending"
-    private val displayname = "displayname"
-    private val email = "email"
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 

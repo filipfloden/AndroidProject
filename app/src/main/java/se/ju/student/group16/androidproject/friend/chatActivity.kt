@@ -38,7 +38,6 @@ class chatActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
         val chatRecyclerView = findViewById<RecyclerView>(R.id.recycler_chat)
         val chatField = findViewById<EditText>(R.id.chat_message_input)
-        //val sendMessage = findViewById<Button>(R.id.button_chat_send)
         val chatAdapter = ChatAdapter(this, listOfMessages)
         chatRecyclerView.scrollToPosition(chatAdapter.itemCount-1)
         chatRecyclerView.adapter = chatAdapter
@@ -46,13 +45,6 @@ class chatActivity : AppCompatActivity() {
 
         val ref1 = database.child(messagesPath).child(currentUser?.uid.toString() + "_" + chattingWithUID)
         val ref2 = database.child(messagesPath).child(chattingWithUID + "_" + currentUser?.uid.toString())
-
-        /*
-        val intent = Intent(this, chatActivity::class.java).putExtra("chattingWith", chattingWithUID).apply {
-            flags = Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-         */
 
         database.child(usersPath).child(chattingWithUID.toString()).get().addOnSuccessListener {
             chattingWithUser = User(chattingWithUID.toString(), it.child("displayname").value.toString(), it.child("email").value.toString())
@@ -62,7 +54,6 @@ class chatActivity : AppCompatActivity() {
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
                 //Log.d("firebase", "onChildAdded:" + dataSnapshot.key!!)
 
-                // A new comment has been added, add it to the displayed list
                 val user = dataSnapshot.child("user").value
                 val message = dataSnapshot.child("message").value
                 val timestamp = dataSnapshot.child("timestamp").value
@@ -70,26 +61,6 @@ class chatActivity : AppCompatActivity() {
                 listOfMessages.add(Message(user.toString(), message.toString(), timestamp as Long))
                 chatRecyclerView.scrollToPosition(chatAdapter.itemCount -1)
                 chatAdapter.notifyDataSetChanged()
-
-                // Message notification
-                /*
-                var builder = NotificationCompat.Builder(baseContext, "MESSAGE_CHANNEL")
-                        .setSmallIcon(R.drawable.common_google_signin_btn_icon_light)
-                        .setContentTitle("Message")
-                        .setContentText(message.toString())
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                        .setContentIntent(pendingIntent)
-                        .setAutoCancel(true)
-                with(NotificationManagerCompat.from(baseContext)) {
-                    // notificationId is a unique int for each notification that you must define
-                    notify(2, builder.build())
-                    Log.d("notfication sent", "true")
-                }
-                 */
-
-
-
-                // ...
             }
 
             override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
@@ -162,11 +133,4 @@ class chatActivity : AppCompatActivity() {
             }
         }
     }
-    /*
-    override fun onBackPressed() {
-        super.onBackPressed()
-        startActivity(Intent(this, EventActivity::class.java))
-        finish()
-    }
-     */
 }

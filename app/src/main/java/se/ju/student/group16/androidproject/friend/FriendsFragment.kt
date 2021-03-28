@@ -50,8 +50,6 @@ class FriendsFragment : Fragment() {
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
                 //Log.d("firebase", "onChildAdded:" + dataSnapshot.key!!)
 
-                // A new comment has been added, add it to the displayed list
-
                 val uid = dataSnapshot.key.toString()
 
                 database.child(usersPath).child(uid).get().addOnSuccessListener {

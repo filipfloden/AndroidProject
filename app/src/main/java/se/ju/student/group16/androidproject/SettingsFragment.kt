@@ -50,11 +50,6 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.logoutBtn.setOnClickListener {
-            /*
-            auth.signOut()
-            val intent = Intent(context, LoginActivity::class.java)
-            startActivity(intent)
-             */
             signOut()
         }
 
